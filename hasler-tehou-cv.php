@@ -29,8 +29,8 @@
 <header id="header">
     <div class="d-flex flex-column">
         <div class="profile">
-            <img src="../assets/img/IMG_8509.jpg" alt="" class="img-fluid rounded-pill h-50 w-50">
-            <h1 class="text-light"><a href="index.html">Hasler TEHOU</a></h1>
+            <img src="/assets/img/IMG_8509.jpg" alt="" class="img-fluid rounded-pill h-50 w-50">
+            <h1 class="text-light"><a href="index.php">Hasler TEHOU</a></h1>
             <div class="social-links mt-3 text-center">
                 <a href="https://github.com/octhama" class="github"><i class="fa-brands fa-github"></i></a>
                 <a href="https://medium.com/@kuassi.tehou" class="medium"><i class="fa-brands fa-medium"></i></a>
@@ -67,7 +67,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4" data-aos="fade-right">
-                    <a href="#"><img src="../assets/img/IMG_6732.JPG" class="img-fluid rounded-pill bubble" alt=""></a>
+                    <a href="#"><img src="/assets/img/IMG_6732.JPG" class="img-fluid rounded-pill bubble" alt=""></a>
                 </div>
                 <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
                 <h3>IT Specialist in power &amp; Fintech passionate learner</h3>
