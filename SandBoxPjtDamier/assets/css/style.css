@@ -1,0 +1,39 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+}
+
+table {
+  width: 500px;
+  height: 500px;
+  border: 1px solid #000;
+  margin: 0 auto;
+}
+
+
+td {
+    width: 10px;
+    border: 1px solid #000;
+}
+
+#black {
+    background-color: #000000;
+    width: 62.5px;
+    height: 62.5px;
+}
+
+#white {
+    background-color: #ffffff;
+    width: 61.5px;
+    height: 61.5px;
+}
+
+
+
