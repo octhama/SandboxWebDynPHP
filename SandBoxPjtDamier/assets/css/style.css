@@ -35,5 +35,42 @@ td {
     height: 63px;
 }
 
+#black:hover {
+    background-color: #ff0000;
+}
+
+#white:hover {
+    background-color: #00ff00;
+}
+
+#black:active {
+    background-color: #0000ff;
+}
+
+#white:active {
+    background-color: #ffff00;
+}
+
+#black:hover::before {
+    content: "X";
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+}
+
+#white:hover::before {
+    content: "O";
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
 
 
