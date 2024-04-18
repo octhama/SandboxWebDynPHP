@@ -8,28 +8,30 @@
 <h1>Liste des fichiers dans le document root</h1>
 
 <?php
-// Récupérer le chemin du document root
+
+// Obtenir le chemin du document root
 $documentRoot = $_SERVER['DOCUMENT_ROOT'];
 
-// Ouvrir le répertoire du document root
+// Ouvrir le dossier document root
 $pointeur = opendir($documentRoot);
 
-// Vérifier si le répertoire a été ouvert avec succès
-if ($pointeur === false) {
-    echo "Impossible d'ouvrir le répertoire du document root.";
-} else {
-    // Parcourir le répertoire
+// Vérifier si l'ouverture du dossier a réussi
+if ($pointeur) {
+    // Lire les fichiers et dossiers du document root
     while (($nomFichier = readdir($pointeur)) !== false) {
-        // Ignorer les entrées spéciales "." et ".."
-        if ($nomFichier != "." && $nomFichier != "..") {
-            // Afficher le nom du fichier
-            echo $nomFichier . "<br>";
-        }
+        // Afficher le nom du fichier ou du dossier
+        echo $nomFichier . "<br>";
     }
+
     // Fermer le pointeur
     closedir($pointeur);
+} else {
+    // Erreur d'ouverture du dossier
+    echo "Erreur d'ouverture du document root";
 }
+
 ?>
+
 
 </body>
 </html>
