@@ -32,6 +32,5 @@ if ($pointeur) {
 
 ?>
 
-
 </body>
 </html>
