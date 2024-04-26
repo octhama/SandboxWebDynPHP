@@ -2,7 +2,7 @@
 /**
  *@author MaitrePylos <info@formatux.be>
  *@version 1.0
- *@license http://www.php.net/license/3_01.txt PHP License 3.01 
+ *@license http://www.php.net/license/3_01.txt PHP License 3.01
  *@link http://www.formatux.be
  *@task File available since Release 1.0
  *@todo petite caluclatrice
@@ -15,7 +15,7 @@
 
 $ok = false;
 
-do { 
+do {
     $nombre1 = readline("Entrez un nombre : ");
     if (is_numeric($nombre1)) {
         $ok = true;
@@ -26,7 +26,7 @@ do {
 
 $ok = false;
 
-do { 
+do {
     $nombre2 = readline("Entrez un autre nombre : ");
     if (is_numeric($nombre2)) {
         $ok = true;
@@ -37,7 +37,7 @@ do {
 
 $ok = false;
 
-do { 
+do {
     $operation = readline("Entrez l'opération à effectuer (+ - / * %) : ");
     if ($operation == "+" || $operation == "-" || $operation == "*" || $operation == "/" || $operation == "%") {
         $ok = true;
@@ -49,7 +49,7 @@ do {
 if($operation == "/" && $nombre2 == 0) {
     echo "Division par zéro impossible\n";
     exit;
-};
+}
 
 $resultat = match ($operation) {
     "+" => $nombre1 + $nombre2,
