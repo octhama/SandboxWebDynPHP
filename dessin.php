@@ -122,4 +122,7 @@ function dessinPendu($l):string
             return " ";
     }
 
+    return " ";
 }
+
+
