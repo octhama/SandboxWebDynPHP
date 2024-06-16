@@ -71,6 +71,7 @@ $categories = getCategories();
                     </td>
                     <td><?php echo getPriorityBadge($todo['priority'] ?? ''); ?></td>
                     <td>
+                        <!-- Le progressbar change en fonction du choix-->
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: <?php echo $todo['progress'] ?? 0; ?>%" aria-valuenow="<?php echo $todo['progress'] ?? 0; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
