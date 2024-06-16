@@ -23,8 +23,8 @@ function getTodos(): array
 
     fclose($file);
 
-    // Sort by completed status, then by priority
-    usort($todos, function ($a, $b) {
+    // Tri des tâches par ordre de priorité décroissante
+    usort($todos, function ($a, $b) { // usort trie un tableau en utilisant une fonction de comparaison
         if ($a['completed'] === $b['completed']) {
             return $b['priority'] <=> $a['priority'];
         }
