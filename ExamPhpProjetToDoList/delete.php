@@ -1,16 +1,13 @@
 <?php
 include 'script/functions.php';
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-} else {
-    $id = '';
-}
+$id = $_GET['id'];
+$todos = getTodos();
 
-if (!empty($id)) {
-    deleteTodo($id);
-}
+$todos = array_filter($todos, function($todo) use ($id) {
+    return $todo['id'] != $id;
+});
+
+saveTodos($todos);
 
 header('Location: index.php');
-exit;
-

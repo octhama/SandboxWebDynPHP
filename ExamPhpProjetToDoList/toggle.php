@@ -1,16 +1,16 @@
 <?php
 include 'script/functions.php';
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-} else {
-    $id = '';
+$id = $_GET['id'];
+$todos = getTodos();
+
+foreach ($todos as &$todo) {
+    if ($todo['id'] == $id) {
+        $todo['completed'] = !$todo['completed'];
+        break;
+    }
 }
 
-if (!empty($id)) {
-    toggleTodo($id);
-}
+saveTodos($todos);
 
 header('Location: index.php');
-exit;
-
