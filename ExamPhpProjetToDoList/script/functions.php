@@ -62,14 +62,6 @@ function getNewId() {
     return $ids ? max($ids) + 1 : 1;
 }
 
-function addTodoToCSV($task, $date, $time, $priority, $category): void
-{
-    $file = fopen('todos.csv', 'a');
-    $id = uniqid();
-    fputcsv($file, [$id, $task, $date, $time, $priority, $category, 0]);
-    fclose($file);
-}
-
 function getCategories(): array
 {
     return [
