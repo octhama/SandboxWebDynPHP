@@ -113,7 +113,7 @@ function getCategoryOptions($selectedCategory): string
 
     foreach (getCategories() as $category) {
         $selected = $category === $selectedCategory ? ' selected' : '';
-        $options .= '<option value="' . $category . '"' . $selected . '>' . $category . '</option>';
+        $options = '<option value="' . $category . '"' . $selected . '>' . $category . '</option>';
     }
 
     return $options;
