@@ -54,7 +54,7 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
             </thead>
             <tbody>
             <?php foreach ($todos as $todo): ?>
-                <tr class="<?php echo $todo['completed'] ? 'text-decoration-line-through' : ''; ?>">
+                <tr class="<?php echo $todo['completed'] ? 'text-decoration-line-through' : ''; ?>"> <!-- Ajout de la classe CSS pour barrer le texte si la tâche est terminée -->
                     <td><?php echo htmlspecialchars($todo['task'] ?? ''); ?></td>
                     <td><?php echo htmlspecialchars($todo['date'] ?? ''); ?></td>
                     <td><?php echo htmlspecialchars($todo['time'] ?? ''); ?></td>
