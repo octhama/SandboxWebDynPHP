@@ -5,17 +5,17 @@
 21,"Écrire un article",2024-06-24,14:00,0,8,70,Travail
 6,"Faire les courses",2024-06-09,11:00,0,7,70,Courses
 15,"Travailler sur un projet",2024-06-18,09:00,0,7,70,Travail
-20,"Visiter un musée",2024-06-23,12:00,0,6,90,"Personnel,Culture"
+20,"Visiter un musée",2024-06-23,12:00,1,6,40,Personnel
 2,Cuisiner,2024-06-05,18:00,0,5,30,"Personnel,Cuisine"
 8,"Lire un livre",2024-06-11,16:00,0,5,60,"Personnel,Lecture"
 19,"Faire du vélo",2024-06-22,06:00,0,5,50,"Personnel,Sport"
 4,Jogging,2024-06-07,06:30,0,4,20,"Personnel,Sport"
 12,"Appeler maman",2024-06-15,19:00,0,4,10,Personnel
 17,"Planter des fleurs",2024-06-20,08:00,0,4,60,"Personnel,Jardinage"
-1,Danser,2024-06-04,23:34,1,3,10,"Personnel,Divertissement"
 11,"Aller chez le médecin",2024-06-14,15:00,0,3,20,"Personnel,Santé"
 18,"Aller à la plage",2024-06-21,10:00,0,3,80,"Personnel,Divertissement"
 16,Méditer,2024-06-19,07:00,0,1,40,Personnel
 5,"Nettoyer la maison",2024-06-08,10:00,1,6,40,"Personnel,Ménage"
+1,Danser,2024-06-04,23:34,1,3,10,"Personnel,Divertissement"
 7,"Regarder un film",2024-06-10,20:00,1,2,50,Divertissement
 13,"Jouer à des jeux vidéo",2024-06-16,21:00,1,2,30,Divertissement
