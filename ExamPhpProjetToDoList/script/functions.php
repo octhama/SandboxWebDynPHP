@@ -8,8 +8,12 @@ function getTodos(): array
 
     $file = fopen('todos.csv', 'r');
     $todos = [];
+    $expectedColumnCount = 8; // Nombre de colonnes attendu dans chaque ligne
 
     while (($line = fgetcsv($file)) !== false) {
+        if (count($line) < $expectedColumnCount) {
+            continue; // Ignore les lignes avec un nombre de colonnes incorrect
+        }
         $todos[] = [
             'id' => $line[0],
             'task' => $line[1],
@@ -17,14 +21,15 @@ function getTodos(): array
             'time' => $line[3],
             'completed' => $line[4] === '1',
             'priority' => $line[5],
-            'category' => $line[6]
+            'progress' => $line[6],
+            'category' => $line[7]
         ];
     }
 
     fclose($file);
 
     // Tri des tâches par ordre de priorité décroissante
-    usort($todos, function ($a, $b) { // usort trie un tableau en utilisant une fonction de comparaison
+    usort($todos, function ($a, $b) {
         if ($a['completed'] === $b['completed']) {
             return $b['priority'] <=> $a['priority'];
         }
@@ -34,6 +39,7 @@ function getTodos(): array
     return $todos;
 }
 
+// Sauvegarde des tâches dans le fichier CSV
 function saveTodos($todos): void
 {
     $file = fopen('todos.csv', 'w');
@@ -44,8 +50,9 @@ function saveTodos($todos): void
             $todo['task'],
             $todo['date'],
             $todo['time'],
-            $todo['completed'] ? '1' : '0', // il s'agit d'un if ternaire
+            $todo['completed'] ? '1' : '0',
             $todo['priority'],
+            $todo['progress'],
             $todo['category']
         ]);
     }
@@ -53,6 +60,7 @@ function saveTodos($todos): void
     fclose($file);
 }
 
+// Génère un nouvel identifiant unique pour une nouvelle tâche
 function getNewId() {
     $todos = getTodos();
     $ids = array_map(function ($todo) {
@@ -62,6 +70,7 @@ function getNewId() {
     return $ids ? max($ids) + 1 : 1;
 }
 
+// Retourne la liste des catégories disponibles
 function getCategories(): array
 {
     return [
@@ -72,6 +81,7 @@ function getCategories(): array
     ];
 }
 
+// Retourne la couleur Bootstrap associée à une catégorie
 function getCategoryColor($category): string
 {
     return match ($category) {
@@ -83,6 +93,7 @@ function getCategoryColor($category): string
     };
 }
 
+// Retourne l'icône Font Awesome associée à une catégorie
 function getCategoryIcon($category): string
 {
     return match ($category) {
@@ -94,29 +105,34 @@ function getCategoryIcon($category): string
     };
 }
 
+// Retourne un badge Bootstrap pour une catégorie
 function getCategoryBadge($category): string
 {
     return '<span class="badge bg-' . getCategoryColor($category) . '"><i class="fas ' . getCategoryIcon($category) . '"></i> ' . $category . '</span>';
 }
 
-function getCategoryOptions($selectedCategory): string
+// Retourne les options de sélection pour les catégories
+function getCategoryOptions($selectedCategories): string
 {
     $options = '';
+    $selectedCategories = is_array($selectedCategories) ? $selectedCategories : [$selectedCategories];
 
     foreach (getCategories() as $category) {
-        $selected = $category === $selectedCategory ? ' selected' : '';
-        $options = '<option value="' . $category . '"' . $selected . '>' . $category . '</option>';
+        $selected = in_array($category, $selectedCategories) ? ' selected' : '';
+        $options .= '<option value="' . $category . '"' . $selected . '>' . $category . '</option>';
     }
 
     return $options;
 }
 
+// Retourne un badge Bootstrap pour la priorité
 function getPriorityBadge($priority): string
 {
     $color = $priority > 5 ? 'danger' : ($priority > 3 ? 'warning' : 'success');
     return '<span class="badge bg-' . $color . '">' . $priority . '</span>';
 }
 
+// Retourne les options de sélection pour la priorité
 function getPriorityOptions($selectedPriority): string
 {
     $options = '';
@@ -129,14 +145,16 @@ function getPriorityOptions($selectedPriority): string
     return $options;
 }
 
-function getProgress(): array
+// Retourne les options de sélection pour le niveau de progression
+function getProgressOptions($selectedValue = 0): string
 {
-    return [
-        '0%' => 0,
-        '25%' => 25,
-        '50%' => 50,
-        '75%' => 75,
-        '100%' => 100
-    ];
-}
+    $options = '';
+    $values = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
+    foreach ($values as $value) {
+        $selected = ($value == $selectedValue) ? 'selected' : '';
+        $options .= "<option value=\"$value\" $selected>$value%</option>";
+    }
+
+    return $options;
+}

@@ -1,11 +1,21 @@
-6,Chanter,2024-06-11,12:04,0,6,Travail
-3,Jouer,2024-06-19,03:44,0,5,Travail
-9,"Rien encore",2024-06-11,12:03,0,5,Autre
-4,"Sortir la poubelle",2024-06-10,11:43,0,4,"Personnel,Ménage"
-10,Test,2024-06-04,23:43,0,4,Autre
-8,Rien,2024-06-03,00:34,0,3,Autre
-11,Test,2024-06-04,11:44,0,3,Autre
-7,"Faire les courses",2024-06-18,03:03,1,6,Travail
-5,Lire,2024-06-21,00:34,0,4,Travail
-2,Bosser,2024-06-12,12:03,1,2,Travail
-1,Danser,2024-06-10,00:09,1,1,Divertissement
+1,Danser,2024-06-04,23:34,0,3,10,"Personnel,Divertissement"
+2,Cuisiner,2024-06-05,18:00,0,5,30,"Personnel,Cuisine"
+3,Apprendre PHP,2024-06-06,14:00,0,8,50,"Travail,Études"
+4,Jogging,2024-06-07,06:30,0,4,20,"Personnel,Sport"
+5,Nettoyer la maison,2024-06-08,10:00,0,6,40,"Personnel,Ménage"
+6,Faire les courses,2024-06-09,11:00,0,7,70,"Courses"
+7,Regarder un film,2024-06-10,20:00,0,2,50,"Divertissement"
+8,Lire un livre,2024-06-11,16:00,0,5,60,"Personnel,Lecture"
+9,Assister à une réunion,2024-06-12,09:00,0,9,80,"Travail"
+10,Rendre un rapport,2024-06-13,17:00,0,10,90,"Travail"
+11,Aller chez le médecin,2024-06-14,15:00,0,3,20,"Personnel,Santé"
+12,Appeler maman,2024-06-15,19:00,0,4,10,"Personnel"
+13,Jouer à des jeux vidéo,2024-06-16,21:00,0,2,30,"Divertissement"
+14,Préparer une présentation,2024-06-17,13:00,0,8,50,"Travail,Études"
+15,Travailler sur un projet,2024-06-18,09:00,0,7,70,"Travail"
+16,Méditer,2024-06-19,07:00,0,1,40,"Personnel"
+17,Planter des fleurs,2024-06-20,08:00,0,4,60,"Personnel,Jardinage"
+18,Aller à la plage,2024-06-21,10:00,0,3,80,"Personnel,Divertissement"
+19,Faire du vélo,2024-06-22,06:00,0,5,50,"Personnel,Sport"
+20,Visiter un musée,2024-06-23,12:00,0,6,90,"Personnel,Culture"
+21,Écrire un article,2024-06-24,14:00,0,8,70,"Travail"

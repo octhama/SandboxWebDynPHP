@@ -1,7 +1,9 @@
 <?php
 include 'script/functions.php';
-$todos = getTodos();
-$categories = getCategories();
+$todos = getTodos(); // Récupérer les tâches existantes pour les afficher
+$categories = getCategories(); // Récupérer les catégories existantes pour les options de sélection
+// Vérifier si une valeur de progression a été soumise et la convertir en entier si elle est valide
+$selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress']) : 0;
 ?>
 
 <!DOCTYPE html>
@@ -25,13 +27,8 @@ $categories = getCategories();
             <select name="newPriority" class="form-select me-2">
                 <?php echo getPriorityOptions(1); ?>
             </select>
-            <select name="progress" class="form-select me-2">
-                <?php
-                $progressOptions = getProgress();
-                foreach ($progressOptions as $label => $value) {
-                    echo '<option value="' . $value . '">' . $label . '</option>';
-                }
-                ?>
+            <select name="newProgress" class="form-select me-2">
+                <?php echo getProgressOptions(0);?>
             </select>
             <select name="newCategory[]" class="form-select me-2">
                 <?php echo getCategoryOptions(''); ?>
@@ -71,9 +68,8 @@ $categories = getCategories();
                     </td>
                     <td><?php echo getPriorityBadge($todo['priority'] ?? ''); ?></td>
                     <td>
-                        <!-- Le progressbar change en fonction du choix-->
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: <?php echo $todo['progress'] ?? 0; ?>%" aria-valuenow="<?php echo $todo['progress'] ?? 0; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <?php echo $todo['progress'] ?? 0; ?>%" aria-valuenow="<?php echo $todo['progress'] ?? 0; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $todo['progress'] ?? 0; ?>%</div>
                         </div>
                     </td>
                     <td>

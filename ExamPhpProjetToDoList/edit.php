@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date = $_POST['date'] ?? '';
     $time = $_POST['time'] ?? '';
     $priority = (int)$_POST['priority'];
-    $progress = (int)$_POST['progress'] ?? 0;
+    $progress = (int)$_POST['progress'];
     $categories = $_POST['category'] ?? [];
 
     if (!empty($_POST['customCategory'])) {
@@ -92,13 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php echo getPriorityOptions($currentTodo['priority']); ?>
             </select>
             <select name="progress" class="form-select me-2">
-                <?php
-                $progressOptions = getProgress();
-                foreach ($progressOptions as $label => $value) {
-                    $selected = $currentTodo['progress'] == $value ? 'selected' : '';
-                    echo '<option value="' . $value . '" ' . $selected . '>' . $label . '</option>';
-                }
-                ?>
+                <?php echo getProgressOptions($currentTodo['progress']); ?>
             </select>
             <select name="category[]" class="form-select me-2">
                 <?php echo getCategoryOptions(explode(',', $currentTodo['category'])); ?>

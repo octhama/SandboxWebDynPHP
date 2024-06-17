@@ -6,7 +6,7 @@ if (isset($_POST['newTask'])) {
     $newDate = $_POST['newDate'] ?? '';
     $newTime = $_POST['newTime'] ?? '';
     $newPriority = $_POST['newPriority'] ?? 0;
-    $newProgress = $_POST['progress'] ?? 0;
+    $newProgress = intval($_POST['newProgress'] ?? 0); // Assurez-vous que newProgress est un entier
     $newCategories = $_POST['newCategory'] ?? [];
 
     if (!empty($_POST['newCustomCategory'])) {
