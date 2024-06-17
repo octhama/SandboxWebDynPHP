@@ -69,7 +69,23 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
                     <td><?php echo getPriorityBadge($todo['priority'] ?? ''); ?></td>
                     <td>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <?php echo $todo['progress'] ?? 0; ?>%" aria-valuenow="<?php echo $todo['progress'] ?? 0; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $todo['progress'] ?? 0; ?>%</div>
+                            <?php
+                            $progress = $todo['progress'] ?? 0;
+
+                            $progressClass = '';
+                            if ($progress <= 25) {
+                                $progressClass = 'bg-danger';
+                            } elseif ($progress <= 50) {
+                                $progressClass = 'bg-warning';
+                            } elseif ($progress <= 75) {
+                                $progressClass = 'bg-info';
+                            } else {
+                                $progressClass = 'bg-success';
+                            }
+                            ?>
+                            <div class="progress-bar <?php echo $progressClass; ?> progress-bar-striped" role="progressbar" style="width: <?php echo $progress; ?>%" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100">
+                                <?php echo $progress; ?>%
+                            </div>
                         </div>
                     </td>
                     <td>

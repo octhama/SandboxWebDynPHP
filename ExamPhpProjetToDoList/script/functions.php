@@ -108,7 +108,7 @@ function getCategoryIcon($category): string
 // Retourne un badge Bootstrap pour une catégorie
 function getCategoryBadge($category): string
 {
-    return '<span class="badge bg-' . getCategoryColor($category) . '"><i class="fas ' . getCategoryIcon($category) . '"></i> ' . $category . '</span>';
+    return '<span class="badge bg-' . getCategoryColor($category) . '"><i class="fas ' . getCategoryIcon($category) . '"></i> ' . $category . '</span> ';
 }
 
 // Retourne les options de sélection pour les catégories
@@ -153,7 +153,7 @@ function getProgressOptions($selectedValue = 0): string
 
     foreach ($values as $value) {
         $selected = ($value == $selectedValue) ? 'selected' : '';
-        $options .= "<option value=\"$value\" $selected>$value%</option>";
+        $options .= "<option value=\"$value\" $selected>$value%</option>"; // .= permet de concaténer les options
     }
 
     return $options;
