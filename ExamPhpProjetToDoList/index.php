@@ -73,7 +73,7 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
                     <td><?php echo htmlspecialchars($todo['time'] ?? ''); ?></td>
                     <td>
                         <?php
-                        $todoCategories = explode(',', $todo['category'] ?? ''); // Les ?? sont utilisés pour éviter les erreurs si la clé n'existe pas
+                        $todoCategories = explode(',', $todo['category'] ?? ''); // Les ?? sont utilisés pour éviter les erreurs si la clé n'existe pas dans le tableau
                         foreach ($todoCategories as $category) {
                             echo getCategoryBadge($category);
                         }
