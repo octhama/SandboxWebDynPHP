@@ -1,6 +1,6 @@
 <?php
 
-function getTodos(): array
+function getTodos(): array // Retourne un tableau de tâches
 {
     if (!file_exists('todos.csv')) {
         return [];
@@ -28,18 +28,18 @@ function getTodos(): array
 
     fclose($file);
 
-    // Tri des tâches par ordre de priorité décroissante
-    usort($todos, function ($a, $b) {
-        if ($a['completed'] === $b['completed']) {
-            return $b['priority'] <=> $a['priority'];
+    // Tri des tâches par ordre de priorité décroissante et de statut de complétion croissant (non complété en premier)
+    usort($todos, function ($a, $b) { // usort() trie un tableau en utilisant une fonction de comparaison utilisateur et conserve les clés d'origine
+        if ($a['completed'] === $b['completed']) { // Si les tâches ont le même statut de complétion
+            return $b['priority'] <=> $a['priority']; // Trie par priorité décroissante
         }
-        return $a['completed'] <=> $b['completed'];
+        return $a['completed'] <=> $b['completed']; // Trie par statut de complétion croissant
     });
 
-    return $todos;
+    return $todos; // Retourne le tableau des tâches triées par priorité et statut de complétion
 }
 
-// Sauvegarde des tâches dans le fichier CSV
+// Sauvegarde des tâches dans le fichier CSV (écrase le contenu existant)
 function saveTodos($todos): void
 {
     $file = fopen('todos.csv', 'w');
@@ -67,7 +67,7 @@ function getNewId() {
         return $todo['id'];
     }, $todos);
 
-    return $ids ? max($ids) + 1 : 1;
+    return $ids ? max($ids) + 1 : 1; // Incrémente l'ID le plus élevé ou retourne 1 si le tableau est vide
 }
 
 // Retourne la liste des catégories disponibles
@@ -81,7 +81,7 @@ function getCategories(): array
     ];
 }
 
-// Retourne la couleur Bootstrap associée à une catégorie
+// Retourne la couleur Bootstrap associée à une catégorie de tâche donnée (par défaut, gris foncé)
 function getCategoryColor($category): string
 {
     return match ($category) {
@@ -93,7 +93,7 @@ function getCategoryColor($category): string
     };
 }
 
-// Retourne l'icône Font Awesome associée à une catégorie
+// Retourne l'icône Font Awesome associée à une catégorie de tâche donnée (par défaut, une étoile)
 function getCategoryIcon($category): string
 {
     return match ($category) {
@@ -105,13 +105,13 @@ function getCategoryIcon($category): string
     };
 }
 
-// Retourne un badge Bootstrap pour une catégorie
+// Retourne un badge Bootstrap pour une catégorie de tâche donnée (avec icône Font Awesome)
 function getCategoryBadge($category): string
 {
     return '<span class="badge bg-' . getCategoryColor($category) . '"><i class="fas ' . getCategoryIcon($category) . '"></i> ' . $category . '</span> ';
 }
 
-// Retourne les options de sélection pour les catégories
+// Retourne les options de sélection pour les catégories avec les catégories sélectionnées par défaut (tableau ou chaîne)
 function getCategoryOptions($selectedCategories): string
 {
     $options = '';
@@ -125,14 +125,14 @@ function getCategoryOptions($selectedCategories): string
     return $options;
 }
 
-// Retourne un badge Bootstrap pour la priorité
+// Retourne un badge Bootstrap pour la priorité d'une tâche en fonction de sa valeur (1 à 10)
 function getPriorityBadge($priority): string
 {
     $color = $priority > 5 ? 'danger' : ($priority > 3 ? 'warning' : 'success');
     return '<span class="badge bg-' . $color . '">' . $priority . '</span>';
 }
 
-// Retourne les options de sélection pour la priorité
+// Retourne les options de sélection pour la priorité de la tâche avec la priorité sélectionnée par défaut (1 à 10)
 function getPriorityOptions($selectedPriority): string
 {
     $options = '';

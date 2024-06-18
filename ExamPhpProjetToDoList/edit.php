@@ -22,8 +22,8 @@ if (isset($_GET['id'])) {
 }
 
 // Traitement du formulaire lorsqu'il est soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $task = trim($_POST['task']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie si le formulaire a été soumis en vérifiant la méthode de la requête
+    $task = trim($_POST['task']); // Supprime les espaces inutiles au début et à la fin de la chaîne
     $date = $_POST['date'] ?? '';
     $time = $_POST['time'] ?? '';
     $priority = (int)$_POST['priority'];
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $categories = $_POST['category'] ?? [];
 
     if (!empty($_POST['customCategory'])) {
-        $categories[] = trim($_POST['customCategory']);
+        $categories[] = trim($_POST['customCategory']); // Ajoute la catégorie personnalisée si elle n'est pas vide et n'existe pas déjà
     }
 
     $categoryString = implode(',', $categories);
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
             }
         }
-        unset($todo); // Détruire la référence
+        unset($todo); // Détruire la référence pour éviter les problèmes potentiels avec d'autres boucles ou opérations sur le tableau $todos
 
         // Sauvegarde des todos mis à jour
         saveTodos($todos);
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: index.php');
         exit;
     } else {
-        // Redirige avec un message d'erreur si la tâche est vide
+        // Redirige avec un message d'erreur si la tâche est vide lors de la soumission du formulaire
         header('Location: edit.php?id=' . urlencode($_GET['id']) . '&error=empty_task');
         exit;
     }

@@ -84,7 +84,6 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
                         <div class="progress">
                             <?php
                             $progress = $todo['progress'] ?? 0;
-
                             $progressClass = '';
                             if ($progress <= 25) {
                                 $progressClass = 'bg-danger';
