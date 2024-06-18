@@ -59,7 +59,7 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
             <?php foreach ($todos as $todo): ?>
 
                 <tr>
-                    <!-- Ajout de la classe CSS Bootstrap pour barrer le texte en rouge si la tâche est terminée -->
+                    <!-- Ajout de la class CSS Bootstrap pour barrer le texte en rouge si la tâche est terminée -->
                     <td>
                         <?php if ($todo['completed']): ?>
                             <span class="text-decoration-line-through text-danger">
