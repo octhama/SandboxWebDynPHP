@@ -41,3 +41,10 @@ body.jour th,
 body.jour label {
     color: #15141A;
 }
+
+/* Modal en mode nuit */
+body.nuit .modal-content {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
