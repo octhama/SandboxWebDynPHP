@@ -1,4 +1,4 @@
-10,"Rendre un rapport",2024-06-13,17:00,0,10,60,Travail
+27,"Test 2",2024-06-21,,0,10,20,"Autre,Test"
 21,"Écrire un article",2024-06-24,14:00,0,8,70,Travail
 3,"Apprendre PHP",2024-06-06,14:00,0,8,30,Travail
 18,"Aller à la plage",2024-06-21,10:00,0,3,80,"Personnel,Divertissement"
@@ -6,3 +6,5 @@
 19,"Faire du vélo",2024-06-22,06:00,1,5,50,"Personnel,Sport"
 8,"Lire un livre",2024-06-11,16:00,1,5,60,"Personnel,Lecture"
 22,"Faire du yoga",2024-06-25,07:00,1,1,30,Sport
+26,Test,2024-05-28,,1,1,10,Autre
+16,Méditer,2024-06-19,07:00,0,1,40,Personnel

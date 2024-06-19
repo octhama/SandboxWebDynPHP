@@ -72,8 +72,8 @@ if (isset($_GET['mode'])) {
                     </td>
                     <td><?php echo $todo['completed'] ? 'Terminé' : 'Non terminé'; ?></td>
                     <td>
-                        <a href="restore.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-success">Restaurer</a>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Supprimer</button>
+                        <a href="restore.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-success"><i class="bi bi-arrow-counterclockwise"></i></a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -87,7 +87,7 @@ if (isset($_GET['mode'])) {
 
 <!-- Modal de confirmation -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmer la suppression</h5>
@@ -99,8 +99,8 @@ if (isset($_GET['mode'])) {
             <div class="modal-footer">
                 <form method="post">
                     <input type="hidden" name="confirm_delete_id" id="confirmDeleteId">
-                    <a href="delete_forever.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-danger">Supprimer définitivement</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <a href="delete_forever.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-danger">Supprimer définitivement</a>
                 </form>
             </div>
         </div>

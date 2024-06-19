@@ -175,9 +175,10 @@ if (isset($_GET['mode'])) {
                         </div>
                     </td>
                     <td>
-                        <a href="edit.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-warning">Modifier</a>
+                        <a href="edit.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-warning"><i
+                                    class="bi bi-pencil"></i></a>
                         <a href="delete.php?id=<?php echo urlencode($todo['id']); ?>"
-                           class="btn btn-danger">Supprimer</a>
+                           class="btn btn-danger"><i class="bi bi-trash"></i></a>
                     </td>
                 </tr>
             <?php endforeach; ?>

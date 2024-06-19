@@ -9,21 +9,26 @@
             <div id="navbarNav" class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="trash.php">Corbeille</a>
+                        <a class="nav-link" href="trash.php"><i class="bi bi-trash"></i></a>
                     </li>
                 </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="?mode=jour">
-                            <i class="bi bi-sun"></i> Mode Jour
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?mode=nuit">
-                            <i class="bi bi-moon"></i> Mode Nuit
-                        </a>
-                    </li>
-                </ul>
+                <div class="dropdown" data-bs-theme="dark">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonDark" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-moon"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDark">
+                        <li class="nav-item">
+                            <a class="nav-link" href="?mode=jour">
+                                <i class="bi bi-sun"></i> Mode Jour
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="?mode=nuit">
+                                <i class="bi bi-moon"></i> Mode Nuit
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
