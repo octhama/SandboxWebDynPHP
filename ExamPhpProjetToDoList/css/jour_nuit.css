@@ -1,0 +1,43 @@
+body.jour {
+    background-color: #ffffff;
+    color: #15141A;
+}
+
+body.nuit {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
+/* Inverser les couleurs des textes spécifiques pour le mode nuit */
+body.nuit h1,
+body.nuit h2,
+body.nuit h3,
+body.nuit h4,
+body.nuit h5,
+body.nuit h6,
+body.nuit p,
+body.nuit a,
+body.nuit span,
+body.nuit div,
+body.nuit td,
+body.nuit th,
+body.nuit label {
+    color: #ffffff;
+}
+
+/* Les textes en mode jour */
+body.jour h1,
+body.jour h2,
+body.jour h3,
+body.jour h4,
+body.jour h5,
+body.jour h6,
+body.jour p,
+body.jour a,
+body.jour span,
+body.jour div,
+body.jour td,
+body.jour th,
+body.jour label {
+    color: #15141A;
+}

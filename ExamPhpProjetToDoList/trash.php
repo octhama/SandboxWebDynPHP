@@ -1,4 +1,5 @@
 <?php
+session_start(); // Démarrer la session pour stocker le mode
 include 'script/functions.php';
 $deletedTodos = getDeletedTodos();
 
@@ -10,6 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete_id']))
     header('Location: corbeille.php');
     exit;
 }
+// Vérifiez si une demande de changement de mode a été faite
+if (isset($_GET['mode'])) {
+    $mode = $_GET['mode'];
+    $_SESSION['mode'] = $mode; // Enregistrez le mode dans la session
+} else {
+    $mode = $_SESSION['mode'] ?? 'jour'; // Mode par défaut est 'jour'
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,14 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete_id']))
     <title>Corbeille</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <?php if ($mode === 'nuit'): ?>
+        <link rel="stylesheet" href="css/jour_nuit.css">
+    <?php endif; ?>
 </head>
-<body>
+<body class="<?php echo $mode; ?>">
 <?php include 'views/layout/navbar.php'; ?>
 <div class="container">
     <h1>Corbeille</h1>
 
     <?php if (count($deletedTodos) > 0): ?>
-        <table class="table table-striped">
+        <table class="table">
             <thead>
             <tr>
                 <th scope="col">Tâche</th>

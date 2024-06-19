@@ -1,5 +1,8 @@
 <?php
+session_start(); // Démarrer la session pour stocker le mode
+// Inclure le fichier de fonctions
 include 'script/functions.php';
+
 $todos = getTodos(); // Récupérer les tâches existantes pour les afficher
 $categories = getCategories(); // Récupérer les catégories existantes pour les options de sélection
 // Vérifier si une valeur de progression a été soumise et la convertir en entier si elle est valide
@@ -26,7 +29,13 @@ if (!empty($filterProgress)) {
         return $todo['progress'] === $filterProgress; // La progression est à la clé 'progress' du tableau associatif de la tâche
     });
 }
-
+// Vérifiez si une demande de changement de mode a été faite
+if (isset($_GET['mode'])) {
+    $mode = $_GET['mode'];
+    $_SESSION['mode'] = $mode; // Enregistrez le mode dans la session
+} else {
+    $mode = $_SESSION['mode'] ?? 'jour'; // Mode par défaut est 'jour'
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,12 +46,15 @@ if (!empty($filterProgress)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <?php if ($mode === 'nuit'): ?>
+        <link rel="stylesheet" href="css/jour_nuit.css">
+    <?php endif; ?>
 </head>
-<body>
+<body class="<?php echo $mode; ?>">
 <?php include 'views/layout/navbar.php'; ?>
 <div class="container">
     <h1>Liste de tâches</h1>
-
     <form action="add.php" method="post" class="mb-3">
         <div class="input-group">
             <input type="text" id="newTask" name="newTask" class="form-control me-2" placeholder="Nouvelle tâche"
@@ -92,7 +104,7 @@ if (!empty($filterProgress)) {
     </form>
 
     <?php if (count($todos) > 0): ?>
-        <table class="table table-striped">
+        <table class="table">
             <thead>
             <tr>
                 <th scope="col">Tâche</th>

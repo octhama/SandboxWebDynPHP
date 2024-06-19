@@ -20,5 +20,6 @@
     <orderEntry type="library" name="typed.js" level="application" />
     <orderEntry type="library" name="isotope-layout" level="application" />
     <orderEntry type="library" name="@srexi/purecounterjs" level="application" />
+    <orderEntry type="library" name="bootstrap-icons" level="application" />
   </component>
 </module>
