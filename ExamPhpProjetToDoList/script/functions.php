@@ -57,7 +57,7 @@ function saveTodos(array $todos, string $filename = 'todos.csv'): void
         ]);
     }
 
-    fclose($file);
+    fclose($file); // Ferme le fichier après avoir écrit toutes les tâches
 }
 
 // Génère un nouvel identifiant unique pour une nouvelle tâche en fonction des tâches existantes (le plus élevé + 1)
@@ -200,7 +200,7 @@ function deleteTodoToTrash($id): void
     foreach ($todos as $index => $todo) {
         if ($todo['id'] == $id) {
             $deletedTodos[] = $todo;
-            unset($todos[$index]);
+            unset($todos[$index]); // Supprime la tâche de la liste des tâches (todos.csv)
             saveTodos($todos);
             saveTodos($deletedTodos, 'trash.csv');
             return;
@@ -214,7 +214,7 @@ function deleteTodoPermanently($id): void
     $deletedTodos = getDeletedTodos();
     foreach ($deletedTodos as $index => $todo) {
         if ($todo['id'] == $id) {
-            unset($deletedTodos[$index]);
+            unset($deletedTodos[$index]); // Supprime la tâche de la corbeille (trash.csv) de manière permanente
             saveTodos($deletedTodos, 'trash.csv');
             return;
         }
@@ -229,7 +229,7 @@ function restoreTodo($id): void
     foreach ($deletedTodos as $index => $todo) {
         if ($todo['id'] == $id) {
             $todos[] = $todo;
-            unset($deletedTodos[$index]);
+            unset($deletedTodos[$index]); // Supprime la tâche restaurée de la corbeille (trash.csv)
             saveTodos($todos);
             saveTodos($deletedTodos, 'trash.csv');
             return;
