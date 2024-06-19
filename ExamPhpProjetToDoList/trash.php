@@ -62,7 +62,7 @@ if (isset($_GET['mode'])) {
                         <?php endif; ?>
                     </td>
                     <td><?php echo htmlspecialchars($todo['date']); ?></td>
-                    <td><?php echo htmlspecialchars($todo['time']); ?></td>
+                    <td><?php if (!empty($todo['time'])) echo htmlspecialchars(date('h:i A', strtotime($todo['time']))); ?></td>
                     <td><?php echo htmlspecialchars($todo['category']); ?></td>
                     <td><?php echo htmlspecialchars($todo['priority']); ?></td>
                     <td>

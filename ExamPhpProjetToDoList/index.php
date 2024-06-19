@@ -130,8 +130,9 @@ if (isset($_GET['mode'])) {
                             <?php echo htmlspecialchars($todo['task'] ?? ''); ?>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo htmlspecialchars($todo['date'] ?? ''); ?></td> <!-- htmlspecialchars() est une fonction PHP qui convertit les caractères spéciaux en entités HTML pour éviter les problèmes de sécurité comme les attaques XSS -->
-                    <td><?php echo htmlspecialchars($todo['time'] ?? ''); ?></td>
+                    <td><i class="bi bi-calendar"></i> <?php echo htmlspecialchars($todo['date'] ?? ''); ?></td>
+                    <!-- Récupérer l'heure en précisant si c'est AM ou PM -->
+                    <td><?php if (!empty($todo['time'])) echo htmlspecialchars(date('h:i A', strtotime($todo['time']))); ?></td>
                     <td>
                         <?php
                         $todoCategories = explode(',', $todo['category'] ?? ''); // Les ?? sont utilisés pour éviter les erreurs si la clé n'existe pas dans le tableau
