@@ -53,3 +53,34 @@ body.nuit .dropdown-menu {
     background-color: #15141A;
     color: #ffffff;
 }
+
+/* Input en mode nuit */
+body.nuit input.form-control,
+body.nuit textarea {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
+body.nuit input.form-check-input{
+    background-color: #3c3c42;
+    color: #ffffff;
+}
+
+/*Select en mode nuit */
+body.nuit select {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
+/*Progress en mode nuit */
+body.nuit .progress {
+    background-color: #222225;
+    color: #ffffff;
+}
+
+/*Alert en mode nuit */
+body.nuit .alert {
+    background-color: #0d5959;
+    color: #ffffff;
+}
+
