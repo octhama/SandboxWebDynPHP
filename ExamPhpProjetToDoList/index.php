@@ -4,6 +4,29 @@ $todos = getTodos(); // Récupérer les tâches existantes pour les afficher
 $categories = getCategories(); // Récupérer les catégories existantes pour les options de sélection
 // Vérifier si une valeur de progression a été soumise et la convertir en entier si elle est valide
 $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress']) : 0;
+
+// Gestion du filtrage
+$filterCategory = $_GET['category'] ?? '';
+$filterPriority = $_GET['priority'] ?? '';
+
+// Filtrage des tâches en fonction des critères sélectionnés
+if (!empty($filterCategory)) {
+    $todos = array_filter($todos, function ($todo) use ($filterCategory) {
+        return $todo['category'] === $filterCategory; // La catégorie est à la clé 'category' du tableau associatif de la tâche
+    });
+}
+if (!empty($filterPriority)) {
+    $todos = array_filter($todos, function ($todo) use ($filterPriority) {
+        return $todo['priority'] === $filterPriority; // La priorité est à la clé 'priority' du tableau associatif de la tâche
+    });
+}
+
+if (!empty($filterProgress)) {
+    $todos = array_filter($todos, function ($todo) use ($filterProgress) {
+        return $todo['progress'] === $filterProgress; // La progression est à la clé 'progress' du tableau associatif de la tâche
+    });
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +64,33 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
         </div>
     </form>
 
+    <!-- Formulaire de filtrage -->
+    <form method="get" class="mb-3">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="categoryFilter" class="form-label">Filtrer par Catégorie :</label>
+                <select class="form-select" id="categoryFilter" name="category">
+                    <option value="">Toutes les catégories</option>
+                    <?php foreach (getCategories() as $category): ?>
+                        <option value="<?php echo htmlspecialchars($category); ?>" <?php if ($filterCategory === $category) echo 'selected'; ?>><?php echo htmlspecialchars($category); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="priorityFilter" class="form-label">Filtrer par Priorité :</label>
+                <select class="form-select" id="priorityFilter" name="priority">
+                    <option value="">Toutes les priorités</option>
+                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                        <option value="<?php echo $i; ?>" <?php if ($filterPriority == $i) echo 'selected'; ?>><?php echo $i; ?></option>
+                    <?php endfor; ?>
+                </select>
+            </div>
+            <div class="col-md-2 mt-4">
+                <button type="submit" class="btn btn-primary mt-2">Filtrer</button>
+            </div>
+        </div>
+    </form>
+
     <?php if (count($todos) > 0): ?>
         <table class="table table-striped">
             <thead>
@@ -73,7 +123,7 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
                     <td>
                         <?php
                         $todoCategories = explode(',', $todo['category'] ?? ''); // Les ?? sont utilisés pour éviter les erreurs si la clé n'existe pas dans le tableau
-                        // PS : explode() divise une chaîne en un tableau de sous-chaînes en utilisant un délimiteur (, dans ce cas) c'est à dire que si la catégorie est "Travail, Personnel", le tableau sera ['Travail', 'Personnel']
+                        // PS : explode() divise une chaîne en un tableau de sous-chaînes en utilisant un délimiteur (, dans ce cas) c'est-à-dire que si la catégorie est "Travail, Personnel", le tableau sera ['Travail', 'Personnel']
                         // On affiche ensuite un badge pour chaque catégorie
                         foreach ($todoCategories as $category) {
                             echo getCategoryBadge($category);

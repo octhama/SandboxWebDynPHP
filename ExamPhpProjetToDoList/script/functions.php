@@ -236,3 +236,11 @@ function restoreTodo($id): void
         }
     }
 }
+
+// Fonctionnalité pour trier les tâches par catégorie (travail, personnel, courses, autre)
+function filterTodosByCategory(array $todos, string $category): array
+{
+    return array_filter($todos, function ($todo) use ($category) {
+        return $todo['category'] === $category;
+    });
+}

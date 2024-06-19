@@ -12,6 +12,7 @@
                         <a class="nav-link" href="trash.php">Corbeille</a>
                     </li>
                 </ul>
+            </div>
         </div>
     </nav>
 </header>
