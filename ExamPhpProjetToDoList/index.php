@@ -159,7 +159,7 @@ if (isset($_GET['mode'])) {
                                 $progressClass = 'bg-success';
                             }
                             ?>
-                            <div class="progress-bar <?php echo $progressClass; ?> progress-bar-striped"
+                            <div class="progress-bar <?php echo $progressClass; ?> progress-bar"
                                  role="progressbar" style="width: <?php echo $progress; ?>%"
                                  aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100">
                                 <?php echo $progress; ?>%
