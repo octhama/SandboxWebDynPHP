@@ -2,8 +2,8 @@
 include 'script/functions.php';
 
 if (isset($_GET['id'])) {
-    deleteTodoToTrash($_GET['id']);
+    restoreTodo($_GET['id']);
 }
 
-header('Location: index.php');
+header('Location: trash.php');
 exit;

@@ -1,6 +1,6 @@
 <?php
 
-function getTodos(): array // Retourne un tableau de tâches
+function getTodos(): array
 {
     if (!file_exists('todos.csv')) {
         return [];
@@ -40,9 +40,9 @@ function getTodos(): array // Retourne un tableau de tâches
 }
 
 // Sauvegarde des tâches dans le fichier CSV (écrase le contenu existant)
-function saveTodos($todos): void
+function saveTodos(array $todos, string $filename = 'todos.csv'): void
 {
-    $file = fopen('todos.csv', 'w'); // Ouvre le fichier en mode écriture (crée un nouveau fichier s'il n'existe pas)
+    $file = fopen($filename, 'w'); // Ouvre le fichier en mode écriture (crée un nouveau fichier s'il n'existe pas)
 
     foreach ($todos as $todo) {
         fputcsv($file, [
@@ -61,7 +61,8 @@ function saveTodos($todos): void
 }
 
 // Génère un nouvel identifiant unique pour une nouvelle tâche en fonction des tâches existantes (le plus élevé + 1)
-function getNewId() {
+function getNewId(): int
+{
     $todos = getTodos(); // Récupère les tâches existantes pour trouver le plus grand ID existant et l'incrémenter de 1 si nécessaire
     $ids = array_map(function ($todo) { // array_map() applique une fonction à chaque élément d'un tableau et retourne un tableau avec les résultats
         return $todo['id']; // Retourne un tableau contenant uniquement les ID des tâches existantes pour la comparaison et la recherche du plus élevé + 1
@@ -82,7 +83,7 @@ function getCategories(): array
 }
 
 // Retourne la couleur Bootstrap associée à une catégorie de tâche donnée (par défaut, gris foncé)
-function getCategoryColor($category): string
+function getCategoryColor(string $category): string
 {
     return match ($category) {
         'Travail' => 'primary',
@@ -94,7 +95,7 @@ function getCategoryColor($category): string
 }
 
 // Retourne l'icône Font Awesome associée à une catégorie de tâche donnée (par défaut, une étoile)
-function getCategoryIcon($category): string
+function getCategoryIcon(string $category): string
 {
     return match ($category) {
         'Travail' => 'fa-briefcase',
@@ -106,7 +107,7 @@ function getCategoryIcon($category): string
 }
 
 // Retourne un badge Bootstrap pour une catégorie de tâche donnée (avec icône Font Awesome)
-function getCategoryBadge($category): string
+function getCategoryBadge(string $category): string
 {
     return '<span class="badge bg-' . getCategoryColor($category) . '"><i class="fas ' . getCategoryIcon($category) . '"></i> ' . $category . '</span> ';
 }
@@ -126,14 +127,14 @@ function getCategoryOptions($selectedCategories): string
 }
 
 // Retourne un badge Bootstrap pour la priorité d'une tâche en fonction de sa valeur (1 à 10)
-function getPriorityBadge($priority): string
+function getPriorityBadge(int $priority): string
 {
     $color = $priority > 5 ? 'danger' : ($priority > 3 ? 'warning' : 'success'); // Détermine la couleur en fonction de la priorité (rouge pour > 5, orange pour > 3, vert pour le reste)
     return '<span class="badge bg-' . $color . '">' . $priority . '</span>';
 }
 
 // Retourne les options de sélection pour la priorité de la tâche avec la priorité sélectionnée par défaut (1 à 10)
-function getPriorityOptions($selectedPriority): string
+function getPriorityOptions(int $selectedPriority): string
 {
     $options = '';
 
@@ -146,7 +147,7 @@ function getPriorityOptions($selectedPriority): string
 }
 
 // Retourne les options de sélection pour le niveau de progression
-function getProgressOptions($selectedValue = 0): string
+function getProgressOptions(int $selectedValue = 0): string
 {
     $options = '';
     $values = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
@@ -157,4 +158,81 @@ function getProgressOptions($selectedValue = 0): string
     }
 
     return $options;
+}
+
+// Retourne les tâches supprimées de la corbeille (trash.csv) pour les afficher dans la vue de la corbeille
+function getDeletedTodos(): array
+{
+    if (!file_exists('trash.csv')) {
+        return [];
+    }
+
+    $file = fopen('trash.csv', 'r');
+    $deletedTodos = [];
+    $expectedColumnCount = 8; // Nombre de colonnes attendu dans chaque ligne
+
+    while (($line = fgetcsv($file)) !== false) {
+        if (count($line) < $expectedColumnCount) {
+            continue; // Ignore les lignes avec un nombre de colonnes incorrect
+        }
+        $deletedTodos[] = [
+            'id' => $line[0],
+            'task' => $line[1],
+            'date' => $line[2],
+            'time' => $line[3],
+            'completed' => $line[4] === '1',
+            'priority' => $line[5],
+            'progress' => $line[6],
+            'category' => $line[7]
+        ];
+    }
+
+    fclose($file);
+
+    return $deletedTodos;
+}
+
+// Supprime une tâche de la liste des tâches et la déplace dans la corbeille (trash.csv) pour la récupérer plus tard
+function deleteTodoToTrash($id): void
+{
+    $todos = getTodos();
+    $deletedTodos = getDeletedTodos();
+    foreach ($todos as $index => $todo) {
+        if ($todo['id'] == $id) {
+            $deletedTodos[] = $todo;
+            unset($todos[$index]);
+            saveTodos($todos);
+            saveTodos($deletedTodos, 'trash.csv');
+            return;
+        }
+    }
+}
+
+// Supprime définitivement une tâche de la corbeille (trash.csv)
+function deleteTodoPermanently($id): void
+{
+    $deletedTodos = getDeletedTodos();
+    foreach ($deletedTodos as $index => $todo) {
+        if ($todo['id'] == $id) {
+            unset($deletedTodos[$index]);
+            saveTodos($deletedTodos, 'trash.csv');
+            return;
+        }
+    }
+}
+
+// Restaure une tâche supprimée de la corbeille (la déplace de trash.csv à todos.csv)
+function restoreTodo($id): void
+{
+    $todos = getTodos();
+    $deletedTodos = getDeletedTodos();
+    foreach ($deletedTodos as $index => $todo) {
+        if ($todo['id'] == $id) {
+            $todos[] = $todo;
+            unset($deletedTodos[$index]);
+            saveTodos($todos);
+            saveTodos($deletedTodos, 'trash.csv');
+            return;
+        }
+    }
 }
