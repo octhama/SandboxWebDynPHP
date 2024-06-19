@@ -1,6 +1,6 @@
 <?php
 include 'script/functions.php';
-
+// Vérifier si le formulaire a été soumis pour ajouter une nouvelle tâche
 if (isset($_POST['newTask'])) {
     $newTask = $_POST['newTask'];
     $newDate = $_POST['newDate'] ?? '';
@@ -16,6 +16,7 @@ if (isset($_POST['newTask'])) {
     $newCategoryString = implode(',', $newCategories); // Convertir le tableau en chaîne séparée par des virgules (si plusieurs catégories)
 
     $todos = getTodos();
+    // Création d'un nouveau tableau associatif pour la nouvelle tâche à ajouter
     $newTodo = [
         'id' => getNewId(),
         'task' => $newTask,

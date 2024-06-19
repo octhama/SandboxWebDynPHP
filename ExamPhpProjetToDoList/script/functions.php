@@ -19,7 +19,7 @@ function getTodos(): array // Retourne un tableau de tâches
             'task' => $line[1],
             'date' => $line[2],
             'time' => $line[3],
-            'completed' => $line[4] === '1',
+            'completed' => $line[4] === '1', // Convertit la chaîne '1' en booléen true, sinon false (statut de complétion) PS : === pour comparer le type et la valeur
             'priority' => $line[5],
             'progress' => $line[6],
             'category' => $line[7]
@@ -42,7 +42,7 @@ function getTodos(): array // Retourne un tableau de tâches
 // Sauvegarde des tâches dans le fichier CSV (écrase le contenu existant)
 function saveTodos($todos): void
 {
-    $file = fopen('todos.csv', 'w');
+    $file = fopen('todos.csv', 'w'); // Ouvre le fichier en mode écriture (crée un nouveau fichier s'il n'existe pas)
 
     foreach ($todos as $todo) {
         fputcsv($file, [
@@ -50,7 +50,7 @@ function saveTodos($todos): void
             $todo['task'],
             $todo['date'],
             $todo['time'],
-            $todo['completed'] ? '1' : '0',
+            $todo['completed'] ? '1' : '0', // Convertit le booléen en '1' ou '0' pour le statut de complétion dans le fichier CSV
             $todo['priority'],
             $todo['progress'],
             $todo['category']
@@ -60,17 +60,17 @@ function saveTodos($todos): void
     fclose($file);
 }
 
-// Génère un nouvel identifiant unique pour une nouvelle tâche
+// Génère un nouvel identifiant unique pour une nouvelle tâche en fonction des tâches existantes (le plus élevé + 1)
 function getNewId() {
-    $todos = getTodos();
-    $ids = array_map(function ($todo) {
-        return $todo['id'];
-    }, $todos);
+    $todos = getTodos(); // Récupère les tâches existantes pour trouver le plus grand ID existant et l'incrémenter de 1 si nécessaire
+    $ids = array_map(function ($todo) { // array_map() applique une fonction à chaque élément d'un tableau et retourne un tableau avec les résultats
+        return $todo['id']; // Retourne un tableau contenant uniquement les ID des tâches existantes pour la comparaison et la recherche du plus élevé + 1
+    }, $todos); // $todos est le tableau de tâches existantes avec des ID
 
-    return $ids ? max($ids) + 1 : 1; // Incrémente l'ID le plus élevé ou retourne 1 si le tableau est vide
+    return $ids ? max($ids) + 1 : 1; // Incrémente l'ID le plus élevé ou retourne 1 si le tableau est vide (première tâche)
 }
 
-// Retourne la liste des catégories disponibles
+// Retourne la liste des catégories disponibles pour les tâches (travail, personnel, courses, autre)
 function getCategories(): array
 {
     return [
@@ -115,10 +115,10 @@ function getCategoryBadge($category): string
 function getCategoryOptions($selectedCategories): string
 {
     $options = '';
-    $selectedCategories = is_array($selectedCategories) ? $selectedCategories : [$selectedCategories];
+    $selectedCategories = is_array($selectedCategories) ? $selectedCategories : [$selectedCategories]; // Convertit en tableau si ce n'est pas déjà le cas (pour la cohérence)
 
     foreach (getCategories() as $category) {
-        $selected = in_array($category, $selectedCategories) ? ' selected' : '';
+        $selected = in_array($category, $selectedCategories) ? ' selected' : ''; // Vérifie si la catégorie est sélectionnée par défaut (dans le tableau)
         $options .= '<option value="' . $category . '"' . $selected . '>' . $category . '</option>';
     }
 
@@ -128,7 +128,7 @@ function getCategoryOptions($selectedCategories): string
 // Retourne un badge Bootstrap pour la priorité d'une tâche en fonction de sa valeur (1 à 10)
 function getPriorityBadge($priority): string
 {
-    $color = $priority > 5 ? 'danger' : ($priority > 3 ? 'warning' : 'success');
+    $color = $priority > 5 ? 'danger' : ($priority > 3 ? 'warning' : 'success'); // Détermine la couleur en fonction de la priorité (rouge pour > 5, orange pour > 3, vert pour le reste)
     return '<span class="badge bg-' . $color . '">' . $priority . '</span>';
 }
 
@@ -153,7 +153,7 @@ function getProgressOptions($selectedValue = 0): string
 
     foreach ($values as $value) {
         $selected = ($value == $selectedValue) ? 'selected' : '';
-        $options .= "<option value=\"$value\" $selected>$value%</option>"; // .= permet de concaténer les options
+        $options .= "<option value=\"$value\" $selected>$value%</option>"; // .= permet de concaténer les options pour chaque valeur de progression
     }
 
     return $options;

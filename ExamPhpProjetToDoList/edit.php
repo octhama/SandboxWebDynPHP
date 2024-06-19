@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
     exit;
 }
 
-// Traitement du formulaire lorsqu'il est soumis
+// Traitement du formulaire lorsqu'il est soumis (mise à jour de la tâche)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie si le formulaire a été soumis en vérifiant la méthode de la requête
     $task = trim($_POST['task']); // Supprime les espaces inutiles au début et à la fin de la chaîne
     $date = $_POST['date'] ?? '';
@@ -32,9 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie si le formulaire a ét�
 
     if (!empty($_POST['customCategory'])) {
         $categories[] = trim($_POST['customCategory']); // Ajoute la catégorie personnalisée si elle n'est pas vide et n'existe pas déjà
+        //PS : trim() est une fonction PHP qui supprime les espaces inutiles au début et à la fin d'une chaîne de caractères
+        // Exemple : trim('  Hello  ') retourne 'Hello'
     }
 
-    $categoryString = implode(',', $categories);
+    $categoryString = implode(',', $categories);  // Convertit le tableau en chaîne séparée par des virgules (si plusieurs catégories) pour le stockage
+
+    // PS : implode() est un fonction PHP qui permet de convertir un tableau en chaîne de caractères en les séparant par un délimiteur
+    // Exemple : implode(',', ['Travail', 'Personnel', 'Autre']) retourne 'Travail, Personnel, Autre')
+    // On a aussi la fonction join() qui fait la même chose que implode() mais avec les arguments inversés : join(',', ['Travail', 'Personnel', 'Autre'])
+    // explode() est l'inverse de implode() : il permet de convertir une chaîne de caractères en tableau en utilisant un délimiteur
+    // Exemple : explode(',', 'Travail,Personnel,Autre') retourne ['Travail', 'Personnel', 'Autre'])
 
     // Vérification si la tâche n'est pas vide
     if (!empty($task)) {
@@ -61,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie si le formulaire a ét�
     } else {
         // Redirige avec un message d'erreur si la tâche est vide lors de la soumission du formulaire
         header('Location: edit.php?id=' . urlencode($_GET['id']) . '&error=empty_task');
+        // PS : urlencode() est une fonction PHP qui encode une chaîne en URL (pour éviter les caractères spéciaux)
         exit;
     }
 }

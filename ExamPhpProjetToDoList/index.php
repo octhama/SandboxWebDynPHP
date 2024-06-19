@@ -69,11 +69,13 @@ $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress'])
                             <?php echo htmlspecialchars($todo['task'] ?? ''); ?>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo htmlspecialchars($todo['date'] ?? ''); ?></td>
+                    <td><?php echo htmlspecialchars($todo['date'] ?? ''); ?></td> <!-- htmlspecialchars() est une fonction PHP qui convertit les caractères spéciaux en entités HTML pour éviter les problèmes de sécurité comme les attaques XSS -->
                     <td><?php echo htmlspecialchars($todo['time'] ?? ''); ?></td>
                     <td>
                         <?php
                         $todoCategories = explode(',', $todo['category'] ?? ''); // Les ?? sont utilisés pour éviter les erreurs si la clé n'existe pas dans le tableau
+                        // PS : explode() divise une chaîne en un tableau de sous-chaînes en utilisant un délimiteur (, dans ce cas) c'est à dire que si la catégorie est "Travail, Personnel", le tableau sera ['Travail', 'Personnel']
+                        // On affiche ensuite un badge pour chaque catégorie
                         foreach ($todoCategories as $category) {
                             echo getCategoryBadge($category);
                         }
