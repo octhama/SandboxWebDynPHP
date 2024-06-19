@@ -90,7 +90,7 @@ function getCategoryColor(string $category): string
         'Personnel' => 'secondary',
         'Courses' => 'success',
         'Autre' => 'danger',
-        default => 'dark',
+        default => 'dark'
     };
 }
 
@@ -102,7 +102,7 @@ function getCategoryIcon(string $category): string
         'Personnel' => 'fa-user',
         'Courses' => 'fa-shopping-cart',
         'Autre' => 'fa-question',
-        default => 'fa-star',
+        default => 'fa-star'
     };
 }
 
