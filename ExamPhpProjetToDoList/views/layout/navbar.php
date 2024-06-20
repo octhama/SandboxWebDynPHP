@@ -19,12 +19,12 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButtonDark">
                         <li>
                             <a class="dropdown-item" href="?mode=jour">
-                                <i class="bi bi-sun"></i> Mode Jour
+                                <i class="bi bi-sunrise"></i> Mode Jour
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="?mode=nuit">
-                                <i class="bi bi-moon"></i> Mode Nuit
+                                <i class="bi bi-moon-fill"></i> Mode Nuit
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
