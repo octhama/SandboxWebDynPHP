@@ -121,12 +121,13 @@ body.nuit .alert {
     color: #ffffff;
 }
 
-/* Boutons en mode nuit */
+/* Boutons en mode nuit
 body.nuit .btn {
     background-color: #3c3c42;
     color: #ffffff;
     border-color: #3c3c42;
 }
+*/
 
 /* Tables en mode nuit */
 body.nuit .table {
@@ -179,12 +180,13 @@ body.jour .alert {
     color: #0c5460;
 }
 
-/* Boutons en mode jour */
+/* Boutons en mode jour
 body.jour .btn {
     background-color: #ffffff;
     color: #15141A;
     border-color: #ced4da;
 }
+*/
 
 /* Tables en mode jour */
 body.jour .table {
