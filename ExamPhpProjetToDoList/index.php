@@ -151,7 +151,7 @@ if (isset($_GET['mode'])) {
                                 if ($progress > 25) $progressClass = 'bg-warning';
                                 if ($progress > 50) $progressClass = 'bg-info';
                                 if ($progress > 75) $progressClass = 'bg-success';
-
+                                // Détermine la classe de couleur en fonction de la progression (rouge pour > 75, vert pour le reste)
                                 echo '<div class="progress mb-2">
                                       <div class="progress-bar ' . $progressClass . '" role="progressbar" style="width: ' . $progress . '%" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100">' . $progress . '%</div>
                                       </div>';
