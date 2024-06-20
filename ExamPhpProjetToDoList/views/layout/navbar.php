@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="index.php">
                 <img src="assets/brand/Backlog.svg" alt="Bootstrap" width="60" height="48" class="d-inline-block align-text-top">

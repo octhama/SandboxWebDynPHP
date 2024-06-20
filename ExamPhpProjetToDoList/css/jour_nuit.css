@@ -50,6 +50,25 @@ body.nuit .navbar {
     border-bottom: 1px solid #3c3c42;
 }
 
+body.nuit .navbar .navbar-brand,
+body.nuit .navbar .navbar-nav .nav-link,
+body.nuit .navbar .dropdown-menu {
+    color: #ffffff;
+}
+
+body.nuit .navbar .dropdown-menu {
+    background-color: #3c3c42;
+    border: none;
+}
+
+body.nuit .navbar-toggler {
+    border-color: #ffffff;
+}
+
+body.nuit .navbar-toggler-icon {
+    filter: invert(1);
+}
+
 /* Footer en mode nuit */
 body.nuit .footer {
     background-color: #15141A;
@@ -187,6 +206,37 @@ body.jour .card {
 
 body.jour .card-header,
 body.jour .card-footer {
+    background-color: #f8f9fa;
+    color: #15141A;
+}
+
+/* Navbar en mode jour */
+body.jour .navbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+body.jour .navbar .navbar-brand,
+body.jour .navbar .navbar-nav .nav-link,
+body.jour .navbar .dropdown-menu {
+    color: #15141A;
+}
+
+body.jour .navbar .dropdown-menu {
+    background-color: #ffffff;
+    border: none;
+}
+
+body.jour .navbar-toggler {
+    border-color: #15141A;
+}
+
+body.jour .navbar-toggler-icon {
+    filter: invert(0);
+}
+
+/* Footer en mode jour */
+body.jour .footer {
     background-color: #f8f9fa;
     color: #15141A;
 }
