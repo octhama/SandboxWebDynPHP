@@ -144,6 +144,7 @@ if (isset($_GET['mode'])) {
                                 <?php
                                 $progress = $todo['progress'] ?? 0;
                                 $progressClass = 'bg-danger';
+                                if ($progress == 0) echo '<p class="text-muted">Non commencé</p>';
                                 if ($progress > 25) $progressClass = 'bg-warning';
                                 if ($progress > 50) $progressClass = 'bg-info';
                                 if ($progress > 75) $progressClass = 'bg-success';

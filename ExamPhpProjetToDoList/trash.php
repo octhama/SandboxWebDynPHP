@@ -70,9 +70,13 @@ if (isset($_GET['mode'])) {
                     <td><?php echo htmlspecialchars($todo['category']); ?></td>
                     <td><?php echo htmlspecialchars($todo['priority']); ?></td>
                     <td>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: <?php echo htmlspecialchars($todo['progress']); ?>%" aria-valuenow="<?php echo htmlspecialchars($todo['progress']); ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                        <?php if ($todo['progress'] == 0){
+                            echo '<p class="text-muted">Non commencé</p>';
+                        } else {
+                            echo '<div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ' . htmlspecialchars($todo['progress']) . '%" aria-valuenow="' . htmlspecialchars($todo['progress']) . '" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>';
+                        } ?>
                     </td>
                     <td><?php echo $todo['completed'] ? 'Terminé' : 'Non terminé'; ?></td>
                     <td>
