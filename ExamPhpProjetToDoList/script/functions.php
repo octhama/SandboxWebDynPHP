@@ -237,10 +237,16 @@ function restoreTodo($id): void
     }
 }
 
-// Fonctionnalité pour trier les tâches par catégorie (travail, personnel, courses, autre)
-function filterTodosByCategory(array $todos, string $category): array
+// Fonctionnalité pour trier les tâches par priorité (1 à 10)
+function getProgressClass($progress): string
 {
-    return array_filter($todos, function ($todo) use ($category) {
-        return $todo['category'] === $category;
-    });
+    if ($progress > 75) {
+        return 'bg-success';
+    } elseif ($progress > 50) {
+        return 'bg-info';
+    } elseif ($progress > 25) {
+        return 'bg-warning';
+    } else {
+        return 'bg-danger';
+    }
 }

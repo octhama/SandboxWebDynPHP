@@ -140,21 +140,22 @@ if (isset($_GET['mode'])) {
                             <p class="card-text">
                                 <?php echo getPriorityBadge($todo['priority'] ?? ''); ?>
                             </p>
-                            <div class="progress mb-2">
-                                <?php
-                                $progress = $todo['progress'] ?? 0;
+
+                            <?php
+                            if ($todo['progress'] == 0) {
+                                echo '<p class="text-muted">Non commencé</p>';
+                            } else {
+                                $progress = $todo['progress'] ?? 0; // Récupère la progression de la tâche
+                                // ?? est l'opérateur de fusion null, c'est-à-dire qu'il renvoie la première valeur non nulle pour éviter les erreurs
                                 $progressClass = 'bg-danger';
-                                if ($progress == 0) echo '<p class="text-muted">Non commencé</p>';
                                 if ($progress > 25) $progressClass = 'bg-warning';
                                 if ($progress > 50) $progressClass = 'bg-info';
                                 if ($progress > 75) $progressClass = 'bg-success';
-                                ?>
-                                <div class="progress-bar <?php echo $progressClass; ?>" role="progressbar"
-                                     style="width: <?php echo $progress; ?>%"
-                                     aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100">
-                                    <?php echo $progress; ?>%
-                                </div>
-                            </div>
+
+                                echo '<div class="progress mb-2">
+                                      <div class="progress-bar ' . $progressClass . '" role="progressbar" style="width: ' . $progress . '%" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100">' . $progress . '%</div>
+                                      </div>';
+                            } ?>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch"
