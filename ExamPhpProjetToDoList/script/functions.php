@@ -7,7 +7,7 @@ function getTodos(): array
     }
 
     $file = fopen('todos.csv', 'r');
-    $todos = [];
+    $todos = []; // Initialise un tableau vide pour stocker les tâches lues à partir du fichier CSV (todos.csv) PS : [] est une syntaxe équivalente à array()
     $expectedColumnCount = 8; // Nombre de colonnes attendu dans chaque ligne
 
     while (($line = fgetcsv($file)) !== false) {
