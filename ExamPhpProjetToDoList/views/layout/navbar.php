@@ -14,7 +14,7 @@
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonDark" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-moon-stars"></i> | <i class="bi bi-trash"></i>
+                        <i class="bi bi-moon-stars"></i> | <i class="bi bi-trash3-fill"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButtonDark">
                         <li>
