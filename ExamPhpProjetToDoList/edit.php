@@ -105,22 +105,40 @@ if (isset($_GET['mode'])) {
         </div>
     <?php endif; ?>
     <form action="edit.php?id=<?php echo urlencode($currentTodo['id']); ?>" method="post" class="mb-3">
-        <div class="input-group">
-            <input type="text" name="task" class="form-control me-2" value="<?php echo htmlspecialchars($currentTodo['task']); ?>" required>
-            <input type="date" name="date" class="form-control me-2" value="<?php echo htmlspecialchars($currentTodo['date']); ?>">
-            <input type="time" name="time" class="form-control me-2" value="<?php echo htmlspecialchars($currentTodo['time']); ?>">
-            <select name="priority" class="form-select me-2">
-                <?php echo getPriorityOptions($currentTodo['priority']); ?>
-            </select>
-            <select name="progress" class="form-select me-2">
-                <?php echo getProgressOptions($currentTodo['progress']); ?>
-            </select>
-            <select name="category[]" class="form-select me-2">
-                <?php echo getCategoryOptions(explode(',', $currentTodo['category'])); ?>
-            </select>
-            <input type="text" name="customCategory" class="form-control me-2" placeholder="Caté. perso.">
-            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="task" class="form-control" value="<?php echo htmlspecialchars($currentTodo['task']); ?>" required placeholder="Nom de la tâche">
+            </div>
+            <div class="col">
+                <input type="date" name="date" class="form-control" value="<?php echo htmlspecialchars($currentTodo['date']); ?>">
+            </div>
+            <div class="col">
+                <input type="time" name="time" class="form-control" value="<?php echo htmlspecialchars($currentTodo['time']); ?>">
+            </div>
         </div>
+        <div class="row mb-3">
+            <div class="col">
+                <select name="priority" class="form-select">
+                    <?php echo getPriorityOptions($currentTodo['priority']); ?>
+                </select>
+            </div>
+            <div class="col">
+                <select name="progress" class="form-select">
+                    <?php echo getProgressOptions($currentTodo['progress']); ?>
+                </select>
+            </div>
+            <div class="col">
+                <select name="category[]" class="form-select">
+                    <?php echo getCategoryOptions(explode(',', $currentTodo['category'])); ?>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="customCategory" class="form-control" placeholder="Catégorie personnalisée">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
     </form>
 </div>
 <?php include 'views/layout/footer.php'; ?>

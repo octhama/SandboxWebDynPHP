@@ -1,8 +1,10 @@
+/* Styles généraux pour le mode jour */
 body.jour {
     background-color: #ffffff;
     color: #15141A;
 }
 
+/* Styles généraux pour le mode nuit */
 body.nuit {
     background-color: #15141A;
     color: #ffffff;
@@ -42,6 +44,18 @@ body.jour label {
     color: #15141A;
 }
 
+/* Navbar en mode nuit */
+body.nuit .navbar {
+    background-color: #15141A;
+    border-bottom: 1px solid #3c3c42;
+}
+
+/* Footer en mode nuit */
+body.nuit .footer {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
 /* Modal en mode nuit */
 body.nuit .modal-content {
     background-color: #15141A;
@@ -59,28 +73,120 @@ body.nuit input.form-control,
 body.nuit textarea {
     background-color: #15141A;
     color: #ffffff;
+    border-color: #3c3c42;
 }
 
-body.nuit input.form-check-input{
+/* Checkbox en mode nuit */
+body.nuit input.form-check-input {
     background-color: #3c3c42;
+    border-color: #3c3c42;
     color: #ffffff;
 }
 
-/*Select en mode nuit */
+/* Select en mode nuit */
 body.nuit select {
     background-color: #15141A;
     color: #ffffff;
+    border-color: #3c3c42;
 }
 
-/*Progress en mode nuit */
+/* Progress en mode nuit */
 body.nuit .progress {
     background-color: #222225;
     color: #ffffff;
 }
 
-/*Alert en mode nuit */
+/* Alert en mode nuit */
 body.nuit .alert {
     background-color: #0d5959;
     color: #ffffff;
 }
 
+/* Boutons en mode nuit */
+body.nuit .btn {
+    background-color: #3c3c42;
+    color: #ffffff;
+    border-color: #3c3c42;
+}
+
+/* Tables en mode nuit */
+body.nuit .table {
+    background-color: #222225;
+    color: #ffffff;
+}
+
+body.nuit .table th,
+body.nuit .table td {
+    border-color: #3c3c42;
+}
+
+/* Cartes en mode nuit */
+body.nuit .card {
+    background-color: #222225;
+    color: #ffffff;
+    border-color: #3c3c42;
+}
+
+body.nuit .card-header,
+body.nuit .card-footer {
+    background-color: #3c3c42;
+    color: #ffffff;
+}
+
+/* Form controls en mode jour */
+body.jour input.form-control,
+body.jour textarea,
+body.jour select {
+    background-color: #ffffff;
+    color: #15141A;
+    border-color: #ced4da;
+}
+
+body.jour input.form-check-input {
+    background-color: #ffffff;
+    border-color: #ced4da;
+    color: #15141A;
+}
+
+/* Progress en mode jour */
+body.jour .progress {
+    background-color: #e9ecef;
+    color: #15141A;
+}
+
+/* Alert en mode jour */
+body.jour .alert {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Boutons en mode jour */
+body.jour .btn {
+    background-color: #ffffff;
+    color: #15141A;
+    border-color: #ced4da;
+}
+
+/* Tables en mode jour */
+body.jour .table {
+    background-color: #ffffff;
+    color: #15141A;
+}
+
+body.jour .table th,
+body.jour .table td {
+    border-color: #dee2e6;
+}
+
+/* Cartes en mode jour */
+body.jour .card {
+    background-color: #ffffff;
+    color: #15141A;
+    border-color: #ced4da;
+}
+
+body.jour .card-header,
+body.jour .card-footer {
+    background-color: #f8f9fa;
+    color: #15141A;
+}

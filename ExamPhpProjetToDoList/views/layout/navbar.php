@@ -1,8 +1,9 @@
 <header>
-    <nav class="navbar navbar-expand-lg bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="index.php">
-                <img src="assets/brand/Backlog.svg" alt="Bootstrap" width="60" height="48">ToDoList
+                <img src="assets/brand/Backlog.svg" alt="Bootstrap" width="60" height="48" class="d-inline-block align-text-top">
+                ToDoList
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,9 +11,8 @@
             </button>
             <div id="navbarNav" class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto">
-
                 </ul>
-                <div class="dropdown" data-bs-theme="dark">
+                <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonDark" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-moon"></i>
                     </button>
@@ -29,7 +29,9 @@
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="trash.php"><i class="bi bi-trash"></i> Corbeille</a>
+                            <a class="dropdown-item" href="trash.php">
+                                <i class="bi bi-trash"></i> Corbeille
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -37,4 +39,3 @@
         </div>
     </nav>
 </header>
-
