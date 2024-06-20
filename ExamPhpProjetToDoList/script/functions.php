@@ -201,7 +201,7 @@ function deleteTodoToTrash($id): void
         if ($todo['id'] == $id) {
             $deletedTodos[] = $todo;
             unset($todos[$index]); // Supprime la tâche de la liste des tâches (todos.csv)
-            saveTodos($todos);
+            saveTodos($todos); // Enregistre les tâches restantes dans la liste des tâches (todos.csv) après la suppression de la tâche déplacée
             saveTodos($deletedTodos, 'trash.csv');
             return;
         }
@@ -215,7 +215,7 @@ function deleteTodoPermanently($id): void
     foreach ($deletedTodos as $index => $todo) {
         if ($todo['id'] == $id) {
             unset($deletedTodos[$index]); // Supprime la tâche de la corbeille (trash.csv) de manière permanente
-            saveTodos($deletedTodos, 'trash.csv');
+            saveTodos($deletedTodos, 'trash.csv'); // Enregistre les tâches restantes dans la corbeille
             return;
         }
     }
@@ -230,8 +230,8 @@ function restoreTodo($id): void
         if ($todo['id'] == $id) {
             $todos[] = $todo;
             unset($deletedTodos[$index]); // Supprime la tâche restaurée de la corbeille (trash.csv)
-            saveTodos($todos);
-            saveTodos($deletedTodos, 'trash.csv');
+            saveTodos($todos); // Enregistre la tâche restaurée dans la liste des tâches (todos.csv) pour la restaurer complètement
+            saveTodos($deletedTodos, 'trash.csv'); // Enregistre les tâches restantes dans la corbeille
             return;
         }
     }
