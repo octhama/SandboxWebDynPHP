@@ -138,7 +138,7 @@ if (isset($_GET['mode'])) {
                 <input type="text" name="customCategory" class="form-control" placeholder="Catégorie personnalisée">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
 </div>
 <?php include 'views/layout/footer.php'; ?>
