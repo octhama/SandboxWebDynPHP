@@ -58,10 +58,25 @@ body.nuit .navbar .dropdown-menu {
     color: #ffffff;
 }
 
-body.nuit .navbar .dropdown-menu .dropdown {
+body.nuit .navbar .dropdown-menu .dropdown  {
     background-color: #3c3c42;
     border: none;
 }
+
+/* Styles par défaut (mode jour) */
+.dropdown-toggle i {
+    color: black; /* Couleur des icônes pour le mode jour */
+}
+
+/* Styles pour le mode nuit */
+body.nuit .dropdown-toggle i {
+    color: white; /* Couleur des icônes pour le mode nuit */
+}
+
+body.nuit .dropdown-toggle {
+    border-color: #ffffff; /* Couleur de la bordure pour le mode nuit */
+}
+
 
 body.nuit .navbar-toggler {
     border-color: #ffffff;
@@ -215,12 +230,13 @@ body.jour .navbar .dropdown-menu {
 }
 */
 
-/*
+
 body.jour .navbar .dropdown-menu {
     background-color: #ffffff;
     border: none;
 }
 
+/*
 body.jour .navbar-toggler {
     border-color: #15141A;
 }
