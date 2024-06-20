@@ -12,10 +12,10 @@
                 <ul class="navbar-nav me-auto">
                 </ul>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButtonDark" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-moon-stars"></i> | <i class="bi bi-trash3-fill"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButtonDark">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDark">
                         <li>
                             <a class="dropdown-item" href="?mode=jour">
                                 <i class="bi bi-sunrise"></i> Mode Jour

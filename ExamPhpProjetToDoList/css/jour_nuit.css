@@ -231,7 +231,7 @@ body.jour .navbar .dropdown-menu {
 */
 
 
-body.jour .navbar .dropdown-menu {
+body.jour .navbar .dropdown-menu .dropdown {
     background-color: #ffffff;
     border: none;
 }
