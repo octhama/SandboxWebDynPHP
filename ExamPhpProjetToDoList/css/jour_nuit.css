@@ -58,7 +58,7 @@ body.nuit .navbar .dropdown-menu {
     color: #ffffff;
 }
 
-body.nuit .navbar .dropdown-menu {
+body.nuit .navbar .dropdown-menu .dropdown {
     background-color: #3c3c42;
     border: none;
 }
