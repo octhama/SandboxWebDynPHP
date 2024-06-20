@@ -165,10 +165,10 @@ if (isset($_GET['mode'])) {
                                 </div>
                                 <div class="btn-group" role="group">
                                     <a href="edit.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-warning">
-                                        <i class="bi bi-pencil"></i>
+                                        <i class="bi bi-pencil-square"></i>
                                     </a>
                                     <a href="delete.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-danger">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="bi bi-trash2"></i>
                                     </a>
                                 </div>
                             </div>
