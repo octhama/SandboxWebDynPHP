@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie si le formulaire a ét�
         // Sauvegarde des todos mis à jour
         saveTodos($todos);
 
-        // Redirection après la mise à jour avec les filtres
+        // Redirection après la mise à jour avec les filtres actuels pour maintenir l'état de la page
         $category = urlencode($_POST['filterCategory']);
         $priority = urlencode($_POST['filterPriority']);
         $progress = urlencode($_POST['filterProgress']);

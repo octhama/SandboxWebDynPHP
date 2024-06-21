@@ -6,6 +6,7 @@ $todos = getTodos(); // Récupérer les tâches existantes pour les afficher
 $categories = getCategories(); // Récupérer les catégories existantes pour les options de sélection
 $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress']) : 0;
 
+// Permet de filtrer les tâches en fonction de la catégorie, de la priorité et de la progression
 $filterCategory = $_GET['category'] ?? '';
 $filterPriority = $_GET['priority'] ?? '';
 $filterProgress = $_GET['progress'] ?? '';
