@@ -197,14 +197,16 @@ if (isset($_GET['mode'])) {
                             } ?>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch"
-                                           id="flexSwitchCheck<?php echo $todo['id']; ?>"
-                                        <?php echo $todo['completed'] ? 'checked' : ''; ?>
-                                        <?php echo $todo['progress'] == 100 ? 'checked' : ''; ?>
-                                           onclick="location.href='toggle.php?id=<?php echo urlencode($todo['id']); ?>'">
-                                    <label class="form-check-label" for="flexSwitchCheck<?php echo $todo['id']; ?>">
-                                        <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'Terminé' : 'Non terminé'; ?>
-                                    </label>
+                                    <form action="toggle.php" method="POST">
+                                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($todo['id']); ?>">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                               id="flexSwitchCheck<?php echo htmlspecialchars($todo['id']); ?>"
+                                               name="completed"
+                                            <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'checked' : ''; ?>>
+                                        <label class="form-check-label" for="flexSwitchCheck<?php echo htmlspecialchars($todo['id']); ?>">
+                                            <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'Terminé' : 'Non terminé'; ?>
+                                        </label>
+                                    </form>
                                 </div>
                                 <div class="btn-group" role="group">
                                     <a href="edit.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-warning">
