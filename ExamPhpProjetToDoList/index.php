@@ -1,40 +1,37 @@
 <?php
 session_start(); // Démarrer la session pour stocker le mode
-// Inclure le fichier de fonctions
 include 'script/functions.php';
 
 $todos = getTodos(); // Récupérer les tâches existantes pour les afficher
 $categories = getCategories(); // Récupérer les catégories existantes pour les options de sélection
-// Vérifier si une valeur de progression a été soumise et la convertir en entier si elle est valide
 $selectedProgress = isset($_POST['newProgress']) ? intval($_POST['newProgress']) : 0;
 
-// Gestion du filtrage
 $filterCategory = $_GET['category'] ?? '';
 $filterPriority = $_GET['priority'] ?? '';
+$filterProgress = $_GET['progress'] ?? '';
 
 // Filtrage des tâches en fonction des critères sélectionnés
 if (!empty($filterCategory)) {
     $todos = array_filter($todos, function ($todo) use ($filterCategory) {
-        return $todo['category'] === $filterCategory; // La catégorie est à la clé 'category' du tableau associatif de la tâche
+        return $todo['category'] === $filterCategory;
     });
 }
 if (!empty($filterPriority)) {
     $todos = array_filter($todos, function ($todo) use ($filterPriority) {
-        return $todo['priority'] === $filterPriority; // La priorité est à la clé 'priority' du tableau associatif de la tâche
+        return $todo['priority'] === $filterPriority;
+    });
+}
+if (!empty($filterProgress)) {
+    $todos = array_filter($todos, function ($todo) use ($filterProgress) {
+        return $todo['progress'] === $filterProgress;
     });
 }
 
-if (!empty($filterProgress)) {
-    $todos = array_filter($todos, function ($todo) use ($filterProgress) {
-        return $todo['progress'] === $filterProgress; // La progression est à la clé 'progress' du tableau associatif de la tâche
-    });
-}
-// Vérifiez si une demande de changement de mode a été faite
 if (isset($_GET['mode'])) {
     $mode = $_GET['mode'];
-    $_SESSION['mode'] = $mode; // Enregistrez le mode dans la session
+    $_SESSION['mode'] = $mode;
 } else {
-    $mode = $_SESSION['mode'] ?? 'jour'; // Mode par défaut est 'jour'
+    $mode = $_SESSION['mode'] ?? 'jour';
 }
 ?>
 
@@ -105,12 +102,14 @@ if (isset($_GET['mode'])) {
                     <label for="newCustomCategory">Catégorie perso.</label>
                 </div>
             </div>
+            <input type="hidden" name="category" value="<?php echo htmlspecialchars($filterCategory); ?>">
+            <input type="hidden" name="priority" value="<?php echo htmlspecialchars($filterPriority); ?>">
+            <input type="hidden" name="progress" value="<?php echo htmlspecialchars($filterProgress); ?>">
             <div class="col-4">
                 <button type="submit" class="btn btn-primary w-20"><i class="bi bi-plus-square-dotted"></i></button>
             </div>
         </div>
     </form>
-
 
     <!-- Formulaire de filtrage -->
     <form method="get" class="mb-4">
@@ -206,13 +205,16 @@ if (isset($_GET['mode'])) {
                                         <label class="form-check-label" for="flexSwitchCheck<?php echo htmlspecialchars($todo['id']); ?>">
                                             <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'Terminé' : 'Non terminé'; ?>
                                         </label>
+                                        <input type="hidden" name="category" value="<?php echo htmlspecialchars($filterCategory); ?>">
+                                        <input type="hidden" name="priority" value="<?php echo htmlspecialchars($filterPriority); ?>">
+                                        <input type="hidden" name="progress" value="<?php echo htmlspecialchars($filterProgress); ?>">
                                     </form>
                                 </div>
                                 <div class="btn-group" role="group">
-                                    <a href="edit.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-warning">
+                                    <a href="edit.php?id=<?php echo urlencode($todo['id']); ?>&category=<?php echo htmlspecialchars($filterCategory); ?>&priority=<?php echo htmlspecialchars($filterPriority); ?>&progress=<?php echo htmlspecialchars($filterProgress); ?>" class="btn btn-warning">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <a href="delete.php?id=<?php echo urlencode($todo['id']); ?>" class="btn btn-danger">
+                                    <a href="delete.php?id=<?php echo urlencode($todo['id']); ?>&category=<?php echo htmlspecialchars($filterCategory); ?>&priority=<?php echo htmlspecialchars($filterPriority); ?>&progress=<?php echo htmlspecialchars($filterProgress); ?>" class="btn btn-danger">
                                         <i class="bi bi-trash2"></i>
                                     </a>
                                 </div>
@@ -233,4 +235,3 @@ if (isset($_GET['mode'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>
-

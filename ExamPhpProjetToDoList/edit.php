@@ -33,17 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie si le formulaire a ét�
 
     if (!empty($_POST['customCategory'])) {
         $categories[] = trim($_POST['customCategory']); // Ajoute la catégorie personnalisée si elle n'est pas vide et n'existe pas déjà
-        //PS : trim() est une fonction PHP qui supprime les espaces inutiles au début et à la fin d'une chaîne de caractères
-        // Exemple : trim('  Hello  ') retourne 'Hello'
     }
 
     $categoryString = implode(',', $categories);  // Convertit le tableau en chaîne séparée par des virgules (si plusieurs catégories) pour le stockage
-
-    // PS : implode() est un fonction PHP qui permet de convertir un tableau en chaîne de caractères en les séparant par un délimiteur
-    // Exemple : implode(',', ['Travail', 'Personnel', 'Autre']) retourne 'Travail, Personnel, Autre')
-    // On a aussi la fonction join() qui fait la même chose que implode() mais avec les arguments inversés : join(',', ['Travail', 'Personnel', 'Autre'])
-    // explode() est l'inverse de implode() : il permet de convertir une chaîne de caractères en tableau en utilisant un délimiteur
-    // Exemple : explode(',', 'Travail,Personnel,Autre') retourne ['Travail', 'Personnel', 'Autre'])
 
     // Vérification si la tâche n'est pas vide
     if (!empty($task)) {
@@ -64,13 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie si le formulaire a ét�
         // Sauvegarde des todos mis à jour
         saveTodos($todos);
 
-        // Redirection après la mise à jour
-        header('Location: index.php');
+        // Redirection après la mise à jour avec les filtres
+        $category = urlencode($_POST['filterCategory']);
+        $priority = urlencode($_POST['filterPriority']);
+        $progress = urlencode($_POST['filterProgress']);
+        header("Location: index.php?category=$category&priority=$priority&progress=$progress");
         exit;
     } else {
         // Redirige avec un message d'erreur si la tâche est vide lors de la soumission du formulaire
         header('Location: edit.php?id=' . urlencode($_GET['id']) . '&error=empty_task');
-        // PS : urlencode() est une fonction PHP qui encode une chaîne en URL (pour éviter les caractères spéciaux)
         exit;
     }
 }
@@ -138,6 +132,9 @@ if (isset($_GET['mode'])) {
                 <input type="text" name="customCategory" class="form-control" placeholder="Catégorie personnalisée">
             </div>
         </div>
+        <input type="hidden" name="filterCategory" value="<?php echo htmlspecialchars($_GET['category'] ?? ''); ?>">
+        <input type="hidden" name="filterPriority" value="<?php echo htmlspecialchars($_GET['priority'] ?? ''); ?>">
+        <input type="hidden" name="filterProgress" value="<?php echo htmlspecialchars($_GET['progress'] ?? ''); ?>">
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
 </div>
