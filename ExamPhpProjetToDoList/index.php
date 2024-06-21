@@ -42,7 +42,7 @@ if (isset($_GET['mode'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste de tâches</title>
+    <title>ToDoList - Liste de tâches</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -54,26 +54,63 @@ if (isset($_GET['mode'])) {
 <body class="<?php echo $mode; ?>">
 <?php include 'views/layout/navbar.php'; ?>
 <div class="container my-4">
-    <h1 class="mb-4">Liste de tâches</h1>
-    <form action="add.php" method="post" class="mb-3">
-        <div class="input-group">
-            <input type="text" id="newTask" name="newTask" class="form-control" placeholder="Nouvelle tâche" required>
-            <input type="date" id="newDate" name="newDate" class="form-control">
-            <input type="time" id="newTime" name="newTime" class="form-control">
-            <select name="newPriority" class="form-select">
-                <?php echo getPriorityOptions(1); ?>
-            </select>
-            <select name="newProgress" class="form-select">
-                <?php echo getProgressOptions(0); ?>
-            </select>
-            <select name="newCategory[]" class="form-select">
-                <?php echo getCategoryOptions(''); ?>
-            </select>
-            <input type="text" id="newCustomCategory" name="newCustomCategory" class="form-control"
-                   placeholder="Catégorie perso.">
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+    <form action="add.php" method="post" class="mb-3 p-3 border rounded">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input type="text" id="newTask" name="newTask" class="form-control" placeholder="Nouvelle tâche" required>
+                    <label for="newTask">Nouvelle tâche</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <input type="date" id="newDate" name="newDate" class="form-control">
+                    <label for="newDate">Date</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <input type="time" id="newTime" name="newTime" class="form-control">
+                    <label for="newTime">Heure</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <select name="newPriority" class="form-select" id="newPriority">
+                        <?php echo getPriorityOptions(1); ?>
+                    </select>
+                    <label for="newPriority">Priorité</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <select name="newProgress" class="form-select" id="newProgress">
+                        <?php echo getProgressOptions(0); ?>
+                    </select>
+                    <label for="newProgress">Progression</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <select name="newCategory[]" class="form-select" id="newCategory">
+                        <?php echo getCategoryOptions(''); ?>
+                    </select>
+                    <label for="newCategory">Catégorie</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-floating mb-3">
+                    <input type="text" id="newCustomCategory" name="newCustomCategory" class="form-control"
+                           placeholder="Catégorie perso.">
+                    <label for="newCustomCategory">Catégorie perso.</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary w-20"><i class="bi bi-plus-square-dotted"></i></button>
+            </div>
         </div>
     </form>
+
 
     <!-- Formulaire de filtrage -->
     <form method="get" class="mb-4">
@@ -101,19 +138,21 @@ if (isset($_GET['mode'])) {
                 </select>
             </div>
             <div class="col-md-4 align-self-end">
-                <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+                <button type="submit" class="btn btn-primary w-20"><i class="bi bi-funnel"></i></button>
             </div>
         </div>
     </form>
+
+    <h1 class="mb-4">Liste de tâches</h1>
 
     <?php if (count($todos) > 0): ?>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <?php foreach ($todos as $todo): ?>
                 <div class="col">
-                    <div class="card <?php echo $todo['completed'] ? 'border-danger' : ''; ?>">
+                    <div class="card <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'border-success' : ''; ?>">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <?php if ($todo['completed']): ?>
+                                <?php if ($todo['completed'] || $todo['progress'] == 100): ?>
                                     <span class="text-decoration-line-through text-danger">
                                         <?php echo htmlspecialchars($todo['task'] ?? ''); ?>
                                     </span>
@@ -144,14 +183,14 @@ if (isset($_GET['mode'])) {
                             <?php
                             if ($todo['progress'] == 0) {
                                 echo '<p class="text-muted">Non commencé</p>';
+                            } elseif ($todo['progress'] == 100) {
+                                echo '<p class="text-success">Accompli</p>';
                             } else {
-                                $progress = $todo['progress'] ?? 0; // Récupère la progression de la tâche
-                                // ?? est l'opérateur de fusion null, c'est-à-dire qu'il renvoie la première valeur non nulle pour éviter les erreurs
+                                $progress = $todo['progress'] ?? 0;
                                 $progressClass = 'bg-danger';
                                 if ($progress > 25) $progressClass = 'bg-warning';
                                 if ($progress > 50) $progressClass = 'bg-info';
                                 if ($progress > 75) $progressClass = 'bg-success';
-                                // Détermine la classe de couleur en fonction de la progression (rouge pour > 75, vert pour le reste)
                                 echo '<div class="progress mb-2">
                                       <div class="progress-bar ' . $progressClass . '" role="progressbar" style="width: ' . $progress . '%" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100">' . $progress . '%</div>
                                       </div>';
@@ -159,10 +198,12 @@ if (isset($_GET['mode'])) {
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch"
-                                           id="flexSwitchCheck<?php echo $todo['id']; ?>" <?php echo $todo['completed'] ? 'checked' : ''; ?>
+                                           id="flexSwitchCheck<?php echo $todo['id']; ?>"
+                                        <?php echo $todo['completed'] ? 'checked' : ''; ?>
+                                        <?php echo $todo['progress'] == 100 ? 'checked' : ''; ?>
                                            onclick="location.href='toggle.php?id=<?php echo urlencode($todo['id']); ?>'">
                                     <label class="form-check-label" for="flexSwitchCheck<?php echo $todo['id']; ?>">
-                                        <?php echo $todo['completed'] ? 'Oui' : 'Non'; ?>
+                                        <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'Terminé' : 'Non terminé'; ?>
                                     </label>
                                 </div>
                                 <div class="btn-group" role="group">

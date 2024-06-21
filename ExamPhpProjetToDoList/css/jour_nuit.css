@@ -5,6 +5,7 @@ body.jour {
 }
 */
 
+
 /* Styles généraux pour le mode nuit */
 body.nuit {
     background-color: #15141A;
@@ -72,11 +73,11 @@ body.nuit .navbar .dropdown-menu .dropdown  {
 body.nuit .dropdown-toggle i {
     color: white; /* Couleur des icônes pour le mode nuit */
 }
-
+/*
 body.nuit .dropdown-toggle {
-    border-color: #ffffff; /* Couleur de la bordure pour le mode nuit */
+    border-color: #ffffff;  Couleur de la bordure pour le mode nuit
 }
-
+*/
 
 body.nuit .navbar-toggler {
     border-color: #ffffff;
