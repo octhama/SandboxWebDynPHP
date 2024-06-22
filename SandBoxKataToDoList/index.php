@@ -199,12 +199,10 @@ if (isset($_GET['mode'])) {
                                 <div class="form-check form-switch">
                                     <form action="toggle.php" method="POST">
                                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($todo['id']); ?>">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                               id="flexSwitchCheck<?php echo htmlspecialchars($todo['id']); ?>"
-                                               name="completed"
-                                            <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'checked' : ''; ?>>
-                                        <label class="form-check-label" for="flexSwitchCheck<?php echo htmlspecialchars($todo['id']); ?>">
-                                            <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'Terminé' : 'Non terminé'; ?>
+                                        <input class="form-check-input form-switch" type="checkbox" role="switch" id="todo-<?php echo $todo['id']; ?>" value="<?php echo $todo['id']; ?>"
+                                            <?php echo $todo['completed'] ? 'checked' : ''; ?>
+                                               onchange="location.href='toggle.php?id=<?php echo urlencode($todo['id']); ?>'">
+                                        <?php echo $todo['completed'] || $todo['progress'] == 100 ? 'Terminé' : 'Non terminé'; ?>
                                         </label>
                                         <input type="hidden" name="category" value="<?php echo htmlspecialchars($filterCategory); ?>">
                                         <input type="hidden" name="priority" value="<?php echo htmlspecialchars($filterPriority); ?>">
