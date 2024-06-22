@@ -21,7 +21,7 @@ body.nuit h5,
 body.nuit h6,
 body.nuit p,
 body.nuit a,
-body.nuit span,
+body.nuit span.navbar-text,
 body.nuit div,
 body.nuit td,
 body.nuit th,
@@ -65,12 +65,12 @@ body.nuit .navbar .dropdown-menu .dropdown  {
 }
 
 /* Styles par défaut (mode jour) */
-.dropdown-toggle i {
+.dropdown-toggle-split i {
     color: black; /* Couleur des icônes pour le mode jour */
 }
 
 /* Styles pour le mode nuit */
-body.nuit .dropdown-toggle i {
+body.nuit .dropdown-toggle-split i {
     color: white; /* Couleur des icônes pour le mode nuit */
 }
 /*
@@ -253,3 +253,18 @@ body.jour .footer {
     color: #15141A;
 }
 */
+
+.toggle-link {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ddd;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.toggle-link.completed {
+    background-color: #aaf;
+    color: #fff;
+}

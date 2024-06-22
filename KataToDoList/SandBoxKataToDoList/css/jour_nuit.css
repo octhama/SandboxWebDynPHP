@@ -1,0 +1,255 @@
+/* Styles généraux pour le mode jour
+body.jour {
+    background-color: #ffffff;
+    color: #15141A;
+}
+*/
+
+
+/* Styles généraux pour le mode nuit */
+body.nuit {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
+/* Inverser les couleurs des textes spécifiques pour le mode nuit */
+body.nuit h1,
+body.nuit h2,
+body.nuit h3,
+body.nuit h4,
+body.nuit h5,
+body.nuit h6,
+body.nuit p,
+body.nuit a,
+body.nuit span,
+body.nuit div,
+body.nuit td,
+body.nuit th,
+body.nuit label {
+    color: #ffffff;
+}
+
+/* Les textes en mode jour
+body.jour h1,
+body.jour h2,
+body.jour h3,
+body.jour h4,
+body.jour h5,
+body.jour h6,
+body.jour p,
+body.jour a,
+body.jour span,
+body.jour div,
+body.jour td,
+body.jour th,
+body.jour label {
+    color: #15141A;
+}
+*/
+
+/* Navbar en mode nuit */
+body.nuit .navbar {
+    background-color: #15141A;
+    border-bottom: 1px solid #3c3c42;
+}
+
+body.nuit .navbar .navbar-brand,
+body.nuit .navbar .navbar-nav .nav-link,
+body.nuit .navbar .dropdown-menu {
+    color: #ffffff;
+}
+
+body.nuit .navbar .dropdown-menu .dropdown  {
+    background-color: #3c3c42;
+    border: none;
+}
+
+/* Styles par défaut (mode jour) */
+.dropdown-toggle-split i {
+    color: black; /* Couleur des icônes pour le mode jour */
+}
+
+/* Styles pour le mode nuit */
+body.nuit .dropdown-toggle-split i {
+    color: white; /* Couleur des icônes pour le mode nuit */
+}
+/*
+body.nuit .dropdown-toggle {
+    border-color: #ffffff;  Couleur de la bordure pour le mode nuit
+}
+*/
+
+body.nuit .navbar-toggler {
+    border-color: #ffffff;
+}
+
+body.nuit .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* Footer en mode nuit */
+body.nuit .footer {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
+/* Modal en mode nuit */
+body.nuit .modal-content {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
+/* Dropdown en mode nuit */
+body.nuit .dropdown-menu {
+    background-color: #15141A;
+    color: #ffffff;
+}
+
+/* Input en mode nuit */
+body.nuit input.form-control,
+body.nuit textarea {
+    background-color: #15141A;
+    color: #ffffff;
+    border-color: #3c3c42;
+}
+
+/* Checkbox en mode nuit */
+body.nuit input.form-check-input {
+    background-color: #3c3c42;
+    border-color: #3c3c42;
+    color: #ffffff;
+}
+
+/* Select en mode nuit */
+body.nuit select {
+    background-color: #15141A;
+    color: #ffffff;
+    border-color: #3c3c42;
+}
+
+/* Progress en mode nuit */
+body.nuit .progress {
+    background-color: #222225;
+    color: #ffffff;
+}
+
+/* Alert en mode nuit */
+body.nuit .alert {
+    background-color: #0d5959;
+    color: #ffffff;
+}
+
+/* Tables en mode nuit */
+body.nuit .table {
+    background-color: #222225;
+    color: #ffffff;
+}
+
+body.nuit .table th,
+body.nuit .table td {
+    border-color: #3c3c42;
+}
+
+/* Cartes en mode nuit */
+body.nuit .card {
+    background-color: #222225;
+    color: #ffffff;
+    border-color: #3c3c42;
+}
+
+body.nuit .card-header,
+body.nuit .card-footer {
+    background-color: #3c3c42;
+    color: #ffffff;
+}
+
+/* Form controls en mode jour
+body.jour input.form-control,
+body.jour textarea,
+body.jour select {
+    background-color: #ffffff;
+    color: #15141A;
+    border-color: #ced4da;
+}
+
+body.jour input.form-check-input {
+    background-color: #ffffff;
+    border-color: #ced4da;
+    color: #15141A;
+}
+*/
+
+/* Progress en mode jour
+body.jour .progress {
+    background-color: #e9ecef;
+    color: #15141A;
+}
+*/
+
+/* Alert en mode jour
+body.jour .alert {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+*/
+
+/* Tables en mode jour
+body.jour .table {
+    background-color: #ffffff;
+    color: #15141A;
+}
+
+body.jour .table th,
+body.jour .table td {
+    border-color: #dee2e6;
+}
+*/
+
+/* Cartes en mode jour
+body.jour .card {
+    background-color: #ffffff;
+    color: #15141A;
+    border-color: #ced4da;
+}
+
+body.jour .card-header,
+body.jour .card-footer {
+    background-color: #f8f9fa;
+    color: #15141A;
+}
+*/
+
+/* Navbar en mode jour
+body.jour .navbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+body.jour .navbar .navbar-brand,
+body.jour .navbar .navbar-nav .nav-link,
+body.jour .navbar .dropdown-menu {
+    color: #15141A;
+}
+*/
+
+
+body.jour .navbar .dropdown-menu .dropdown {
+    background-color: #ffffff;
+    border: none;
+}
+
+/*
+body.jour .navbar-toggler {
+    border-color: #15141A;
+}
+
+body.jour .navbar-toggler-icon {
+    filter: invert(0);
+}
+*/
+
+/* Footer en mode jour
+body.jour .footer {
+    background-color: #f8f9fa;
+    color: #15141A;
+}
+*/

@@ -12,7 +12,7 @@
                 <ul class="navbar-nav me-auto">
                 </ul>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-moon-stars"></i> <span>|</span> <i class="bi bi-trash3-fill"></i>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDark">
