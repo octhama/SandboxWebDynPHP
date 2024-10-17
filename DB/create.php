@@ -1,3 +1,8 @@
+<?php
+require_once 'Db.php';
+$db = new Db();
+$users = $db->findAll();
+?>
 <!DOCTYPE html>
 <html lang='fr'>
 <head>
@@ -20,4 +25,5 @@
             <button type="submit">Ajouter</button>
         </form>
     </main>
+</body>
 </html>
