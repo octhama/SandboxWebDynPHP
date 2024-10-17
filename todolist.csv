@@ -1,0 +1,30 @@
+"Réserver un restaurant",,medium,Anniversaire,2024-07-03,2024-07-03,0,10,Personnel
+"Organiser une soirée entre amis",,medium,,2024-07-11,2024-07-11,0,5,Social
+"Lire un chapitre",,low,,2024-06-18,2024-06-18,0,4,Loisirs
+"Nettoyer le garage",,low,,2024-06-29,2024-06-30,0,4,Maison
+"Nettoyer la cuisine",,low,,2024-06-15,2024-06-15,0,3,Maison
+"Faire une séance de yoga",,low,,2024-06-24,2024-06-24,0,3,Santé
+"Trier les vêtements",,low,,2024-07-06,2024-07-07,0,3,Maison
+Méditer,,low,,2024-06-21,2024-06-21,100,2,Bien-être
+Jardiner,,low,,2024-06-27,2024-06-27,0,2,Loisirs
+"Commencer un nouveau livre",,low,,2024-07-12,2024-07-12,0,2,Loisirs
+"Écrire dans le journal",,low,,2024-07-02,2024-07-02,0,1,Bien-être
+"Faire du bénévolat",,medium,,2024-07-05,2024-07-05,69,1,Communauté
+"Réviser pour l'examen",checked,medium,,2024-06-16,2024-06-20,30,10,Études
+"Rédiger le rapport mensuel",checked,high,,2024-06-25,2024-06-27,46,10,Travail
+"Préparer la présentation",checked,high,,2024-06-13,2024-06-15,30,9,Travail
+"Payer les factures",checked,high,,2024-06-22,2024-06-22,0,9,Finances
+"Préparer une présentation",checked,high,,2024-06-30,2024-07-02,25,9,Travail
+"Préparer un plan d'épargne",checked,high,,2024-07-08,2024-07-10,15,9,Finances
+"Répondre aux emails",checked,,,2024-06-11,2024-06-11,50,8,Travail
+"Mettre à jour le CV",checked,high,,2024-06-19,2024-06-21,60,8,Carrière
+"Assister à un webinaire",checked,high,,2024-07-04,2024-07-04,0,8,Carrière
+"Apprendre une nouvelle compétence",checked,medium,,2024-06-28,2024-07-28,5,8,"Développement personnel"
+"Appeler le plombier",checked,medium,Urgent,2024-06-17,2024-06-17,0,7,Maison
+"Organiser une réunion d'équipe",checked,medium,,2024-06-23,2024-06-23,0,7,Travail
+"Faire un bilan de santé",checked,medium,Important,2024-07-01,2024-07-01,0,7,Santé
+"Acheter des cadeaux",checked,medium,Anniversaire,2024-06-14,2024-06-14,0,6,Personnel
+"Planifier les vacances",checked,medium,,2024-06-26,2024-06-28,10,6,Personnel
+"Faire un check-up de la voiture",checked,medium,Entretien,2024-07-13,2024-07-13,0,6,Transport
+"Faire du jogging",checked,,,2024-06-12,2024-06-12,0,5,Santé
+"Faire les courses",checked,medium,,2024-06-20,2024-06-20,0,5,Personnel
