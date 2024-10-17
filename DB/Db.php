@@ -3,7 +3,7 @@
 class Db
 {
     private $conn;
-    public function __construct()
+    public function __construct() // on crée un constructeur qui permet de se connecter à la base de données
     {
         $this->conn = new PDO('sqlite:esadb.db'); // on se connecte à la base de données
     }
