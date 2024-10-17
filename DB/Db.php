@@ -9,7 +9,7 @@ class Db
     }
     public function store($data) // on crée une méthode store qui permet d'enregistrer les données dans la base de données
     {
-        $sql = 'INSERT INTO users (nom, prenom, email) VALUES (?, ?, :?)'; // on crée une requête sql qui permet d'insérer les données dans la base de données avec des paramètres nommés pour éviter les injections sql
+        $sql = 'INSERT INTO users (nom, prenom, email) VALUES (?, ?, ?)'; // on crée une requête sql qui permet d'insérer les données dans la base de données avec des paramètres nommés pour éviter les injections sql
         $stmt = $this->conn->prepare($sql); // on prépare la requête sql
         $stmt->execute($data); // on exécute la requête sql
     }
