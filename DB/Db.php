@@ -2,7 +2,7 @@
 // Créer une classe Db qui permet de se connecter à la base de données et d'enregistrer les données dans la base de données avec un attribut connexion
 class Db
 {
-    private $conn;
+    private $conn; // on crée un attribut connexion qui permet de se connecter à la base de données
     public function __construct() // on crée un constructeur qui permet de se connecter à la base de données
     {
         $this->conn = new PDO('sqlite:esadb.db'); // on se connecte à la base de données
