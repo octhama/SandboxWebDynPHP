@@ -1,22 +1,25 @@
 <?php
-// Modifier un utilisateur dans la base de données SQLite (CRUD) (DB)
-
-require_once 'Db.php'; // Inclure le fichier Db.php pour accéder à la classe Db (CRUD) (DB)
+require_once 'Db.php';
 $db = new Db();
 
-if (!empty($_GET['id'])) { // Vérifier si l'identifiant de l'utilisateur est défini dans l'URL
-    $user = $db->find($_GET['id']); // Récupérer les données de l'utilisateur à modifier
+if (!empty($_GET['id'])) {
+    $user = $db->find($_GET['id']);
+    if (!$user) {
+        header('Location: index.php'); // Si l'utilisateur n'existe pas, redirection
+        exit();
+    }
 } else {
-    header('Location: index.php'); // Rediriger vers la page d'accueil si l'identifiant de l'utilisateur n'est pas défini dans l'URL
+    header('Location: index.php');
     exit();
 }
 
-if (!empty($_POST['name']) && !empty($_POST['prenom']) && !empty($_POST['email'])) { // Vérifier si les champs du formulaire ne sont pas vides (validation côté serveur)
-    // Mettre à jour les données de l'utilisateur dans la base de données
-    $db->update([$_POST['name'], $_POST['prenom'], $_POST['email'], $_GET['id']]); // Appeler la méthode update() de la classe Db avec les données du formulaire et l'identifiant de l'utilisateur en tant que paramètres (CRUD)
-    header('Location: index.php'); // Rediriger vers la page d'accueil après la mise à jour des données de l'utilisateur dans la base de données SQLite (CRUD)
+if (!empty($_POST['name']) && !empty($_POST['prenom']) && !empty($_POST['email'])) {
+    // Mettre à jour l'utilisateur avec les nouvelles données
+    $db->update([$_POST['name'], $_POST['prenom'], $_POST['email'], $_GET['id']]);
+    header('Location: index.php');
     exit();
 }
+?>
 
 <!DOCTYPE html>
 <html lang='fr'>
@@ -30,7 +33,7 @@ if (!empty($_POST['name']) && !empty($_POST['prenom']) && !empty($_POST['email']
 <body>
     <main class="container">
         <h1>ESA - CRUD</h1>
-        <form action="edit.php?id=<?= $user->id ?>" method="post">
+        <form action="edit.php?id=<?= htmlspecialchars($user->id) ?>" method="post">
             <label for="name">Nom</label>
             <input type="text" name="name" id="name" value="<?= htmlspecialchars($user->nom) ?>" required>
             <label for="prenom">Prénom</label>
