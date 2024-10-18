@@ -27,3 +27,4 @@ $users = $db->findAll();
     </main>
 </body>
 </html>
+
