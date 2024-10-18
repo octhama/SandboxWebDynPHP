@@ -1,0 +1,52 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "185.216.26.228",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "ConnectDolibarrDB",
+            "database": "dolibarr",
+            "username": "dolibarr",
+            "askForPassword": true
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "PlaisanceDBConnect",
+            "database": "plaisance",
+            "username": "postgres"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "BibloExamDBConnect",
+            "database": "biblio_exam",
+            "username": "postgres"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "DBConnectBiblio",
+            "database": "biblio",
+            "username": "postgres"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:SandboxWebDynPHP}/DB/esadb.db",
+            "name": "esadb"
+        }
+    ]
+}
