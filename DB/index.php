@@ -23,15 +23,16 @@ $users = $db->findAll();
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($users as $user): ?>
                     <tr>
-                        <td><?= $user->id ?></td>
-                        <td><?= $user->nom ?></td>
-                        <td><?= $user->prenom ?></td>
-                        <td><?= $user->email ?></td>
+                        <td><?= htmlspecialchars($user->id) ?></td>
+                        <td><?= htmlspecialchars($user->nom) ?></td>
+                        <td><?= htmlspecialchars($user->prenom) ?></td>
+                        <td><?= htmlspecialchars($user->email) ?></td>
                         <td>
                             <a href="edit.php?id=<?= $user->id ?>" role="button" class="outline">Modifier</a>
                             <a href="delete.php?id=<?= $user->id ?>" role="button" class="outline">Supprimer</a>
@@ -39,6 +40,7 @@ $users = $db->findAll();
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+        </table>
     </main>
 </body>
 </html>

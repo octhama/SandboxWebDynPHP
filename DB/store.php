@@ -1,15 +1,14 @@
 <?php
-echo '<pre>';
-var_dump($_POST);
-echo '</pre>';
+require_once 'Db.php'; // Inclure le fichier Db.php pour accéder à la classe Db (CRUD) (DB)
+$db = new Db();
 
-// Si un des trois champs est vide on retourne dans le ffoormulaire sinon on retourne à la page index.php
-if (empty($_POST['name']) || empty($_POST['prenom']) || empty($_POST['email'])) {
-    $db = new Db(); // on instancie la classe db pour pouvoir utiliser la méthode store qui permet d'enregistrer les données dans la base de données
-    $db->store($_POST); // on enregistre les données dans la base de données
-    header('Location: index.php'); // on redirige vers la page index.php
-    exit(); // on arrête le script
+if (!empty($_POST['name']) && !empty($_POST['prenom']) && !empty($_POST['email'])) { // Vérifier si les champs du formulaire ne sont pas vides (validation côté serveur)
+    // Enregistrer les données dans la base de données
+    $db->store([$_POST['name'], $_POST['prenom'], $_POST['email']]); // Appeler la méthode store() de la classe Db avec les données du formulaire en tant que paramètre (CRUD)
+    header('Location: index.php'); // Rediriger vers la page d'accueil après l'insertion des données dans la base de données SQLite (CRUD)
+    exit();
 } else {
-    header('Location: create.php'); // on redirige vers la page create.php
-    exit(); // on arrête le script
+    // Rediriger vers le formulaire s'il y a des champs vides (validation côté serveur)
+    header('Location: create.php');
+    exit();
 }

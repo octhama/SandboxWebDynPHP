@@ -1,23 +1,29 @@
 <?php
-// Créer une classe Db qui permet de se connecter à la base de données et d'enregistrer les données dans la base de données avec un attribut connexion
 class Db
 {
-    private $conn; // on crée un attribut connexion qui permet de se connecter à la base de données
-    public function __construct($sqlite = 'esadb.db') // on crée un constructeur qui permet de se connecter à la base de données
+    private $conn;
+
+    public function __construct($sqlite = 'esadb.db')
     {
-        $this->conn = new PDO('sqlite:' . $sqlite); // on se connecte à la base de données sqlite avec le nom de la base de données passée en paramètre
+        // Initialiser la connexion à la base de données SQLite
+        $this->conn = new PDO('sqlite:' . $sqlite);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Activer les erreurs PDO
     }
-    public function findAll() // on crée une méthode findAll qui permet de récupérer toutes les données de la base de données
+
+    // Récupérer tous les utilisateurs
+    public function findAll()
     {
-        $sql = 'SELECT * FROM users ORDER BY id DESC'; // on crée une requête sql qui permet de récupérer toutes les données de la base de données
-        $stmt = $this->conn->prepare($sql); // on prépare la requête sql
-        $stmt->execute(); // on exécute la requête sql
-        return $stmt->fetchAll(); // on retourne toutes les données de la base de données
+        $sql = 'SELECT * FROM users ORDER BY id DESC';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ); // Renvoyer les résultats sous forme d'objets
     }
-    public function store($data) // on crée une méthode store qui permet d'enregistrer les données dans la base de données
+
+    // Enregistrer un utilisateur
+    public function store($data)
     {
-        $sql = 'INSERT INTO users (nom, prenom, email) VALUES (?, ?, ?)'; // on crée une requête sql qui permet d'insérer les données dans la base de données avec des paramètres nommés pour éviter les injections sql
-        $stmt = $this->conn->prepare($sql); // on prépare la requête sql
-        $stmt->execute($data); // on exécute la requête sql
+        $sql = 'INSERT INTO users (nom, prenom, email) VALUES (?, ?, ?)';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($data); // Exécuter la requête avec les données
     }
 }
