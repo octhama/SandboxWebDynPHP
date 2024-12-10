@@ -131,4 +131,3 @@ Voici une vue simplifiée de la structure du projet :
 - [Laravel Documentation](https://laravel.com/docs)
 - [Bootstrap Documentation](https://getbootstrap.com/docs)
 - [Chinook Database Schema](https://www.sqlitetutorial.net/sqlite-sample-database/)
-
