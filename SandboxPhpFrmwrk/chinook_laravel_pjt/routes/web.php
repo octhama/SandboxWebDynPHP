@@ -8,4 +8,4 @@ Route::resource('customers', CustomerController::class); // Ressource route pour
 Route::resource('employees', EmployeeController::class); // Ressource route pour les employés : index, create, store, show, edit, update, destroy
 Route::get('/', function () {
     return view('welcome');
-});
+}); // Route pour la page d'accueil de l'application
