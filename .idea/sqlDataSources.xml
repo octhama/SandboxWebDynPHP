@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="DdlMappings">
-    <mapping uuid="390be49e-02a0-4e29-bdcd-b455b4c547b5" name="HTCV.sqlite">
-      <data-sources db="2f91de93-53ed-44e3-8825-77f8aa30e3e7" ddl="733dadd3-8e5b-4e7e-ab39-01c8da6e0fbb" />
-    </mapping>
-  </component>
-</project>

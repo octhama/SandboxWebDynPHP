@@ -15,7 +15,7 @@ class Customer extends Model
 {
     use HasFactory;
 
-    protected $table = 'Customer'; // Nom exact de la table
+    protected $table = 'customers'; // Nom exact de la table
     protected $primaryKey = 'CustomerId'; // Si différent de "id"
     public $timestamps = false; // Si la table n'a pas `created_at` et `updated_at`
 

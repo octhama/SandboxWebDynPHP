@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SandboxEsaPhp.iml" filepath="$PROJECT_DIR$/.idea/SandboxEsaPhp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SandboxWebDynPHP.iml" filepath="$PROJECT_DIR$/.idea/SandboxWebDynPHP.iml" />
     </modules>
   </component>
 </project>
