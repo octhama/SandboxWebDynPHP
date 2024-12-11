@@ -18,8 +18,7 @@ class Customer extends Model
     protected $table = 'customers'; // Nom exact de la table
     protected $primaryKey = 'CustomerId'; // Si différent de "id"
     public $timestamps = false; // Si la table n'a pas `created_at` et `updated_at`
-
-    protected $fillable = [
+    protected $fillable = [ // Attributs de la table qui peuvent être modifiables par l'utilisateur
         'FirstName',
         'LastName',
         'Company',
