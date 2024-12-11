@@ -2,8 +2,7 @@
 
 namespace App\Controllers;
 
-class MainController extends \Leaf\Controller
-{
+class MainController extends \Leaf\Controller {
     function home() {
         render('home');
     }
