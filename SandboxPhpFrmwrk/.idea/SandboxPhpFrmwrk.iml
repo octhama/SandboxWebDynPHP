@@ -26,6 +26,33 @@
       <sourceFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/app/workers" isTestSource="false" packagePrefix="App\Workers\" />
       <sourceFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/config" isTestSource="false" packagePrefix="Config\" />
       <sourceFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/tests" isTestSource="false" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/channels" isTestSource="false" packagePrefix="App\Channels\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/components" isTestSource="false" packagePrefix="App\Components\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/console" isTestSource="false" packagePrefix="App\Console\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/controllers" isTestSource="false" packagePrefix="App\Controllers\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/database/factories" isTestSource="false" packagePrefix="App\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/database/schema" isTestSource="false" packagePrefix="App\Database\Schema\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/database/seeds" isTestSource="false" packagePrefix="App\Database\Seeds\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/events" isTestSource="false" packagePrefix="App\Events\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/helpers" isTestSource="false" packagePrefix="App\Helpers\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/http" isTestSource="false" packagePrefix="App\Http\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/jobs" isTestSource="false" packagePrefix="App\Jobs\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/lang" isTestSource="false" packagePrefix="App\Lang\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/mail" isTestSource="false" packagePrefix="App\Mail\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/middleware" isTestSource="false" packagePrefix="App\Middleware\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/models" isTestSource="false" packagePrefix="App\Models\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/notifications" isTestSource="false" packagePrefix="App\Notifications\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/scripts" isTestSource="false" packagePrefix="App\Scripts\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/services" isTestSource="false" packagePrefix="App\Services\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/utils" isTestSource="false" packagePrefix="App\Utils\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/views" isTestSource="false" packagePrefix="App\Views\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/app/workers" isTestSource="false" packagePrefix="App\Workers\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/config" isTestSource="false" packagePrefix="Config\" />
+      <sourceFolder url="file://$MODULE_DIR$/leaf-app-sandbox/tests" isTestSource="false" packagePrefix="Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/chinook_laravel_pjt/vendor/composer" />
