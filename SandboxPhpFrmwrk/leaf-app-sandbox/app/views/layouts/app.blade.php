@@ -28,6 +28,14 @@
 </head>
 
 <body class="overflow-hidden">
+@if (isset($errors) && $errors) > 0)
+    <div class="flex flex-col justify-center items-center min-h-96 w-full max-w-[500px] bg-[url(/public/assets/img/eclipse.svg)] bg-cover pt-28">
+        <ul>
+            @foreach ($errors as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @yield('content')
     {{ $slot }}
 </body>

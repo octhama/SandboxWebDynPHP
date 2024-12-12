@@ -1364,16 +1364,16 @@
         },
         {
             "name": "leafs/aloe",
-            "version": "2.1.1",
+            "version": "2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafsphp/aloe.git",
-                "reference": "3fbbcfdc669c371df956e1a45c1e0d02b305a538"
+                "reference": "6f44b4b4909c46ba91a59a1cab123c6d7a99ca45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafsphp/aloe/zipball/3fbbcfdc669c371df956e1a45c1e0d02b305a538",
-                "reference": "3fbbcfdc669c371df956e1a45c1e0d02b305a538",
+                "url": "https://api.github.com/repos/leafsphp/aloe/zipball/6f44b4b4909c46ba91a59a1cab123c6d7a99ca45",
+                "reference": "6f44b4b4909c46ba91a59a1cab123c6d7a99ca45",
                 "shasum": ""
             },
             "require": {
@@ -1417,7 +1417,7 @@
             ],
             "support": {
                 "issues": "https://github.com/leafsphp/aloe/issues",
-                "source": "https://github.com/leafsphp/aloe/tree/v2.1.1"
+                "source": "https://github.com/leafsphp/aloe/tree/v2.2"
             },
             "funding": [
                 {
@@ -1429,7 +1429,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-12-01T15:48:01+00:00"
+            "time": "2024-12-12T09:20:32+00:00"
         },
         {
             "name": "leafs/anchor",
@@ -2296,16 +2296,16 @@
         },
         {
             "name": "leafs/mvc-core",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafsphp/mvc-core.git",
-                "reference": "6068df6ff3bbe80b6139e301562f2dbef49f18db"
+                "reference": "a2f55f31b12d0b689e68c3c3391b94d398b2a84a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafsphp/mvc-core/zipball/6068df6ff3bbe80b6139e301562f2dbef49f18db",
-                "reference": "6068df6ff3bbe80b6139e301562f2dbef49f18db",
+                "url": "https://api.github.com/repos/leafsphp/mvc-core/zipball/a2f55f31b12d0b689e68c3c3391b94d398b2a84a",
+                "reference": "a2f55f31b12d0b689e68c3c3391b94d398b2a84a",
                 "shasum": ""
             },
             "require": {
@@ -2351,7 +2351,7 @@
             ],
             "support": {
                 "issues": "https://github.com/leafsphp/mvc-core/issues",
-                "source": "https://github.com/leafsphp/mvc-core/tree/v1.9.0"
+                "source": "https://github.com/leafsphp/mvc-core/tree/v1.10.0"
             },
             "funding": [
                 {
@@ -2363,7 +2363,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-11-30T18:57:46+00:00"
+            "time": "2024-12-11T22:43:20+00:00"
         },
         {
             "name": "leafs/password",

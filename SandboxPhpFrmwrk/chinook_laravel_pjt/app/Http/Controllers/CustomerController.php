@@ -23,11 +23,11 @@ class CustomerController extends Controller{
         $request->validate([
             'FirstName' => 'required|string|max:255', // Permet de valider les champs du formulaire en utilisant des règles de validation
             'LastName' => 'required|string|max:255',
-            'Email' => 'required|email|max:255',
+            'Email' => 'required|email|max:255|unique:customers:email', // Permet de valider que l'email est unique dans la base de données
         ]);
 
-        Customer::create($request->all());
-        return redirect()->route('customers.index')->with('success', 'Client ajouté avec succès !'); // redirection vers la page index
+        Customer::create($request->all()); // Permet de créer un nouveau client dans la base de données avec les données du formulaire
+        return redirect()->route('customers.index')->with('success', 'Client ajouté avec succès !'); // redirection vers la page index si le client est ajouté
     }
 
     // Permet d'afficher un client dans la page d'accueil
@@ -52,7 +52,7 @@ class CustomerController extends Controller{
         ]);
 
         $customer->update($request->all());
-        return redirect()->route('customers.index')->with('success', 'Client modifié avec succès !'); // redirection vers la page index
+        return redirect()->route('customers.index')->with('success', 'Client modifié avec succès !'); // redirection vers la page index si la modification est effectuée
     }
 
     // Permet de supprimer un client dans la page d'accueil

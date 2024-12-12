@@ -2,10 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\Customer;
 class CustomerController extends \Leaf\Controller {
 
-    // cettte fonction index sert a afficher la liste des utilisateurs de la base de données
+    // cette fonction index sert à afficher la liste des utilisateurs de la base de données
     public function index() {
         $titre = 'Customers'; // pour le titre de la page
         $customers = Customer::all(); // pour afficher la liste des utilisateurs de la base de données
@@ -18,15 +17,27 @@ class CustomerController extends \Leaf\Controller {
     }
 
     // une fonction store qui sert a créer un nouvel utilisateur et le redirige vers la page d'accueil
-    function store() {
-        $data = request()->postData();
-        $customer = new Customer();
-        $customer->FirstName = $data["FirstName"];
-        $customer->LastName = $data["LastName"];
-        $customer-City = $data["City"];
-        $customer->Email = $data["Email"];
-        $customer->save();
-        response()->redirect('customer');
+    public function store() {
+        $validator = validator(request()->all(), [
+            'FirstName' => 'required|string|min:3',
+            'LastName' => 'required|string|min:3',
+            'City' => 'required|string|min:3',
+            'Email' => 'required|email',
+        ]);
+        if ($validator) {
+            $errors = request()->errors();
+            render('customer.create', compact('errors'));
+            return;
+        } else {
+            $data = request()->all();
+            $customer = new Customer();
+            $customer->FirstName = $data["FirstName"];
+            $customer->LastName = $data["LastName"];
+            $customer->City = $data["City"];
+            $customer->Email = $data["Email"];
+            $customer->save();
+            response()->redirect('customer');
+        }
     }
 
     function show($id) {
