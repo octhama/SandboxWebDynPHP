@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Model;
+
 class CustomerController extends \Leaf\Controller {
 
     // cette fonction index sert à afficher la liste des utilisateurs de la base de données
@@ -83,4 +85,5 @@ class CustomerController extends \Leaf\Controller {
         $filter = request()->get('filter');
         $customers = Customer::where('City', $filter)->get();
         render('customer.index', compact('customers'));
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Model;
 class EmployeeController extends \Leaf\Controller {
     public function index() {
         $titre = 'Employees';
