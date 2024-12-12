@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Model;
+use App\Models\Customer;
 
 class CustomerController extends \Leaf\Controller {
 
