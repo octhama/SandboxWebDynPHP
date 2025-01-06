@@ -35,6 +35,4 @@ app()->get('/customer/{id}/destroy', 'CustomerController@destroy');
 
 app()->get('/customer/{id}/delete', 'CustomerController@destroy');
 
-app()->get('/customer/{id}/remove', 'CustomerController@destroy');
 
-app()->get('/customer/{id}/destroy', 'CustomerController@destroy');

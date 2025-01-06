@@ -7,7 +7,7 @@
     </div>
 
     <div class="mt-16 mb-32 rounded-xl border border-[rgba(172,175,176,0.3)] py-3 px-8 [font-family:Berkeley_Mono]">
-        <form action="/customers/{{ $customer->id }}" method="POST">
+        <form action="/customers/{{ $customer->CustomerId }}" method="POST">
             @csrf
             @method('PATCH')
             @include('customers._form')

@@ -27,15 +27,15 @@
     ],
     "require": {
         "illuminate/console": "^8.75",
-        "leafs/blade": "*",
-        "leafs/mvc-core": "*",
+        "leafs/blade": "^3.0",
+        "leafs/mvc-core": "^1.10",
         "leafs/leaf": "^3.7",
-        "leafs/csrf": "*",
-        "leafs/logger": "*",
-        "leafs/cors": "*",
+        "leafs/csrf": "^0.5",
+        "leafs/logger": "^2.0",
+        "leafs/cors": "^1.2",
         "leafs/auth": "^3.0",
-        "leafs/db": "*",
-        "leafs/vite": "*",
+        "leafs/db": "^2.2",
+        "leafs/vite": "^0.3",
         "leafs/form": "^3.0",
         "leafs/http": "^3.0",
         "leafs/aloe": "^2.0"
@@ -91,6 +91,6 @@
             "@php leaf key:generate"
         ]
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

@@ -20,7 +20,7 @@
             <tbody>
                 @foreach ($customers as $customer)
                     <tr>
-                        <td>{{ $customer->id }}</td>
+                        <td>{{ $customer->CustomerId }}</td>
                         <td>{{ $customer->FirstName }}</td>
                         <td>{{ $customer->LastName }}</td>
                         <td>{{ $customer->City }}</td>
@@ -29,4 +29,5 @@
             </tbody>
         </table>
     </div>
+@endsection
 

@@ -5,123 +5,60 @@
       <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/tests" isTestSource="true" packagePrefix="Tests\" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/brick/math" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/carbonphp/carbon-doctrine-types" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/dflydev/dot-access-data" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/doctrine/inflector" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/doctrine/lexer" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/dragonmantank/cron-expression" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/egulias/email-validator" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/fakerphp/faker" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/filp/whoops" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/fruitcake/php-cors" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/graham-campbell/result-type" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/guzzlehttp/guzzle" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/guzzlehttp/promises" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/guzzlehttp/psr7" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/guzzlehttp/uri-template" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/hamcrest/hamcrest-php" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/laravel/framework" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/laravel/pail" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/laravel/pint" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/laravel/prompts" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/laravel/sail" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/laravel/serializable-closure" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/laravel/tinker" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/league/commonmark" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/league/config" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/league/flysystem" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/league/flysystem-local" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/league/mime-type-detection" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/league/uri" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/league/uri-interfaces" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/mockery/mockery" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/monolog/monolog" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/nesbot/carbon" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/nette/schema" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/nette/utils" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/nikic/php-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/nunomaduro/collision" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/nunomaduro/termwind" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phar-io/manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phar-io/version" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phpoption/phpoption" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phpunit/php-code-coverage" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phpunit/php-file-iterator" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phpunit/php-invoker" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phpunit/php-text-template" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phpunit/php-timer" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/clock" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/container" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/event-dispatcher" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/http-client" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/http-factory" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/http-message" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/log" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psr/simple-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/psy/psysh" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/ralouphie/getallheaders" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/ramsey/collection" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/ramsey/uuid" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/cli-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/code-unit" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/code-unit-reverse-lookup" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/comparator" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/complexity" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/diff" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/environment" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/exporter" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/global-state" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/lines-of-code" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/object-enumerator" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/object-reflector" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/recursion-context" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/type" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/sebastian/version" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/staabm/side-effects-detector" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/clock" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/console" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/css-selector" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/deprecation-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/error-handler" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/event-dispatcher" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/event-dispatcher-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/finder" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/http-foundation" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/http-kernel" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/mailer" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/mime" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-ctype" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-intl-grapheme" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-intl-idn" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-intl-normalizer" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-mbstring" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-php80" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-php83" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/polyfill-uuid" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/process" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/routing" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/service-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/string" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/translation" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/translation-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/uid" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/var-dumper" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/symfony/yaml" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/tijsverkoyen/css-to-inline-styles" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/vlucas/phpdotenv" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/voku/portable-ascii" />
-      <excludeFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/vendor/webmozart/assert" />
-      <excludeFolder url="file://$MODULE_DIR$/todoList/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/todoList/vendor/symfony/deprecation-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/todoList/vendor/symfony/polyfill-mbstring" />
-      <excludeFolder url="file://$MODULE_DIR$/todoList/vendor/symfony/var-dumper" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/channels" isTestSource="false" packagePrefix="App\Channels\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/components" isTestSource="false" packagePrefix="App\Components\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/console" isTestSource="false" packagePrefix="App\Console\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/controllers" isTestSource="false" packagePrefix="App\Controllers\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/database/factories" isTestSource="false" packagePrefix="App\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/database/schema" isTestSource="false" packagePrefix="App\Database\Schema\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/database/seeds" isTestSource="false" packagePrefix="App\Database\Seeds\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/events" isTestSource="false" packagePrefix="App\Events\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/helpers" isTestSource="false" packagePrefix="App\Helpers\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/http" isTestSource="false" packagePrefix="App\Http\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/jobs" isTestSource="false" packagePrefix="App\Jobs\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/lang" isTestSource="false" packagePrefix="App\Lang\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/mail" isTestSource="false" packagePrefix="App\Mail\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/middleware" isTestSource="false" packagePrefix="App\Middleware\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/models" isTestSource="false" packagePrefix="App\Models\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/notifications" isTestSource="false" packagePrefix="App\Notifications\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/scripts" isTestSource="false" packagePrefix="App\Scripts\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/services" isTestSource="false" packagePrefix="App\Services\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/utils" isTestSource="false" packagePrefix="App\Utils\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/views" isTestSource="false" packagePrefix="App\Views\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/app/workers" isTestSource="false" packagePrefix="App\Workers\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/config" isTestSource="false" packagePrefix="Config\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-app-sandbox/tests" isTestSource="false" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/channels" isTestSource="false" packagePrefix="App\Channels\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/components" isTestSource="false" packagePrefix="App\Components\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/console" isTestSource="false" packagePrefix="App\Console\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/controllers" isTestSource="false" packagePrefix="App\Controllers\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/database/factories" isTestSource="false" packagePrefix="App\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/database/schema" isTestSource="false" packagePrefix="App\Database\Schema\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/database/seeds" isTestSource="false" packagePrefix="App\Database\Seeds\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/events" isTestSource="false" packagePrefix="App\Events\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/helpers" isTestSource="false" packagePrefix="App\Helpers\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/http" isTestSource="false" packagePrefix="App\Http\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/jobs" isTestSource="false" packagePrefix="App\Jobs\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/lang" isTestSource="false" packagePrefix="App\Lang\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/mail" isTestSource="false" packagePrefix="App\Mail\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/middleware" isTestSource="false" packagePrefix="App\Middleware\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/models" isTestSource="false" packagePrefix="App\Models\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/notifications" isTestSource="false" packagePrefix="App\Notifications\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/scripts" isTestSource="false" packagePrefix="App\Scripts\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/services" isTestSource="false" packagePrefix="App\Services\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/utils" isTestSource="false" packagePrefix="App\Utils\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/views" isTestSource="false" packagePrefix="App\Views\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/app/workers" isTestSource="false" packagePrefix="App\Workers\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/config" isTestSource="false" packagePrefix="Config\" />
+      <sourceFolder url="file://$MODULE_DIR$/SandboxPhpFrmwrk/leaf-chinook-app/tests" isTestSource="false" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/hypotherapp/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/hypotherapp/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/hypotherapp/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/hypotherapp/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/hypotherapp/tests" isTestSource="true" packagePrefix="Tests\" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

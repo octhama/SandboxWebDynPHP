@@ -4,6 +4,7 @@
     <option name="directories">
       <list>
         <option value="$PROJECT_DIR$/SandboxPhpFrmwrk/chinook_laravel_pjt/tests" />
+        <option value="$PROJECT_DIR$/hypotherapp/tests" />
       </list>
     </option>
   </component>
