@@ -7,7 +7,10 @@
         <div class="row">
             <!-- Section gauche : Rendez-vous prévus -->
             <div class="col-md-7">
-                <h2 class="mb-3">Mercredi 2 Octobre 2024</h2>
+                <!-- Date en court en francais-->
+                <h2 class="mb-3"><?php echo // Date en français
+
+                                date('d-m-Y');?></h2>
 
                 <h4>Rendez-vous prévus :</h4>
                 <ul class="list-group mb-3">
@@ -57,20 +60,42 @@
                     <button type="submit" class="btn btn-primary">Confirmer</button>
                 </form>
 
+                <h4>Rendez-vous passés :</h4>
                 <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Famille Bélier</span>
-                        <span>15h à 17h</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Casser 3 pattes à un canard</span>
-                        <span>15h à 16h</span>
-                    </li>
+                    @foreach ($clients as $client)
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>{{ $client->nom }}</span>
+                            <span>{{ $client->heures }}</span>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
 
-            <!-- Section droite : Enregistrer un nouveau client -->
+            <!-- Section droite : Enregister un Rendez-vous et Enregistrer un nouveau client -->
             <div class="col-md-5">
+                <h4 class="mb-3">Enregistrer un rendez-vous :</h4>
+                <form action="{{ route('rendez_vous.store') }}" method="POST" class="mb-3">
+                    @csrf
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <input type="text" name="nom" class="form-control" placeholder="Nom du rendez-vous" required>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <input type="datetime-local" name="date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <select class="form-select">
+                                <option>Poney 1</option>
+                                <option>Mercenaire</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
                 <h4 class="mb-3">Enregistrer un nouveau client :</h4>
                 <form action="{{ route('clients.store') }}" method="POST" class="mb-3">
                     @csrf

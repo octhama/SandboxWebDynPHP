@@ -27,7 +27,7 @@
                     @foreach($poneys as $poney)
                         <tr>
                             <td>{{ $poney->nom }}</td>
-                            <td>{{ $poney->current_hours }}h sur {{ $poney->max_work_hours }}h</td>
+                            <td>{{ $poney->current_hours }}h à {{ $poney->max_work_hours }}h</td>
                             <td>
                                 @if($poney->id)
                                     <a href="{{ route('poneys.edit', $poney->id) }}" class="btn btn-warning btn-sm me-1">Modifier</a>
