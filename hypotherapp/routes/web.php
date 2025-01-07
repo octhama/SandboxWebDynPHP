@@ -23,5 +23,5 @@ Route::post('/rendez_vous', [RendezVousController::class, 'store'])->name('rende
 Route::resource('clients', ClientController::class);
 Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
 
-Route::get('/gestion-factures', [FactureController::class, 'index'])->name('factures.index');
-Route::post('/gestion-factures/envoyer', [FactureController::class, 'envoyer'])->name('factures.envoyer');
+Route::get('/factures', [FactureController::class, 'index'])->name('factures.index');
+Route::post('/factures/envoyer', [FactureController::class, 'envoyerFactures'])->name('factures.envoyer');

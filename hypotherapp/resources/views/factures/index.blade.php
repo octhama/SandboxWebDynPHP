@@ -2,13 +2,14 @@
 
 @section('content')
     <div class="container">
-        <h1>Gestion des poneys</h1>
+        <h1>Gestion des Poneys</h1>
+        <p><strong>Mercredi 2 Octobre 2024</strong></p>
 
+        <!-- Section Historique -->
         <div class="row">
-            <!-- Historique des factures -->
             <div class="col-md-6">
-                <h2>Historique</h2>
-                <table class="table table-bordered">
+                <h3>Historique</h3>
+                <table class="table">
                     <thead>
                     <tr>
                         <th>Mois</th>
@@ -16,37 +17,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($historique as $mois => $montant)
+                    @foreach ($historique as $item)
                         <tr>
-                            <td>{{ $mois }}</td>
-                            <td>{{ number_format($montant, 2, ',', ' ') }} €</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                <h3>Clients par mois</h3>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Nom du client</th>
-                        <th>Montant</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($clientsMoisPrecedent as $client)
-                        <tr>
-                            <td>{{ $client->nom }}</td>
-                            <td>{{ number_format($client->montant, 2, ',', ' ') }} €</td>
+                            <td>{{ $item->mois }}</td>
+                            <td>{{ number_format($item->montant_total, 2, ',', ' ') }} €</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
 
-            <!-- Mois en cours -->
+            <!-- Section Mois en cours -->
             <div class="col-md-6">
-                <h2>Mois en cours</h2>
-                <table class="table table-bordered">
+                <h3>Mois en cours</h3>
+                <table class="table">
                     <thead>
                     <tr>
                         <th>Nom du client</th>
@@ -55,7 +39,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($facturesMoisEnCours as $facture)
+                    @foreach ($factures as $facture)
                         <tr>
                             <td>{{ $facture->client->nom }}</td>
                             <td>{{ $facture->nombre_jours }}</td>
@@ -66,21 +50,19 @@
                     <tfoot>
                     <tr>
                         <th colspan="2">Total :</th>
-                        <th>{{ number_format($totalMoisEnCours, 2, ',', ' ') }} €</th>
+                        <th>{{ number_format($total, 2, ',', ' ') }} €</th>
                     </tr>
                     </tfoot>
                 </table>
-                <button class="btn btn-primary" onclick="envoyerFactures()">Envoyer toutes les factures</button>
             </div>
+        </div>
+
+        <!-- Bouton pour envoyer les factures -->
+        <div class="text-end">
+            <form action="{{ route('factures.envoyer') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">Envoyer toutes les factures</button>
+            </form>
         </div>
     </div>
 @endsection
-
-<script>
-    function envoyerFactures() {
-        if (confirm('Êtes-vous sûr de vouloir envoyer toutes les factures ?')) {
-            // Rediriger vers une route pour envoyer les factures
-            window.location.href = "{{ route('factures.envoyer') }}";
-        }
-    }
-</script>

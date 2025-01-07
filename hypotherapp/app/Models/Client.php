@@ -15,6 +15,11 @@ class Client extends Model
         'prix',
     ];
 
+    public function factures()
+    {
+        return $this->hasMany(Facture::class);
+    }
+
     public function rendezVous()
     {
         return $this->hasMany(RendezVous::class, 'client_id');

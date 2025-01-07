@@ -2,31 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Facture;
+use App\Models\Historique;
 use Illuminate\Http\Request;
 
 class FactureController extends Controller
 {
+    // Afficher la page de gestion des factures
     public function index()
     {
-        $factures = Facture::with('client')->get();
-        return view('gestion-factures', compact('factures'));
+        // Obtenir les données nécessaires
+        $historique = Historique::orderBy('id', 'desc')->get();
+        $factures = Facture::with('client')->where('mois', 'Octobre 2024')->get();
+        $total = $factures->sum('montant');
+
+        return view('factures.index', compact('historique', 'factures', 'total'));
     }
 
-    public function store(Request $request)
+    // Envoyer toutes les factures
+    public function envoyerFactures()
     {
-        $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'montant' => 'required|numeric',
-            'mois' => 'required|string',
-        ]);
-        Facture::create($request->all());
-        return redirect()->route('factures.index')->with('success', 'Facture créée avec succès.');
+        // Logique pour envoyer les factures (exemple : générer un PDF et l'envoyer par email)
+        $factures = Facture::where('mois', 'Octobre 2024')->get();
+
+        // Exemple de boucle pour envoyer chaque facture
+        foreach ($factures as $facture) {
+            // Appeler une fonction d'envoi (peut être un service dédié pour l'envoi d'emails)
+            $this->envoyerFactureEmail($facture);
+        }
+
+        return redirect()->back()->with('success', 'Toutes les factures ont été envoyées avec succès.');
     }
 
-    public function sendAll()
+    // Fonction privée pour envoyer une facture par email
+    private function envoyerFactureEmail(Facture $facture)
     {
-        // Logic to send all invoices (for example, via email)
-        return redirect()->route('factures.index')->with('success', 'Toutes les factures ont été envoyées.');
+        // Exemple de logique pour générer un PDF et envoyer un email
+        // Mail::to($facture->client->email)->send(new FactureEmail($facture));
     }
 }
