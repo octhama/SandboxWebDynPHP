@@ -9,52 +9,42 @@ class PoneyController extends Controller
 {
     public function index()
     {
-        $poneys = Poney::all(); // Récupère tous les poneys
-        return view('poneys.index', compact('poneys'));
-    }
-
-    public function create()
-    {
-        return view('poneys.create');
+        $poneys = Poney::all();
+        return view('gestion.poneys', compact('poneys'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nom' => 'required|string|max:255',
-            'max_work_hours' => 'required|integer|min:1',
+            'heures_max' => 'required|integer|min:1',
         ]);
 
-        Poney::create([
-            'nom' => $request->nom,
-            'max_work_hours' => $request->max_work_hours,
-            'current_hours' => 0,
-        ]);
+        Poney::create($validated);
 
-        return redirect()->route('poneys.index')->with('success', 'Poney ajouté avec succès.');
+        return redirect()->back()->with('success', 'Poney ajouté avec succès.');
     }
 
-    public function edit(Poney $poney)
+    public function update(Request $request, $id)
     {
-        return view('poneys.edit', compact('poney'));
-    }
-
-    public function update(Request $request, Poney $poney)
-    {
-        $request->validate([
+        $validated = $request->validate([
             'nom' => 'required|string|max:255',
-            'max_work_hours' => 'required|integer|min:1',
+            'heures_max' => 'required|integer|min:1',
         ]);
 
-        $poney->update($request->only(['nom', 'max_work_hours']));
+        $poney = Poney::findOrFail($id);
+        $poney->update($validated);
 
-        return redirect()->route('poneys.index')->with('success', 'Poney mis à jour avec succès.');
+        return redirect()->back()->with('success', 'Poney mis à jour avec succès.');
     }
 
-    public function destroy(Poney $poney)
+    public function destroy($id)
     {
+        $poney = Poney::findOrFail($id);
         $poney->delete();
 
-        return redirect()->route('poneys.index')->with('success', 'Poney supprimé avec succès.');
+        return redirect()->back()->with('success', 'Poney supprimé avec succès.');
     }
 }
+
+

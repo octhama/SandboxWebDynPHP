@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Client;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function index()
-    {
-        $clients = Client::all();
-        return view('clients.index', compact('clients'));
-    }
-
     public function store(Request $request)
     {
-        $request->validate([
+        // Validation des données
+        $validated = $request->validate([
             'nom' => 'required|string|max:255',
-            'nombre_personnes' => 'required|integer',
-            'heures' => 'required|string',
-            'prix' => 'required|numeric',
+            'nb_personnes' => 'required|integer|min:1',
         ]);
 
-        Client::create($request->all());
-        return redirect()->route('clients.index')->with('success', 'Client créé avec succès.');
+        // Création du client
+        Client::create($validated);
+
+        // Redirection avec un message de succès
+        return redirect()->back()->with('success', 'Client ajouté avec succès !');
     }
 }
