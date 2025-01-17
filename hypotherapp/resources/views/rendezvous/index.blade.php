@@ -47,22 +47,31 @@
                     <div class="card-body">
                         <form action="{{ route('clients.store') }}" method="POST">
                             @csrf
+                            <!-- Nom du client -->
                             <div class="form-group">
                                 <label for="nom_client">Nom du client</label>
                                 <input type="text" class="form-control" id="nom_client" name="nom_client" required>
                             </div>
+
+                            <!-- Nombre de personnes -->
                             <div class="form-group">
                                 <label for="nombre_personnes">Nombre de personnes</label>
                                 <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes" min="1" required>
                             </div>
+
+                            <!-- Heures (simple input limité aux chiffres) -->
                             <div class="form-group">
                                 <label for="horaire">Heures</label>
-                                <input type="time" class="form-control" id="horaire" name="horaire" required>
+                                <input type="number" class="form-control" id="horaire" name="horaire" min="1" max="6" required placeholder="Maximum 6h">
                             </div>
+
+                            <!-- Prix (calculé automatiquement) -->
                             <div class="form-group">
                                 <label for="prix">Prix</label>
-                                <input type="number" class="form-control" id="prix" name="prix" min="0" required>
+                                <input type="number" class="form-control" id="prix" name="prix" min="0" required readonly>
                             </div>
+
+                            <!-- Assigner des poneys -->
                             <div class="form-group">
                                 <label for="poneys">Assigner des poneys</label>
                                 <div class="row">
@@ -77,6 +86,8 @@
                                     @endfor
                                 </div>
                             </div>
+
+                            <!-- Bouton d'enregistrement -->
                             <button type="submit" class="btn btn-success mt-3">Enregistrer</button>
                         </form>
                     </div>
@@ -90,5 +101,23 @@
             var content = document.getElementById(id);
             content.style.display = content.style.display === "none" ? "block" : "none";
         }
+    </script>
+    <!-- Script pour le calcul dynamique -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nombrePersonnesInput = document.getElementById('nombre_personnes');
+            const horaireInput = document.getElementById('horaire');
+            const prixInput = document.getElementById('prix');
+
+            function calculerPrix() {
+                const nombrePersonnes = parseInt(nombrePersonnesInput.value) || 0;
+                const heures = parseInt(horaireInput.value) || 0;
+                const prix = nombrePersonnes * heures * 100; // 100€/heure par personne
+                prixInput.value = prix;
+            }
+
+            nombrePersonnesInput.addEventListener('input', calculerPrix);
+            horaireInput.addEventListener('input', calculerPrix);
+        });
     </script>
 @endsection
