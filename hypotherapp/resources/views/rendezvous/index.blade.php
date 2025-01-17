@@ -36,6 +36,11 @@
                         </div>
                     </div>
                 @endforeach
+
+                <!-- Nouveau bouton pour créer un rendez-vous -->
+                <button class="btn btn-success mt-4" onclick="window.location='{{ route('rendezvous.create') }}'">
+                    Nouveau Rendez-vous
+                </button>
             </div>
 
             <!-- Section Enregistrer un nouveau client -->

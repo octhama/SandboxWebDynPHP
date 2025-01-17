@@ -9,40 +9,42 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    public function index()
+    {
+        $clients = Client::all(); // Récupère tous les clients
+        return view('clients.index', compact('clients')); // Retourne une vue avec les clients
+    }
+
     public function store(Request $request)
     {
-        // Validation des données
         $validated = $request->validate([
             'nom_client' => 'required|string|max:255',
-            'nombre_personnes' => 'required|integer|min:1',
-            'horaire' => 'required',
+            'nombre_personnes' => 'required|numeric|min:1',
+            'horaire' => 'required|numeric|min:1|max:6', // Validation pour les heures (1 à 6 max)
             'prix' => 'required|numeric|min:0',
             'poneys' => 'array|required|min:1'
         ]);
 
+        // Calcul du prix total
+        $prix_total = $validated['nombre_personnes'] * $validated['horaire'] * 100;
+
         // Créer un nouveau client
         $client = Client::create([
             'nom' => $validated['nom_client'],
+            'nombre_personnes' => $validated['nombre_personnes'],
+            'heures' => $validated['horaire'], // Ajouter cette ligne pour remplir la colonne 'heures'
+            'prix_total' => $prix_total, // Ajouter le prix total
         ]);
 
         // Créer un nouveau rendez-vous
         $rendezVous = RendezVous::create([
             'client_id' => $client->id,
             'nombre_personnes' => $validated['nombre_personnes'],
-            'horaire' => $validated['horaire'],
-            'prix' => $validated['prix'],
+            'horaire' => $validated['horaire'], // Inclure les heures ici aussi
+            'prix' => $prix_total, // Utiliser le prix total calculé
             'poneys_assignes' => json_encode($validated['poneys']),
         ]);
 
-        // Mettre à jour la disponibilité des poneys
-        foreach ($validated['poneys'] as $poneyId) {
-            $poney = Poney::find($poneyId);
-            if ($poney) {
-                $poney->disponible = false;
-                $poney->save();
-            }
-        }
-
-        return redirect()->back()->with('success', 'Client et rendez-vous enregistrés avec succès.');
+        return redirect()->route('clients.index')->with('success', 'Client et rendez-vous créés avec succès.');
     }
 }
