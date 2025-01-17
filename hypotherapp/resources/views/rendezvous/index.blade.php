@@ -65,8 +65,8 @@
                                 <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes" min="1" required>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="horaire">Plage horaire</label>
-                                <input type="text" class="form-control" id="horaire" name="horaire" placeholder="Ex : 12h30-14h30" required>
+                                <label for="horaire">Heures</label>
+                                <input type="number" class="form-control" id="heures" name="heures" placeholder="Ex : 6" min="1" max ="6" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="prix">Prix</label>
@@ -105,18 +105,18 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const nombrePersonnesInput = document.getElementById('nombre_personnes');
-            const horaireInput = document.getElementById('horaire');
+            const heuresInput = document.getElementById('heures');
             const prixInput = document.getElementById('prix');
 
             function calculerPrix() {
                 const nombrePersonnes = parseInt(nombrePersonnesInput.value) || 0;
-                const heures = parseInt(horaireInput.value) || 0;
+                const heures = parseInt(heuresInput.value) || 0;
                 const prix = nombrePersonnes * heures * 100; // 100€/heure par personne
                 prixInput.value = prix;
             }
 
             nombrePersonnesInput.addEventListener('input', calculerPrix);
-            horaireInput.addEventListener('input', calculerPrix);
+            heuresInput.addEventListener('input', calculerPrix);
         });
     </script>
 @endsection
