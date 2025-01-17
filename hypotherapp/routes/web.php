@@ -11,3 +11,7 @@ Route::get('/rendezvous', [RendezVousController::class, 'index'])->name('rendezv
 Route::post('/rendezvous/assigner/{id}', [RendezVousController::class, 'assignerPoneys'])->name('rendezvous.assigner');
 
 Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
+
+Route::resource('poneys', PoneyController::class);
+Route::get('poneys/{poney}/edit', [PoneyController::class, 'edit'])->name('poneys.edit');
+

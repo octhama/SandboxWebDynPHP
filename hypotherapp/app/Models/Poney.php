@@ -1,6 +1,5 @@
 <?php
 
-// Modèle Poney
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poney extends Model
 {
+    use HasFactory;
+
     protected $table = 'poneys';
-    protected $fillable = ['nom', 'disponible'];
+
+    // Champs modifiables via formulaire
+    protected $fillable = ['nom', 'heures_travail_effectuee', 'heures_travail_max'];
+
 }
+
 
 
 
