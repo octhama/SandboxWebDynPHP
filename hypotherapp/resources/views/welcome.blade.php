@@ -114,7 +114,7 @@
 
 <!-- Footer -->
 <footer class="text-center py-4 mt-5 bg-light">
-    <p class="mb-0">&copy; 2025 Gestion Poney. Tous droits réservés.</p>
+    <p class="mb-0">&copy; 2025 Hypotherapp - Gestion des Poneys. Tous droits réservés.</p>
 </footer>
 
 <!-- Bootstrap JS -->
