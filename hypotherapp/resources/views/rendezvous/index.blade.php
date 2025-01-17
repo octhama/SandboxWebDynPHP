@@ -101,4 +101,22 @@
             content.classList.toggle('collapse', !isCollapsed);
         }
     </script>
+    <!-- Script pour le calcul dynamique -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nombrePersonnesInput = document.getElementById('nombre_personnes');
+            const horaireInput = document.getElementById('horaire');
+            const prixInput = document.getElementById('prix');
+
+            function calculerPrix() {
+                const nombrePersonnes = parseInt(nombrePersonnesInput.value) || 0;
+                const heures = parseInt(horaireInput.value) || 0;
+                const prix = nombrePersonnes * heures * 100; // 100€/heure par personne
+                prixInput.value = prix;
+            }
+
+            nombrePersonnesInput.addEventListener('input', calculerPrix);
+            horaireInput.addEventListener('input', calculerPrix);
+        });
+    </script>
 @endsection
