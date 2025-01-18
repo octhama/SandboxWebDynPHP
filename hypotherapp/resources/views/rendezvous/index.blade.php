@@ -32,7 +32,7 @@
                                     @for ($i = 1; $i <= $rdv->nombre_personnes; $i++)
                                         <div class="col-md-6 mb-3">
                                             <label for="poney{{ $i }}">Poney {{ $i }}</label>
-                                            <select name="poneys[]" class="form-control" required>
+                                            <select name="poneys[]" class="form-select" required>
                                                 @foreach ($poneys as $poney)
                                                     <option value="{{ $poney->id }}">{{ $poney->nom }}</option>
                                                 @endforeach
@@ -77,7 +77,7 @@
                                 <div class="row">
                                     @for ($i = 1; $i <= 5; $i++)
                                         <div class="col-md-6">
-                                            <select name="poneys[]" class="form-control mb-2" required>
+                                            <select name="poneys[]" class="form-select mb-2" required>
                                                 @foreach ($poneys as $poney)
                                                     <option value="{{ $poney->id }}">{{ $poney->nom }}</option>
                                                 @endforeach
