@@ -9,24 +9,70 @@
     <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
+        /* Global Styling */
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #f0f4ff, #d9e8f8);
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+            font-family: 'Arial', sans-serif;
         }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Title Styling */
+        h2 {
+            color: #343a40;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Menu Cards Styling */
         .menu-card {
-            min-height: 270px; /* Hauteur uniforme */
+            min-height: 270px;
             max-height: 270px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            overflow: hidden; /* Empêche le débordement */
+            border: none;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .menu-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
         .menu-card i {
             font-size: 3rem;
+            margin-bottom: 10px;
         }
-        .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        .menu-card .btn {
+            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: #343a40;
+            color: #f8f9fa;
+            padding: 20px;
+            border-top: 3px solid #ffce00;
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            color: #ffce00;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -37,7 +83,7 @@
     <div class="row g-4">
         <!-- Clients -->
         <div class="col-md-4">
-            <div class="card menu-card shadow-sm">
+            <div class="card menu-card">
                 <div class="card-body text-center">
                     <i class="fas fa-users text-primary"></i>
                     <h5 class="card-title">Gestion des Clients</h5>
@@ -49,7 +95,7 @@
 
         <!-- Rendez-vous -->
         <div class="col-md-4">
-            <div class="card menu-card shadow-sm">
+            <div class="card menu-card">
                 <div class="card-body text-center">
                     <i class="fas fa-calendar-alt text-success"></i>
                     <h5 class="card-title">Gestion des Rendez-vous</h5>
@@ -61,7 +107,7 @@
 
         <!-- Poneys -->
         <div class="col-md-4">
-            <div class="card menu-card shadow-sm">
+            <div class="card menu-card">
                 <div class="card-body text-center">
                     <i class="fas fa-horse text-warning"></i>
                     <h5 class="card-title">Gestion des Poneys</h5>
@@ -76,7 +122,7 @@
     <div class="row g-4 mt-3">
         <!-- Rapports -->
         <div class="col-md-4">
-            <div class="card menu-card shadow-sm">
+            <div class="card menu-card">
                 <div class="card-body text-center">
                     <i class="fas fa-chart-line text-info"></i>
                     <h5 class="card-title">Rapports et Statistiques</h5>
@@ -88,7 +134,7 @@
 
         <!-- Paramètres -->
         <div class="col-md-4">
-            <div class="card menu-card shadow-sm">
+            <div class="card menu-card">
                 <div class="card-body text-center">
                     <i class="fas fa-cogs text-secondary"></i>
                     <h5 class="card-title">Paramètres</h5>
@@ -100,7 +146,7 @@
 
         <!-- Support -->
         <div class="col-md-4">
-            <div class="card menu-card shadow-sm">
+            <div class="card menu-card">
                 <div class="card-body text-center">
                     <i class="fas fa-life-ring text-danger"></i>
                     <h5 class="card-title">Support</h5>
@@ -113,8 +159,12 @@
 </div>
 
 <!-- Footer -->
-<footer class="text-center py-4 mt-5 bg-light">
-    <p class="mb-0">&copy; 2025 Hypotherapp - Gestion des Poneys. Tous droits réservés.</p>
+<footer class="text-center">
+    <p>&copy; 2025 Hypotherapp - Gestion des Poneys. Tous droits réservés.</p>
+    <p>
+        <a href="#">Politique de confidentialité</a> |
+        <a href="#">Conditions d'utilisation</a>
+    </p>
 </footer>
 
 <!-- Bootstrap JS -->

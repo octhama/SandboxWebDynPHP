@@ -9,28 +9,63 @@
     <style>
         /* Navigation Bar Styling */
         .navbar {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .nav-link {
+            color: #fff !important;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .navbar .nav-link:hover {
+            color: #ffce00 !important;
+            transform: scale(1.1);
+        }
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: bold;
         }
 
         /* Footer Styling */
         footer {
-            background-color: #343a40;
+            background: #343a40;
             color: #f8f9fa;
         }
         footer a {
-            color: #f8f9fa;
+            color: #ffce00;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         footer a:hover {
-            text-decoration: underline;
+            color: #f8f9fa;
+        }
+
+        /* Background Animation */
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container Styling */
+        .container {
+            animation: fadeIn 1.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="#">Hypotherapp - Gestion des Poneys</a>
+        <a class="navbar-brand" href="#">Hypotherapp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
