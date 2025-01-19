@@ -26,10 +26,10 @@
                         <td>{{ number_format($client->prix_total, 2, ',', ' ') }}</td>
                         <td>
                             <!-- Boutons d'actions -->
-                            <a href="{{ route('clients.show', $client->id) }}" class="btn btn-info btn-sm" title="Voir">
+                            <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary btn-sm" title="Voir">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-warning btn-sm" title="Modifier">
+                            <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-secondary btn-sm" title="Modifier">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="{{ route('clients.destroy', $client->id) }}" method="POST" style="display: inline-block;">
@@ -63,17 +63,35 @@
 
     <!-- Styles supplémentaires -->
     <style>
+
+        /* Titres */
+        h1, h2, h3, h4 {
+            color: #2c3e50; /* Gris foncé */
+            font-weight: 600;
+        }
+
         /* Style pour les boutons */
-        .btn-info, .btn-warning, .btn-danger {
-            transition: all 0.3s ease;
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
         }
-        .btn-info:hover {
-            background-color: #117a8b;
-            border-color: #117a8b;
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
         }
-        .btn-warning:hover {
-            background-color: #d39e00;
-            border-color: #c69500;
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+            border-color: #3d4349;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
         .btn-danger:hover {
             background-color: #c82333;

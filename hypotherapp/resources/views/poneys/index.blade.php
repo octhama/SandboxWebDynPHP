@@ -57,7 +57,7 @@
             <!-- Ajouter un nouveau poney -->
             <div class="col-md-4">
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header text-bg-light">
                         <h4><i class="fas fa-plus"></i> Ajouter un nouveau poney</h4>
                     </div>
                     <div class="card-body">
@@ -88,6 +88,11 @@
 
     <!-- Styles supplémentaires -->
     <style>
+        /* Titres */
+        h1, h2, h3, h4 {
+            color: #2c3e50; /* Gris foncé */
+            font-weight: 600;
+        }
         .table-hover tbody tr:hover {
             background-color: rgba(0, 123, 255, 0.1);
         }

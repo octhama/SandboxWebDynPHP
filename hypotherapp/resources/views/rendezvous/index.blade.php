@@ -7,7 +7,7 @@
         <div class="row">
             <!-- Section Gestion journalière -->
             <div class="col-md-8">
-                <h3 class="mb-4">Mercredi 2 Octobre 2024 :</h3>
+                <h3 class="mb-4">{{ ucfirst(\Carbon\Carbon::now()->isoFormat('dddd D MMMM YYYY')) }}</h3>
 
                 <!-- Nouveau bouton pour créer un rendez-vous -->
                 <button class="btn btn-success mb-4" onclick="window.location='{{ route('rendezvous.create') }}'">
