@@ -21,13 +21,13 @@
 
         /* Navigation Bar Styling */
         .navbar {
-            background: #ffffff; /* Fond blanc */
+            background: #ffffff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 1rem;
-            margin: 1rem auto; /* Centrage et marge */
-            border-radius: 12px; /* Bordure arrondie */
-            width: 90%; /* Largeur réduite */
-            max-width: 1200px; /* Largeur maximale */
+            margin: 1rem auto;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
         }
         .navbar .nav-link {
             color: #2c3e50 !important;
@@ -35,16 +35,13 @@
             transition: color 0.3s ease, transform 0.2s ease;
         }
         .navbar .nav-link:hover {
-            color: #6c5ce7 !important; /* Violet doux */
+            color: #6c5ce7 !important;
             transform: translateY(-2px);
         }
         .navbar-brand {
-            color: #6c5ce7 !important; /* Violet doux */
+            color: #6c5ce7 !important;
             font-weight: bold;
             font-size: 1.5rem;
-        }
-        .navbar-toggler-icon {
-            background-color: #2c3e50; /* Icône toggle */
         }
 
         /* Contenu principal */
@@ -52,9 +49,9 @@
             flex: 1;
             padding: 2rem 0;
             animation: fadeIn 1s ease;
-            width: 90%; /* Largeur réduite */
-            max-width: 1200px; /* Largeur maximale */
-            margin: 0 auto; /* Centrage */
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -80,27 +77,27 @@
             color: #2c3e50;
             border-top: 1px solid #e5e6e8;
             padding: 1.5rem;
-            margin: 1rem auto 0; /* Centrage et marge */
-            border-radius: 12px; /* Bordure arrondie */
-            width: 90%; /* Largeur réduite */
-            max-width: 1200px; /* Largeur maximale */
+            margin: 1rem auto; /* Centrage et marge */
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
         }
         footer a {
-            color: #6c5ce7; /* Violet doux */
+            color: #6c5ce7;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         footer a:hover {
-            color: #5a4acf; /* Violet plus foncé */
+            color: #5a4acf;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar, .container, footer {
-                width: 95%; /* Largeur légèrement réduite pour les petits écrans */
+                width: 95%;
             }
             .navbar-brand {
-                font-size: 1.2rem; /* Taille de police réduite */
+                font-size: 1.2rem;
             }
         }
     </style>

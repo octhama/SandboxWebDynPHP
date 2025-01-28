@@ -10,38 +10,50 @@
             <!-- Sélectionner un client -->
             <div class="form-group mb-4">
                 <label for="client_id" class="form-label"><i class="fas fa-user"></i> Sélectionner un client</label>
-                <select name="client_id" id="client_id" class="form-control" required>
+                <select name="client_id" id="client_id" class="form-control @error('client_id') is-invalid @enderror" required>
                     <option value="" disabled selected>Choisissez un client</option>
                     @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">{{ $client->nom }}</option>
+                        <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>{{ $client->nom }}</option>
                     @endforeach
                 </select>
+                @error('client_id')
+                <span class="invalid-feedback">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Nombre de personnes -->
             <div class="form-group mb-4">
                 <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
-                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes" min="1" placeholder="Ex : 3" required>
+                <input type="number" class="form-control @error('nombre_personnes') is-invalid @enderror" id="nombre_personnes" name="nombre_personnes" min="1" value="{{ old('nombre_personnes') }}" placeholder="Ex : 3" required>
+                @error('nombre_personnes')
+                <span class="invalid-feedback">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Plage horaire -->
             <div class="form-group mb-4">
                 <label for="horaire" class="form-label"><i class="fas fa-clock"></i> Plage horaire</label>
-                <input type="text" class="form-control" id="horaire" name="horaire" placeholder="Exemple : 12h30-14h30" required>
+                <input type="text" class="form-control @error('horaire') is-invalid @enderror" id="horaire" name="horaire" value="{{ old('horaire') }}" placeholder="Exemple : 12h30-14h30" required>
+                @error('horaire')
+                <span class="invalid-feedback">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Assigner des poneys -->
             <div class="form-group mb-4">
                 <label for="poneys" class="form-label"><i class="fas fa-horse"></i> Assigner des poneys</label>
                 <div class="row">
-                    @for ($i = 1; $i <= 5; $i++) <!-- Limiter à 5 poneys maximum -->
+                    @for ($i = 0; $i < 5; $i++) <!-- Limiter à 5 poneys maximum -->
                     <div class="col-md-6">
-                        <select name="poneys[]" class="form-control mb-3" required>
+                        <select name="poneys[]" class="form-control mb-3 @error('poneys.' . $i) is-invalid @enderror" {{ $i === 0 ? 'required' : '' }}>
                             <option value="" disabled selected>Choisissez un poney</option>
                             @foreach ($poneys as $poney)
-                                <option value="{{ $poney->id }}">{{ $poney->nom }}</option>
+                                <option value="{{ $poney->id }}" {{ (old('poneys.' . $i) == $poney->id) ? 'selected' : '' }}>{{ $poney->nom }}</option>
                             @endforeach
                         </select>
+                        @error('poneys.' . $i)
+                        <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
                     </div>
                     @endfor
                 </div>

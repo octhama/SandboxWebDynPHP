@@ -14,7 +14,6 @@
         <div class="row">
             <!-- Liste des poneys -->
             <div class="col-md-8 mb-4">
-                <h3 class="mb-3"><i class="fas fa-list"></i> Liste des poneys</h3>
                 <table class="table table-hover table-bordered">
                     <thead class="table-dark">
                     <tr>

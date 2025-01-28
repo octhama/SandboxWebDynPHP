@@ -157,17 +157,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .btn-primary, .btn-success {
-            background-color: #6c5ce7; /* Violet doux */
-            border-color: #6c5ce7;
-            color: white;
-        }
-
-        .btn-primary:hover, .btn-success:hover {
-            background-color: #5a4acf; /* Violet plus foncé */
-            border-color: #5a4acf;
-        }
-
         /* Formulaires */
         .form-control {
             border-radius: 10px;
