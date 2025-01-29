@@ -57,28 +57,4 @@ class JournalierController extends Controller
 
         return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous créé avec succès.');
     }
-
-    /**
-     * Met à jour les poneys assignés à un rendez-vous.
-     */
-    public function updateRendezVousPoneys(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'poneys' => 'required|array|min:1',
-            'poneys.*' => 'exists:poneys,id',
-        ]);
-
-        $rendezvous = RendezVous::findOrFail($id);
-
-        // Libérer les poneys précédemment assignés
-        $rendezvous->poneys()->update(['disponible' => true]);
-
-        // Associer les nouveaux poneys
-        $rendezvous->poneys()->sync($validated['poneys']);
-
-        // Mettre à jour leur disponibilité
-        Poney::whereIn('id', $validated['poneys'])->update(['disponible' => false]);
-
-        return redirect()->route('gestion.journaliere.index')->with('success', 'Poneys mis à jour avec succès.');
-    }
 }

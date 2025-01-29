@@ -32,6 +32,18 @@
 
     <!-- Styles -->
     <style>
+        /* Arrière-plan */
+        body {
+            background-color: #f8f9fa; /* Blanc cassé */
+            font-family: 'Poppins', sans-serif;
+            color: #2c3e50; /* Gris foncé */
+        }
+
+        /* Titres */
+        h1, h2, h3, h4 {
+            color: #2c3e50; /* Gris foncé */
+            font-weight: 600;
+        }
         .card-title {
             font-weight: bold;
             color: #495057;
