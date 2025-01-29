@@ -37,26 +37,34 @@
 
                                 <!-- Boutons d'actions -->
                                 <div class="d-flex justify-content-start">
+                                    <!-- Bouton Confirmer -->
                                     <form action="{{ route('rendez-vous.confirm', $rdv->id) }}" method="POST" class="me-2">
                                         @csrf
-                                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                                        <button type="submit" class="btn btn-light border shadow-sm">
+                                            <i class="fas fa-check text-success"></i>
+                                        </button>
                                     </form>
 
+                                    <!-- Bouton Réinitialiser -->
                                     <form action="{{ route('rendez-vous.reset', $rdv->id) }}" method="POST" class="me-2">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" class="btn btn-warning">Réinitialiser</button>
+                                        <button type="submit" class="btn btn-light border shadow-sm">
+                                            <i class="fas fa-undo text-warning"></i>
+                                        </button>
                                     </form>
 
+                                    <!-- Bouton Supprimer -->
                                     <form action="{{ route('rendez-vous.destroy', $rdv->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
+                                        <button type="submit" class="btn btn-light border shadow-sm"
                                                 onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">
-                                            Supprimer
+                                            <i class="fas fa-trash text-danger"></i>
                                         </button>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -159,11 +167,18 @@
         }
 
         /* Boutons */
-        .btn {
-            border-radius: 25px;
-            font-weight: 500;
-            padding: 0.5rem 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .btn-light {
+            padding: 0.5rem 0.75rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-light:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .fas {
+            font-size: 1.2rem;
         }
 
         /* Formulaires */
