@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hypotheapp - Welcome Page</title>
+    <title>Hypotherapp - Welcome Page</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for Icons -->
@@ -104,7 +104,7 @@
 <div class="container my-3">
     <!-- Welcome Section -->
     <div class="container my-5">
-        <h1 class="text-center">Bienvenue sur Hypotheapp</h1>
+        <h1 class="text-center">Bienvenue sur Hypotherapp</h1>
     </div>
     <h2 class="text-center mb-4">Navigation principale</h2>
     <div class="row g-4">
