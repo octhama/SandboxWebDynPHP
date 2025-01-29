@@ -18,8 +18,13 @@ Route::get('/settings', [SettingsController::class, 'index'])->name('settings.in
 Route::get('/support', [SupportController::class, 'index'])->name('support.index');
 
 
-Route::get('/rendezvous', [RendezVousController::class, 'index'])->name('rendezvous.index');
-Route::post('/rendezvous/assigner/{id}', [RendezVousController::class, 'assignerPoneys'])->name('rendezvous.assigner');
+Route::get('/rendez-vous', [RendezVousController::class, 'index'])->name('rendez-vous.index');
+
+Route::post('/rendez-vous/{id}/confirm', [RendezVousController::class, 'confirm'])->name('rendez-vous.confirm');
+Route::patch('/rendez-vous/{id}/reset', [RendezVousController::class, 'reset'])->name('rendez-vous.reset');
+Route::delete('/rendez-vous/{id}', [RendezVousController::class, 'destroy'])->name('rendez-vous.destroy');
+
+Route::post('/rendez-vous/assigner/{id}', [RendezVousController::class, 'assignerPoneys'])->name('rendez-vous.assigner');
 
 Route::resource('clients', ClientController::class);
 Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
@@ -35,5 +40,5 @@ Route::get('poneys/{poney}/edit', [PoneyController::class, 'edit'])->name('poney
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
 
-Route::get('/rendezvous/create', [RendezVousController::class, 'create'])->name('rendezvous.create');
-Route::post('/rendezvous', [RendezVousController::class, 'store'])->name('rendezvous.store');
+Route::get('/rendez-vous/create', [RendezVousController::class, 'create'])->name('rendez-vous.create');
+Route::post('/rendez-vous', [RendezVousController::class, 'store'])->name('rendez-vous.store');

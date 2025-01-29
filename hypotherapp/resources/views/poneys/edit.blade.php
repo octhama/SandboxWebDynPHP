@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="text-center mb-5">Modifier le Poney : <strong>{{ $poney->nom }}</strong></h1>
 
-        <!-- Afficher les erreurs -->
+        <!-- Notification d'erreurs -->
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong><i class="fas fa-exclamation-circle"></i> Erreurs détectées :</strong>
@@ -18,9 +18,9 @@
         @endif
 
         <!-- Formulaire de modification -->
-        <div class="card shadow-lg">
-            <div class="card-header bg-primary text-white">
-                <h3 class="mb-0"><i class="fas fa-pencil-alt"></i> Modifier les informations</h3>
+        <div class="card shadow">
+            <div class="card-header text-bg-primary text-white">
+                <h4><i class="fas fa-pencil-alt"></i> Modifier les informations du Poney</h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('poneys.update', $poney->id) }}" method="POST">
@@ -28,21 +28,21 @@
                     @method('PUT')
 
                     <!-- Nom du poney -->
-                    <div class="form-group mb-3">
-                        <label for="nom" class="form-label"><i class="fas fa-horse"></i> Nom du poney</label>
-                        <input type="text" class="form-control" id="nom" name="nom" value="{{ $poney->nom }}" required>
+                    <div class="mb-4">
+                        <label for="nom" class="form-label"><i class="fas fa-horse"></i> Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom', $poney->nom) }}" required>
                     </div>
 
-                    <!-- Heures de travail effectuées -->
-                    <div class="form-group mb-3">
-                        <label for="heures_travail_effectuee" class="form-label"><i class="fas fa-clock"></i> Heures de travail effectuées</label>
+                    <!-- Heures travaillées -->
+                    <div class="mb-4">
+                        <label for="heures_travail_effectuee" class="form-label"><i class="fas fa-clock"></i> Heures travaillées</label>
                         <input type="number" class="form-control" id="heures_travail_effectuee" name="heures_travail_effectuee"
-                               value="{{ $poney->heures_travail_effectuee }}" required>
+                               value="{{ old('heures_travail_effectuee', $poney->heures_travail_effectuee) }}" min="0" required>
                     </div>
 
                     <!-- Disponibilité -->
                     <div class="form-check form-switch mb-4">
-                        <input class="form-check-input" type="checkbox" id="disponible" name="disponible" value="1" {{ $poney->disponible ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="disponible" name="disponible" value="1" {{ old('disponible', $poney->disponible) ? 'checked' : '' }}>
                         <label class="form-check-label" for="disponible"><i class="fas fa-check-circle"></i> Disponible</label>
                     </div>
 
@@ -68,6 +68,13 @@
         .btn-secondary:hover {
             background-color: #6c757d;
             border-color: #5a6268;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.8);
         }
     </style>
 @endsection

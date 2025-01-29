@@ -13,7 +13,7 @@
 
         <div class="row">
             <!-- Liste des poneys -->
-            <div class="col-md-8 mb-4">
+            <div class="col-md-8">
                 <table class="table table-hover table-bordered">
                     <thead class="table-dark">
                     <tr>
@@ -24,22 +24,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($poneys as $poney)
+                    @forelse ($poneys as $poney)
                         <tr class="{{ $poney->disponible ? 'table-success' : 'table-danger' }}">
                             <td>{{ $poney->nom }}</td>
                             <td>
-                                @if ($poney->disponible)
-                                    <span class="badge bg-success"><i class="fas fa-check-circle"></i> Disponible</span>
-                                @else
-                                    <span class="badge bg-danger"><i class="fas fa-times-circle"></i> Indisponible</span>
-                                @endif
+                                    <span class="badge {{ $poney->disponible ? 'bg-success' : 'bg-danger' }}">
+                                        <i class="fas {{ $poney->disponible ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
+                                        {{ $poney->disponible ? 'Disponible' : 'Indisponible' }}
+                                    </span>
                             </td>
-                            <td>{{ $poney->heures_travail_effectuee }} heures</td>
+                            <td> {{ $poney->heures_travail_validee }} / 8 heures</td>
                             <td>
                                 <a href="{{ route('poneys.edit', $poney->id) }}" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i> Éditer
+                                    <i class="fas fa-edit"></i> Modifier
                                 </a>
-                                <form action="{{ route('poneys.destroy', $poney->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('poneys.destroy', $poney->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer ce poney ?')">
@@ -48,7 +47,11 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Aucun poney enregistré.</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
@@ -62,29 +65,23 @@
                     <div class="card-body">
                         <form action="{{ route('poneys.store') }}" method="POST">
                             @csrf
-                            <!-- Nom du poney -->
                             <div class="form-group mb-3">
                                 <label for="nom"><i class="fas fa-horse"></i> Nom du poney</label>
                                 <input type="text" class="form-control" name="nom" placeholder="Ex : Spirit" required>
                             </div>
-                            <!-- Heures de travail max -->
                             <div class="form-group mb-3">
-                                <label for="heures_travail_max"><i class="fas fa-clock"></i> Heures de travail max</label>
-                                <input type="number" class="form-control" name="heures_travail_max" placeholder="Ex : 6" min="1" max="6" required>
+                                <label for="heures_travail_max"><i class="fas fa-clock"></i> Heures max</label>
+                                <input type="number" class="form-control" name="heures_travail_max" placeholder="Ex : 6" min="1" max="24" required>
                             </div>
-                            <!-- Bouton d'ajout -->
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-save"></i> Ajouter
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fas fa-save"></i> Ajouter
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Styles supplémentaires -->
     <style>
         /* Titres */

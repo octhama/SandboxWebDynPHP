@@ -12,7 +12,7 @@ class Poney extends Model
     protected $table = 'poneys';
 
     // Champs modifiables via formulaire
-    protected $fillable = ['nom', 'heures_travail_effectuee', 'heures_travail_max'];
+    protected $fillable = ['nom', 'heures_travail_validee'];
 
 }
 

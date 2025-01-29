@@ -55,7 +55,7 @@ class JournalierController extends Controller
         // Mettre à jour la disponibilité des poneys
         Poney::whereIn('id', $validated['poneys'])->update(['disponible' => false]);
 
-        return redirect()->route('rendezvous.index')->with('success', 'Rendez-vous créé avec succès.');
+        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous créé avec succès.');
     }
 
     /**

@@ -126,7 +126,7 @@
                     <i class="fas fa-calendar-alt text-success"></i>
                     <h5 class="card-title">Gestion des Rendez-vous</h5>
                     <p class="card-text">Planifiez et gérez vos rendez-vous efficacement.</p>
-                    <a href="{{ route('rendezvous.index') }}" class="btn btn-success">Accéder</a>
+                    <a href="{{ route('rendez-vous.index') }}" class="btn btn-success">Accéder</a>
                 </div>
             </div>
         </div>

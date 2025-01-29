@@ -6,101 +6,122 @@ use App\Models\Client;
 use App\Models\Poney;
 use App\Models\RendezVous;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class RendezVousController extends Controller
 {
+    // Afficher la liste des rendez-vous
     public function index()
     {
-        $rendezVous = RendezVous::with('client')->get(); // Charge les clients liés
-        $poneys = Poney::where('disponible', true)->get(); // Récupère les poneys disponibles
-        return view('rendezvous.index', compact('rendezVous', 'poneys'));
+        // Charger les rendez-vous avec les clients et les poneys associés
+        $rendezVous = RendezVous::with(['client', 'poneys'])->get();
+        $poneys = Poney::all();
+        $clients = Client::all();
+
+        return view('rendez-vous.index', compact('rendezVous', 'poneys', 'clients'));
     }
 
+    // Confirmer un rendez-vous
+    public function confirm($id)
+    {
+        DB::transaction(function () use ($id) {
+            $rendezVous = RendezVous::findOrFail($id);
+
+            // Marquer les poneys comme non disponibles
+            $rendezVous->poneys()->update(['disponible' => false]);
+
+            // Ajouter un champ confirmed si nécessaire
+            $rendezVous->update(['confirmed' => true]);
+        });
+
+        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous confirmé avec succès.');
+    }
+
+    // Réinitialiser un rendez-vous
+    public function reset($id)
+    {
+        DB::transaction(function () use ($id) {
+            $rendezVous = RendezVous::findOrFail($id);
+
+            // Libérer les poneys assignés
+            $rendezVous->poneys()->update(['disponible' => true]);
+
+            // Dissocier les poneys
+            $rendezVous->poneys()->detach();
+        });
+
+        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous réinitialisé avec succès.');
+    }
+
+    // Supprimer un rendez-vous
+    public function destroy($id)
+    {
+        DB::transaction(function () use ($id) {
+            $rendezVous = RendezVous::findOrFail($id);
+
+            // Réinitialiser la disponibilité des poneys avant de supprimer le rendez-vous
+            $rendezVous->poneys()->update(['disponible' => true]);
+
+            // Supprimer le rendez-vous
+            $rendezVous->delete();
+        });
+
+        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous supprimé avec succès.');
+    }
+
+    // Afficher le formulaire de création d'un rendez-vous
     public function create()
     {
-        $clients = Client::all(); // Récupère tous les clients disponibles
-        $poneys = Poney::all();   // Récupère tous les poneys disponibles
-        return view('rendezvous.create', compact('clients', 'poneys'));
+        $clients = Client::all();
+
+        $poneys = Poney::where('disponible', true)->get(); // Récupérer uniquement les poneys disponibles
+
+        return view('rendez-vous.create', compact('clients', 'poneys'));
     }
 
+    // Enregistrer un nouveau rendez-vous
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'client_id' => 'required|exists:clients,id',
-            'horaire' => 'required|regex:/^\d{1,2}h\d{2}-\d{1,2}h\d{2}$/', // Format horaire valide
             'nombre_personnes' => 'required|integer|min:1',
-            'poneys' => 'required|array|min:1', // Vérifie qu'au moins un poney est sélectionné
+            'horaire_debut' => 'required|date_format:H:i',
+            'horaire_fin' => 'required|date_format:H:i|after:horaire_debut',
+            'poneys' => 'array',
+            'poneys.*' => 'nullable|exists:poneys,id',
         ]);
 
-        $horaire = $this->parseHoraire($request->horaire); // Convertir l'horaire en timestamps
-        $poneys = $request->poneys;
+        $selectedPoneys = array_filter($validated['poneys'], fn($poneyId) => $poneyId !== null);
 
-        // Vérification des plages horaires (6h max)
-        if (($horaire['end'] - $horaire['start']) > 6 * 3600) {
-            return back()->withErrors(['horaire' => 'La durée du rendez-vous ne peut pas excéder 6 heures.']);
-        }
-
-        // Vérification que les poneys sont disponibles
-        foreach ($poneys as $poneyId) {
-            $poney = Poney::findOrFail($poneyId);
-
-            $overlap = RendezVous::where('poneys_assignes', 'like', "%\"$poneyId\"%")
-                ->where(function ($query) use ($horaire) {
-                    $query->whereBetween('horaire_start', [$horaire['start'], $horaire['end']])
-                        ->orWhereBetween('horaire_end', [$horaire['start'], $horaire['end']])
-                        ->orWhere(function ($q) use ($horaire) {
-                            $q->where('horaire_start', '<=', $horaire['start'])
-                                ->where('horaire_end', '>=', $horaire['end']);
-                        });
-                })->exists();
-
-            if ($overlap) {
-                return back()->withErrors(['poneys' => "Le poney {$poney->nom} est déjà pris pour ce créneau horaire."]);
-            }
-
-            if (($poney->heures_travail_effectuee + (($horaire['end'] - $horaire['start']) / 3600)) > $poney->heures_travail_max) {
-                return back()->withErrors(['poneys' => "Le poney {$poney->nom} a dépassé ses heures de travail autorisées."]);
-            }
-        }
-
-        // Créer le rendez-vous
+        // Créer un rendez-vous
         $rendezVous = RendezVous::create([
-            'client_id' => $request->client_id,
-            'horaire' => $request->horaire,
-            'horaire_start' => $horaire['start'],
-            'horaire_end' => $horaire['end'],
-            'nombre_personnes' => $request->nombre_personnes,
-            'poneys_assignes' => json_encode($poneys),
+            'client_id' => $validated['client_id'],
+            'nombre_personnes' => $validated['nombre_personnes'],
+            'horaire_debut' => $validated['horaire_debut'],
+            'horaire_fin' => $validated['horaire_fin'],
+            'poneys_assignes' => json_encode($selectedPoneys),
         ]);
 
-        // Mettre à jour les heures de travail des poneys
-        foreach ($poneys as $poneyId) {
-            $poney = Poney::find($poneyId);
-            $poney->heures_travail_effectuee += ($horaire['end'] - $horaire['start']) / 3600;
-            $poney->disponible = false;
-            $poney->save();
-        }
+        DB::transaction(function () use ($request) {
+            $horaireDebut = Carbon::createFromFormat('H:i', $request->horaire_debut);
+            $horaireFin = Carbon::createFromFormat('H:i', $request->horaire_fin);
 
-        return redirect()->route('rendezvous.index')->with('success', 'Rendez-vous créé avec succès.');
-    }
+            // Créer le rendez-vous
+            $rendezVous = RendezVous::create([
+                'client_id' => $request->client_id,
+                'horaire_debut' => $horaireDebut,
+                'horaire_fin' => $horaireFin,
+                'nombre_personnes' => $request->nombre_personnes,
+            ]);
 
-    private function parseHoraire($horaire)
-    {
-        [$start, $end] = explode('-', $horaire);
-        $start = \Carbon\Carbon::createFromFormat('H\hi', str_replace('h', ':', $start))->timestamp;
-        $end = \Carbon\Carbon::createFromFormat('H\hi', str_replace('h', ':', $end))->timestamp;
+            // Associer les poneys
+            $rendezVous->poneys()->attach($request->poneys);
 
-        return ['start' => $start, 'end' => $end];
-    }
+            // Mettre à jour les poneys
+            Poney::whereIn('id', $request->poneys)->update(['disponible' => false]);
+        });
 
-    public function assignerPoneys(Request $request, $id)
-    {
-        $rendezVous = RendezVous::findOrFail($id);
-        $rendezVous->poneys_assignes = json_encode($request->input('poneys'));
-        $rendezVous->save();
-
-        Poney::whereIn('id', $request->input('poneys'))->update(['disponible' => false]);
-
-        return redirect()->back()->with('success', 'Poneys assignés avec succès.');
+        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous créé avec succès.');
     }
 }

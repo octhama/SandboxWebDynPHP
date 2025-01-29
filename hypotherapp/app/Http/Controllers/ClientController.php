@@ -31,40 +31,30 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
+        // Validation des données
         $validated = $request->validate([
-            'nom_client' => 'required|string|max:255',
-            'nombre_personnes' => 'required|numeric|min:1',
-            'horaire' => 'required|numeric|min:1|max:6', // Validation pour les heures (1 à 6 max)
-            'prix' => 'required|numeric|min:0',
-            'poneys' => 'array|required|min:1'
+            'nom' => 'required|string|max:255',
+            'email' => 'nullable|email|unique:clients,email',
+            'nombre_personnes' => 'required|integer|min:1',
+            'heures' => 'required|integer|min:1|max:6',
+            'prix_total' => 'required|numeric|min:0',
         ]);
 
-        // Calcul du prix total
-        $prix_total = $validated['nombre_personnes'] * $validated['horaire'] * 100;
-
-        // Créer un nouveau client
+        // Création du client avec les données soumises, y compris le prix total
         $client = Client::create([
-            'nom' => $validated['nom_client'],
+            'nom' => $validated['nom'],
+            'email' => $validated['email'] ?? null,
             'nombre_personnes' => $validated['nombre_personnes'],
-            'heures' => $validated['horaire'], // Ajouter cette ligne pour remplir la colonne 'heures'
-            'prix_total' => $prix_total, // Ajouter le prix total
+            'heures' => $validated['heures'],
+            'prix_total' => $validated['prix_total'],
         ]);
 
-        // Créer un nouveau rendez-vous
-        $rendezVous = RendezVous::create([
-            'client_id' => $client->id,
-            'nombre_personnes' => $validated['nombre_personnes'],
-            'horaire' => $validated['horaire'], // Inclure les heures ici aussi
-            'prix' => $prix_total, // Utiliser le prix total calculé
-            'poneys_assignes' => json_encode($validated['poneys']),
-        ]);
-
-        return redirect()->route('clients.index')->with('success', 'Client et rendez-vous créés avec succès.');
+        return redirect()->route('clients.index')->with('success', 'Client créé avec succès.');
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'nombre_personnes' => 'required|integer|min:1',
             'heures' => 'required|integer|min:0',
@@ -72,7 +62,8 @@ class ClientController extends Controller
         ]);
 
         $client = Client::findOrFail($id);
-        $client->update($request->all());
+
+        $client->update($validated);
 
         return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès.');
     }
@@ -82,13 +73,9 @@ class ClientController extends Controller
         return view('clients.create');
     }
 
-
     public function destroy($id)
     {
-        $client = Client::findOrFail($id);
-
-        $this->authorize('delete', $client); // Vérifie l'autorisation
-
+        $client = Client::findOrFail($id); // Vérifie que le client existe ou renvoie une erreur 404
         $client->delete();
 
         return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès.');

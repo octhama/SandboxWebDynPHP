@@ -38,7 +38,7 @@
 
             <div class="form-group mb-3">
                 <label for="heures" class="form-label">Heures</label>
-                <input type="number" class="form-control @error('heures') is-invalid @enderror" id="heures" name="heures" value="{{ old('heures', $client->heures) }}" min="0" step="0.5" required>
+                <input type="number" class="form-control @error('heures') is-invalid @enderror" id="heures" name="heures" value="{{ old('heures', $client->heures) }}" min="0" max="6" required>
                 @error('heures')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

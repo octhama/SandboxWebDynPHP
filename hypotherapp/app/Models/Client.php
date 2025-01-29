@@ -1,6 +1,5 @@
 <?php
 
-// Modèle Client
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    protected $table = 'clients';
-    protected $fillable = ['nom', 'nombre_personnes', 'prix_total', 'heures'];
+    use HasFactory;
+
+    protected $fillable = [
+        'nom',
+        'email',
+        'nombre_personnes',
+        'heures',
+        'prix_total',
+    ];
 
     // Relation inverse avec le modèle RendezVous
     public function rendezVous()
@@ -17,5 +23,6 @@ class Client extends Model
         return $this->hasMany(RendezVous::class);
     }
 }
+
 
 
