@@ -16,12 +16,6 @@ class Client extends Model
         'heures',
         'prix_total',
     ];
-
-    // Relation inverse avec le modèle RendezVous
-    public function rendezVous()
-    {
-        return $this->hasMany(RendezVous::class);
-    }
 }
 
 

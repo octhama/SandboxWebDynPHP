@@ -92,31 +92,26 @@ class RendezVousController extends Controller
             'poneys.*' => 'nullable|exists:poneys,id',
         ]);
 
-        $selectedPoneys = array_filter($validated['poneys'], fn($poneyId) => $poneyId !== null);
-
-        // Créer un rendez-vous
-        $rendezVous = RendezVous::create([
-            'client_id' => $validated['client_id'],
-            'nombre_personnes' => $validated['nombre_personnes'],
-            'horaire_debut' => $validated['horaire_debut'],
-            'horaire_fin' => $validated['horaire_fin'],
-            'poneys_assignes' => json_encode($selectedPoneys),
-        ]);
-
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($validated, $request) {
             $horaireDebut = Carbon::createFromFormat('H:i', $request->horaire_debut);
             $horaireFin = Carbon::createFromFormat('H:i', $request->horaire_fin);
 
             // Créer le rendez-vous
             $rendezVous = RendezVous::create([
-                'client_id' => $request->client_id,
+                'client_id' => $validated['client_id'],
                 'horaire_debut' => $horaireDebut,
                 'horaire_fin' => $horaireFin,
-                'nombre_personnes' => $request->nombre_personnes,
+                'nombre_personnes' => $validated['nombre_personnes'],
             ]);
 
-            // Associer les poneys
-            $rendezVous->poneys()->attach($request->poneys);
+            // Associer les poneys uniquement si des poneys ont été sélectionnés
+            $selectedPoneys = array_filter($validated['poneys'], fn($poneyId) => $poneyId !== null);
+            if (!empty($selectedPoneys)) {
+                $rendezVous->poneys()->attach($selectedPoneys);
+
+                // Marquer les poneys sélectionnés comme indisponibles
+                Poney::whereIn('id', $selectedPoneys)->update(['disponible' => false]);
+            }
 
             // Mettre à jour les poneys
             Poney::whereIn('id', $request->poneys)->update(['disponible' => false]);

@@ -13,9 +13,7 @@
                 <select name="client_id" id="client_id" class="form-select" required>
                     <option value="" disabled selected>Choisissez un client</option>
                     @foreach ($clients as $client)
-                        <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>
-                            {{ $client->nom }}
-                        </option>
+                        <option value="{{ $client->id }}">{{ $client->nom }}</option>
                     @endforeach
                 </select>
             </div>
@@ -23,17 +21,16 @@
             <!-- Nombre de personnes -->
             <div class="form-group mb-4">
                 <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
-                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes"
-                       min="1" max="{{ count($poneys) }}" value="{{ old('nombre_personnes') }}" required>
+                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes" min="1" max="{{ count($poneys) }}" placeholder="Maximum : {{ count($poneys) }}" required>
             </div>
 
             <!-- Heure début et fin -->
             <div class="form-group mb-4">
                 <label for="horaire" class="form-label"><i class="fas fa-clock"></i> Horaire</label>
                 <div class="d-flex align-items-center">
-                    <input type="time" class="form-control me-2" id="horaire_debut" name="horaire_debut" required value="{{ old('horaire_debut') }}">
+                    <input type="time" class="form-control me-2" id="horaire_debut" name="horaire_debut" required>
                     <span class="mx-2">-</span>
-                    <input type="time" class="form-control ms-2" id="horaire_fin" name="horaire_fin" required value="{{ old('horaire_fin') }}">
+                    <input type="time" class="form-control ms-2" id="horaire_fin" name="horaire_fin" required>
                 </div>
             </div>
 
@@ -59,18 +56,16 @@
             </div>
 
             <!-- Bouton de validation -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">Créer le rendez-vous</button>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success px-5 py-2">
+                    <i class="fas fa-calendar-plus"></i> Créer le rendez-vous
+                </button>
             </div>
         </form>
     </div>
+
     <!-- Styles supplémentaires -->
     <style>
-        /* Titres */
-        h1, h2, h3, h4 {
-            color: #2c3e50; /* Gris foncé */
-            font-weight: 600;
-        }
         .form-group label {
             font-weight: bold;
         }
