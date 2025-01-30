@@ -19,8 +19,8 @@
 
         <!-- Formulaire de modification -->
         <div class="card shadow">
-            <div class="card-header text-bg-primary text-white">
-                <h4><i class="fas fa-pencil-alt"></i> Modifier les informations du Poney</h4>
+            <div class="card-header text-bg-light text-center">
+                <h4>Modifier les informations du Poney</h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('poneys.update', $poney->id) }}" method="POST">
@@ -35,9 +35,9 @@
 
                     <!-- Heures travaillées -->
                     <div class="mb-4">
-                        <label for="heures_travail_effectuee" class="form-label"><i class="fas fa-clock"></i> Heures travaillées</label>
-                        <input type="number" class="form-control" id="heures_travail_effectuee" name="heures_travail_effectuee"
-                               value="{{ old('heures_travail_effectuee', $poney->heures_travail_effectuee) }}" min="0" required>
+                        <label for="heures_travail_validee" class="form-label"><i class="fas fa-clock"></i> Heures travaillées</label>
+                        <input type="number" class="form-control" id="heures_travail_validee" name="heures_travail_validee"
+                               value="{{ old('heures_travail_validee', $poney->heures_travail_validee) }}" min="0" required>
                     </div>
 
                     <!-- Disponibilité -->
@@ -87,6 +87,10 @@
         .form-control:focus {
             border-color: #28a745;
             box-shadow: 0 0 5px rgba(40, 167, 69, 0.8);
+        }
+        /* Alignement centré pour l'en-tête du formulaire */
+        .card-header {
+            text-align: center;
         }
     </style>
 @endsection
