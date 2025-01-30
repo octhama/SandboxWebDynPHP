@@ -126,7 +126,6 @@ class RendezVousController extends Controller
         return view('rendez-vous.create', compact('clients', 'poneys', 'disponibilites'));
     }
 
-
     // Enregistrer un nouveau rendez-vous
     public function store(Request $request)
     {
