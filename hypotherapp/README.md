@@ -1,6 +1,6 @@
 ## Hypotherapp
 
-Hypotherapp est une application web de gestion de centre d'hypothérapie. Il a été full stack développer avec le framework Laravel. Ce projet est un "kata" et n'a pas de but professionnel. Il s'agit d'un projet à but pratiquo-ludique afin de prendre en main le Framework Laravel et de mettre en pratique les notions de programmation en PHP.
+Hypotherapp est une application web de gestion de centre d'hypothérapie. Il a été full stack développer avec le framework Laravel. Ce projet est un "kata" et n'a pas de but professionnel. Il s'agit d'un projet à but pratiquo-ludique afin de prendre en main le Framework Laravel et de mettre en pratique les notions de programmation en PHP. Il a pour but également de prendre en main le design pattern "Facade" et l'architecture MVC de Laravel. Sans oublié l'ORM Eloquent de Laravel qui permet d'interagir facilement avec la base de données. Notez qu'un ORM(Object Relational Mapper) est un moyen de mapper des objets en base de données c'est a dire de transformer des objets en base de données et inversement.
 
 ## Prerequisites
 
