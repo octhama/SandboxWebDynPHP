@@ -22,8 +22,10 @@
             </div>
         </div>
 
-        <!-- Bouton retour -->
         <div class="text-center">
+            <a href="{{ route('clients.invoice', $client->id) }}" class="btn btn-success">
+                <i class="fas fa-file-pdf"></i> Générer la Facture
+            </a>
             <a href="{{ route('clients.index') }}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Retour à la liste des clients
             </a>

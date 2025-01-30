@@ -42,3 +42,5 @@ Route::get('/clients', [ClientController::class, 'index'])->name('clients.index'
 
 Route::get('/rendez-vous/create', [RendezVousController::class, 'create'])->name('rendez-vous.create');
 Route::post('/rendez-vous', [RendezVousController::class, 'store'])->name('rendez-vous.store');
+
+Route::get('/clients/{id}/invoice', [ClientController::class, 'generateInvoice'])->name('clients.invoice');

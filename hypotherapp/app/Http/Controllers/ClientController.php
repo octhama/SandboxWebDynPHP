@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use App\Models\Poney;
-use App\Models\RendezVous;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
@@ -71,6 +70,15 @@ class ClientController extends Controller
     public function create()
     {
         return view('clients.create');
+    }
+
+    public function generateInvoice($id)
+    {
+        $client = Client::findOrFail($id);
+
+        $pdf = Pdf::loadView('clients.invoice', compact('client'));
+
+        return $pdf->download('facture_' . $client->nom . '.pdf');
     }
 
     public function destroy($id)
