@@ -72,12 +72,6 @@
             font-family: 'Poppins', sans-serif;
             color: #2c3e50; /* Gris foncé */
         }
-
-        /* Titres */
-        h1, h2, h3, h4 {
-            color: #2c3e50; /* Gris foncé */
-            font-weight: 600;
-        }
         .form-control.is-invalid {
             border-color: #dc3545;
             box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);

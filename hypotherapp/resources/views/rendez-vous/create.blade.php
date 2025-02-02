@@ -93,11 +93,6 @@
 
     <!-- Styles supplémentaires -->
     <style>
-        /* Titres */
-        h1, h2, h3, h4 {
-            color: #2c3e50; /* Gris foncé */
-            font-weight: 600;
-        }
         .form-group label {
             font-weight: bold;
         }

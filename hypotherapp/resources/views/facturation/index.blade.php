@@ -4,61 +4,80 @@
     <div class="container">
         <h3 class="mb-4">{{ ucfirst(\Carbon\Carbon::now()->isoFormat('dddd D MMMM YYYY')) }}</h3>
 
-        <h2 class="text-center mb-4 fw-bold">Facturation</h2>
+        <h2 class="text-center mb-4">Facturation</h2>
 
         <div class="row">
             <!-- Colonne Historique des facturations -->
             <div class="col-md-4">
                 <h4 class="mb-3">Historique</h4>
-                <ul class="list-group shadow-sm">
-                    @foreach ($facturations->groupBy(fn($facture) => \Carbon\Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
-                            <a class="text-decoration-none w-100 d-flex align-items-center justify-content-between text-dark fw-semibold"
-                               data-bs-toggle="collapse" href="#facture-{{ $loop->index }}" role="button"
-                               aria-expanded="false" aria-controls="facture-{{ $loop->index }}">
-                                <span>
-                                    <i class="fas fa-chevron-right me-2 transition-icon"></i>
-                                    {{ \Carbon\Carbon::createFromFormat('Y-m', $mois)->translatedFormat('F Y') }}
-                                </span>
-                                <span class="badge bg-primary p-2 fs-6">
-                                    {{ number_format($factures->sum('montant'), 2, ',', ' ') }} €
-                                </span>
-                            </a>
+                <ol class="list-group shadow-sm">
+                    @forelse ($facturations->groupBy(fn($facture) => \Carbon\Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <a class="text-decoration-none text-dark fw-semibold d-flex align-items-center toggle-link"
+                                   data-bs-toggle="collapse" href="#facture-{{ $loop->index }}" role="button"
+                                   aria-expanded="false" aria-controls="facture-{{ $loop->index }}">
+                                    {{ ucfirst(\Carbon\Carbon::createFromFormat('Y-m', $mois)->translatedFormat('F Y')) }}
+                                </a>
+                                <small class="text-muted">Total : {{ count($factures) }} factures</small>
+                            </div>
+                            <span class="badge text-bg-primary rounded-pill fs-6">
+                                {{ number_format($factures->sum('montant'), 2, ',', ' ') }} €
+                            </span>
                         </li>
-                    @endforeach
-                </ul>
+                    @empty
+                        <li class="list-group-item text-center text-muted">Aucune facturation disponible</li>
+                    @endforelse
+                </ol>
             </div>
 
             <!-- Colonne Détails de facturation -->
             <div class="col-md-8">
                 <h4 class="mb-3">Détails</h4>
+
+                <!-- Message d'instruction quand aucun historique n'est sélectionné -->
+                <div id="message-instruction" class="text-center text-muted p-4">
+                    <i class="fas fa-info-circle fa-2x mb-2"></i>
+                    <p>Cliquez sur une facture dans l'historique pour afficher les détails.</p>
+                </div>
+
                 <div>
-                    @foreach ($facturations->groupBy(fn($facture) => \Carbon\Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
-                        <div class="collapse mt-2 bg-white p-3 rounded shadow-sm" id="facture-{{ $loop->index }}" data-bs-parent=".col-md-8">
-                            <h5 class="fw-bold text-primary">{{ \Carbon\Carbon::parse($mois)->translatedFormat('F Y') }}</h5>
-                            <table class="table table-hover">
-                                <thead class="bg-primary text-white">
-                                <tr>
-                                    <th>Client</th>
-                                    <th>Heures</th>
-                                    <th>Montant (€)</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($factures as $facture)
-                                    <tr class="align-middle">
-                                        <td>{{ $facture->client ? $facture->client->nom : 'Client inconnu' }}</td>
-                                        <td>{{ $facture->nombre_heures }}</td>
-                                        <td class="fw-bold">{{ number_format($facture->montant, 2, ',', ' ') }} €</td>
+                    @forelse ($facturations->groupBy(fn($facture) => \Carbon\Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
+                        <div class="collapse fade mt-2 bg-white p-3 rounded shadow-sm animated-collapse" id="facture-{{ $loop->index }}" data-bs-parent=".col-md-8">
+                            <h5 class="fw-bold text-primary">{{ ucfirst(\Carbon\Carbon::createFromFormat('Y-m', $mois)->translatedFormat('F Y')) }}
+                            </h5>
+                            @if ($factures->isNotEmpty())
+                                <table class="table table-hover">
+                                    <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Heures</th>
+                                        <th>Montant (€)</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <button class="btn btn-primary w-100 shadow-sm">
-                                <i class="fas fa-paper-plane"></i> Envoyer les factures
-                            </button>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($factures as $facture)
+                                        <tr class="align-middle">
+                                            <td>{{ $facture->client ? $facture->client->nom : 'Client inconnu' }}</td>
+                                            <td>{{ $facture->nombre_heures }}</td>
+                                            <td class="fw-bold">{{ number_format($facture->montant, 2, ',', ' ') }} €</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-primary w-100 shadow-sm">
+                                    <i class="fas fa-paper-plane"></i> Envoyer les factures
+                                </button>
+                            @else
+                                <p class="text-center text-muted"><i class="fas fa-info-circle"></i> Aucune facture pour ce mois</p>
+                            @endif
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="text-center text-muted p-4">
+                            <i class="fas fa-folder-open fa-3x mb-2"></i>
+                            <p>Aucune facturation enregistrée pour le moment.</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -79,6 +98,18 @@
             transform: rotate(90deg);
         }
 
+        /* Animation des détails */
+        .animated-collapse {
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .collapse.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
         /* Animation sur la liste */
         .list-group-item:hover {
             background: #f8f9fa;
@@ -97,5 +128,20 @@
             transition: all 0.2s ease-in-out;
         }
     </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let messageInstruction = document.getElementById("message-instruction");
+
+            document.querySelectorAll(".toggle-link").forEach(link => {
+                link.addEventListener("click", function () {
+                    // Masquer le message d'instruction au premier clic sur une facture
+                    if (messageInstruction) {
+                        messageInstruction.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

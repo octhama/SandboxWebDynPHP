@@ -65,11 +65,6 @@
             color: #2c3e50; /* Gris foncé */
         }
 
-        /* Titres */
-        h1, h2, h3, h4 {
-            color: #2c3e50; /* Gris foncé */
-            font-weight: 600;
-        }
         .btn-success, .btn-secondary {
             transition: all 0.3s ease;
         }

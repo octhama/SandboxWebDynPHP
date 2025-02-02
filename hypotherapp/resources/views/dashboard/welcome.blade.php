@@ -12,74 +12,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(to right, #f8f9fa, #e3f2fd);
             font-family: 'Poppins', sans-serif;
             color: #343a40;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-        }
-
-        .navbar, footer {
-            background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 1200px;
-            margin: 1rem auto;
-        }
-
-        .navbar .nav-link, .navbar-brand, footer {
-            color: #2c3e50 !important;
-            font-weight: 500;
-        }
-        .navbar-brand {
-            font-weight: bold;
-            color: #6c5ce7 !important;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
         .container {
-            flex: 1;
-            width: 90%;
             max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h1, h2 {
-            font-weight: 600;
-            color: #2c3e50;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
         .menu-card {
             border-radius: 15px;
             background: #ffffff;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+            position: relative;
         }
+
         .menu-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
+
         .menu-card i {
             font-size: 3rem;
             margin-bottom: 10px;
         }
 
-        @media (max-width: 768px) {
-            .navbar, .container, footer {
-                width: 95%;
-            }
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-<div class="container my-3 text-center">
+<div class="container">
     <h1>Bienvenue sur Hypotherapp</h1>
     <h2 class="mb-4">Navigation principale</h2>
     <div class="row g-4">

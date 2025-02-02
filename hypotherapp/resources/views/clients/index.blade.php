@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-center mb-5">Liste des Clients</h1>
+        <h1 class="mb-5">Liste des Clients</h1>
 
         <div class="table-responsive">
             <table class="table table-striped table-hover">
@@ -25,7 +25,6 @@
                         <td>{{ $client->heures }}</td>
                         <td>{{ number_format($client->prix_total, 2, ',', ' ') }}</td>
                         <td>
-                            <!-- Boutons d'actions -->
                             <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary btn-sm" title="Voir">
                                 <i class="fas fa-eye"></i>
                             </a>
@@ -45,9 +44,13 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination Bootstrap -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $clients->links('pagination::bootstrap-5') }}
+        </div>
     </div>
 
-    <!-- Boîte de dialogue de confirmation -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const deleteButtons = document.querySelectorAll('.delete-btn');
@@ -61,50 +64,12 @@
         });
     </script>
 
-    <!-- Styles supplémentaires -->
     <style>
-        /* Arrière-plan */
         body {
-            background-color: #f8f9fa; /* Blanc cassé */
+            background-color: #f8f9fa;
             font-family: 'Poppins', sans-serif;
-            color: #2c3e50; /* Gris foncé */
+            color: #2c3e50;
         }
-
-        /* Titres */
-        h1, h2, h3, h4 {
-            color: #2c3e50; /* Gris foncé */
-            font-weight: 600;
-        }
-
-        /* Style pour les boutons */
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            background-color: #545b62;
-            border-color: #3d4349;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-
-        /* Effet survol des lignes du tableau */
         .table-hover tbody tr:hover {
             background-color: rgba(0, 123, 255, 0.1);
         }

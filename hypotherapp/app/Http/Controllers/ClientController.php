@@ -13,7 +13,7 @@ class ClientController extends Controller
     use AuthorizesRequests;
     public function index()
     {
-        $clients = Client::all(); // Récupère tous les clients
+        $clients = Client::paginate(5);
         return view('clients.index', compact('clients')); // Retourne une vue avec les clients
     }
 
