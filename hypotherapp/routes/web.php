@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FacturationController;
 use App\Http\Controllers\RapportController;
 use App\Http\Controllers\RendezVousController;
 use App\Http\Controllers\SettingsController;
@@ -44,3 +45,5 @@ Route::get('/rendez-vous/create', [RendezVousController::class, 'create'])->name
 Route::post('/rendez-vous', [RendezVousController::class, 'store'])->name('rendez-vous.store');
 
 Route::get('/clients/{id}/invoice', [ClientController::class, 'generateInvoice'])->name('clients.invoice');
+
+Route::resource('facturation', FacturationController::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Facturation;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -47,6 +48,15 @@ class ClientController extends Controller
             'heures' => $validated['heures'],
             'prix_total' => $validated['prix_total'],
         ]);
+
+        // Création de la facturation pour le client
+        Facturation::create([
+            'client_id' => $client->id,
+            'nombre_heures' => $client->heures,
+            'montant' => $client->prix_total,
+            'created_at' => now(),
+        ]);
+
 
         return redirect()->route('clients.index')->with('success', 'Client créé avec succès.');
     }

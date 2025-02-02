@@ -16,6 +16,19 @@ class Client extends Model
         'heures',
         'prix_total',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($client) {
+            Facturation::create([
+                'client_id' => $client->id,
+                'nombre_heures' => $client->heures,
+                'montant' => 0.00, // Valeur initiale de la facturation
+            ]);
+        });
+    }
 }
 
 

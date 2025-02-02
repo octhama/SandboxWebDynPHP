@@ -7,9 +7,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>@yield('title', 'Hypotheapp - Gestion des Poneys')</title>
     <style>
-        /* Arrière-plan avec dégradé doux */
         body {
-            background: linear-gradient(135deg, #f3f4f6, #e5e6e8);
+            background: linear-gradient(to bottom, #f8f9fa, #d9e2ec);
             font-family: 'Arial', sans-serif;
             color: #2c3e50;
             margin: 0;
@@ -19,15 +18,14 @@
             flex-direction: column;
         }
 
-        /* Navigation Bar Styling */
         .navbar {
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 1rem;
-            margin: 1rem auto;
             border-radius: 12px;
             width: 90%;
             max-width: 1200px;
+            margin: 1rem auto;
         }
         .navbar .nav-link {
             color: #2c3e50 !important;
@@ -44,11 +42,10 @@
             font-size: 1.5rem;
         }
 
-        /* Contenu principal */
         .container {
             flex: 1;
             padding: 2rem 0;
-            animation: fadeIn 1s ease;
+            animation: fadeIn 0.8s ease-out;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
@@ -58,7 +55,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cartes */
         .card {
             border: none;
             border-radius: 12px;
@@ -71,16 +67,16 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* Footer Styling */
         footer {
             background: #ffffff;
             color: #2c3e50;
             border-top: 1px solid #e5e6e8;
             padding: 1.5rem;
-            margin: 1rem auto; /* Centrage et marge */
             border-radius: 12px;
             width: 90%;
             max-width: 1200px;
+            margin: 1rem auto;
+            text-align: center;
         }
         footer a {
             color: #6c5ce7;
@@ -91,7 +87,6 @@
             color: #5a4acf;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .navbar, .container, footer {
                 width: 95%;
@@ -103,7 +98,6 @@
     </style>
 </head>
 <body>
-<!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Hypotherapp</a>
@@ -112,43 +106,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('welcome') }}">Dashboard</a>
+                <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Dashboard</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="clientsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clients</a>
+                    <ul class="dropdown-menu" aria-labelledby="clientsDropdown">
+                        <li><a class="dropdown-item" href="{{ route('clients.index') }}"><i class="fas fa-list"></i> Liste des clients</a></li>
+                        <li><a class="dropdown-item" href="{{ route('facturation.index') }}"><i class="fas fa-file-invoice"></i> Historique des facturations</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('clients.index') }}">Clients</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('rendez-vous.index') }}">Rendez-vous</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('poneys.index') }}">Poneys</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('settings.index') }}">Paramètres</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('support.index') }}">Support</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('rendez-vous.index') }}">Rendez-vous</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('poneys.index') }}">Poneys</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('settings.index') }}">Paramètres</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('support.index') }}">Support</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Main Content -->
 <div class="container my-5">
     @yield('content')
 </div>
 
-<!-- Footer -->
-<footer class="text-center py-4">
-    <div class="container">
-        <p class="mb-2">&copy; 2025 Hypotherapp - Gestion des Poneys. Tous droits réservés.</p>
-        <p class="mb-0">
-            <a href="#">Politique de confidentialité</a> |
-            <a href="#">Conditions d'utilisation</a>
-        </p>
-    </div>
+<footer>
+    <p class="mb-2">&copy; 2025 Hypotherapp - Gestion des Poneys. Tous droits réservés.</p>
+    <p class="mb-0"><a href="#">Politique de confidentialité</a> | <a href="#">Conditions d'utilisation</a></p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
