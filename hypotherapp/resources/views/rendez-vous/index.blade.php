@@ -104,6 +104,30 @@
                     </div>
                 </div>
             </div>
+            <script>
+                // Fonction pour recalculer le prix total
+                function recalculerPrix() {
+                    var nombrePersonnes = document.getElementById('nombre_personnes').value;
+                    var heures = document.getElementById('heures').value;
+
+                    // Exemple de tarification
+                    var tarifParPersonne = 50;  // Tarif par personne en €
+                    var tarifParHeure = 50;     // Tarif par heure en €
+
+                    // Calcul du prix total
+                    var prixTotal = (nombrePersonnes * tarifParPersonne) + (heures * tarifParHeure);
+
+                    // Affichage du prix total dans le champ
+                    document.getElementById('prix_total').value = prixTotal.toFixed(2);
+                }
+
+                // Événements pour recalculer le prix à chaque modification
+                document.getElementById('nombre_personnes').addEventListener('input', recalculerPrix);
+                document.getElementById('heures').addEventListener('input', recalculerPrix);
+
+                // Initialiser le prix au chargement de la page
+                recalculerPrix();
+            </script>
         </div>
     </div>
 @endsection
