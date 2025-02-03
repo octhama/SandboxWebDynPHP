@@ -4,12 +4,11 @@ namespace App\Policies;
 
 use App\Models\Poney;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class PoneyPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Détermine si l'utilisateur peut voir tous les poneys.
      */
     public function viewAny(User $user): bool
     {
@@ -17,7 +16,7 @@ class PoneyPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Détermine si l'utilisateur peut voir un poney spécifique.
      */
     public function view(User $user, Poney $poney): bool
     {
@@ -25,7 +24,7 @@ class PoneyPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Détermine si l'utilisateur peut créer un poney.
      */
     public function create(User $user): bool
     {
@@ -33,7 +32,7 @@ class PoneyPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Détermine si l'utilisateur peut modifier un poney.
      */
     public function update(User $user, Poney $poney): bool
     {
@@ -41,16 +40,15 @@ class PoneyPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Détermine si l'utilisateur peut supprimer un poney.
      */
     public function delete(User $user, Poney $poney): bool
     {
-        return $user->role === 'admin'; // Seul l'admin peut supprimer
-
+        return $user->role === 'admin'; // Seul un administrateur peut supprimer un poney
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Détermine si l'utilisateur peut restaurer un poney.
      */
     public function restore(User $user, Poney $poney): bool
     {
@@ -58,7 +56,7 @@ class PoneyPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Détermine si l'utilisateur peut supprimer définitivement un poney.
      */
     public function forceDelete(User $user, Poney $poney): bool
     {

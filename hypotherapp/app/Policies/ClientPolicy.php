@@ -4,12 +4,11 @@ namespace App\Policies;
 
 use App\Models\Client;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ClientPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Détermine si l'utilisateur peut voir tous les clients.
      */
     public function viewAny(User $user): bool
     {
@@ -17,7 +16,7 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Détermine si l'utilisateur peut voir un client spécifique.
      */
     public function view(User $user, Client $client): bool
     {
@@ -25,7 +24,7 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Détermine si l'utilisateur peut créer un client.
      */
     public function create(User $user): bool
     {
@@ -33,7 +32,7 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Détermine si l'utilisateur peut modifier un client.
      */
     public function update(User $user, Client $client): bool
     {
@@ -41,16 +40,15 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Détermine si l'utilisateur peut supprimer un client.
      */
     public function delete(User $user, Client $client): bool
     {
-        return $user->role === 'admin'; // Seul l'admin peut supprimer
-
+        return $user->role === 'admin'; // Seul un administrateur peut supprimer un client
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Détermine si l'utilisateur peut restaurer un client.
      */
     public function restore(User $user, Client $client): bool
     {
@@ -58,7 +56,7 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Détermine si l'utilisateur peut supprimer définitivement un client.
      */
     public function forceDelete(User $user, Client $client): bool
     {
