@@ -27,7 +27,7 @@ class RendezVous extends Model
     {
         return $this->belongsTo(Client::class);
     }
-    // Relation avec les poneys (manipulés via un tableau JSON)
+    // Relation avec les poneys
     public function poneys()
     {
         return $this->belongsToMany(Poney::class, 'rendez_vous_poneys', 'rendez_vous_id', 'poney_id');
