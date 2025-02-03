@@ -91,11 +91,10 @@ class ClientController extends Controller
         return $pdf->download('facture_' . $client->nom . '.pdf');
     }
 
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        $client = Client::findOrFail($id); // Vérifie que le client existe ou renvoie une erreur 404
         $client->delete();
-
         return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès.');
     }
+
 }

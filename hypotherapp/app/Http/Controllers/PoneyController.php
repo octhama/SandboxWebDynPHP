@@ -19,12 +19,12 @@ class PoneyController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
-            'heures_travail_validee' => 'required|integer|min:1',
+            'heures_travail_validee' => 'required|integer|min:1|max:24',
         ]);
 
         Poney::create([
             'nom' => $request->nom,
-            'heures_travail_validee' => 0,
+            'heures_travail_validee' => $request->heures_travail_validee,
         ]);
 
         return redirect()->route('poneys.index')->with('success', 'Poney ajouté avec succès.');

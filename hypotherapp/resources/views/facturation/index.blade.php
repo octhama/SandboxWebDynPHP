@@ -73,10 +73,7 @@
                             @endif
                         </div>
                     @empty
-                        <div class="text-center text-muted p-4">
-                            <i class="fas fa-folder-open fa-3x mb-2"></i>
-                            <p>Aucune facturation enregistrée pour le moment.</p>
-                        </div>
+                        <p class="text-muted"><i class="fas fa-info-circle"></i> Cliquez sur une facture dans l'historique pour afficher les détails.</p>
                     @endforelse
                 </div>
             </div>

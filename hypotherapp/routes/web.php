@@ -37,14 +37,18 @@ Route::middleware(['auth'])->group(function () {
     // 📁 GESTION DES CLIENTS
     // ========================
     Route::resource('clients', ClientController::class)->except(['destroy']);
-    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy')->middleware('can:delete,App\Models\Client');
+    Route::delete('/clients/{client}', [ClientController::class, 'destroy'])
+        ->name('clients.destroy')
+        ->middleware('can:delete,client'); // Utilisation correcte
     Route::get('/clients/{id}/invoice', [ClientController::class, 'generateInvoice'])->name('clients.invoice');
 
     // ========================
     // 🐴 GESTION DES PONEYS
     // ========================
     Route::resource('poneys', PoneyController::class)->except(['destroy']);
-    Route::delete('/poneys/{id}', [PoneyController::class, 'destroy'])->name('poneys.destroy')->middleware('can:delete,App\Models\Poney');
+    Route::delete('/poneys/{poney}', [PoneyController::class, 'destroy'])
+        ->name('poneys.destroy')
+        ->middleware('can:delete,poney');
 
     // ========================
     // 📆 GESTION DES RENDEZ-VOUS

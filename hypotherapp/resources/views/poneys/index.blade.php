@@ -70,7 +70,7 @@
                                 <input type="text" class="form-control" name="nom" placeholder="Ex : Spirit" required>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="heures_travail_validee"><i class="fas fa-clock"></i> Heures max</label>
+                                <label for="heures_travail_validee"><i class="fas fa-clock"></i> Heures travaillées</label>
                                 <input type="number" class="form-control" name="heures_travail_validee" placeholder="Ex : 6" min="1" max="24" required>
                             </div>
                             <button type="submit" class="btn btn-success w-100">
