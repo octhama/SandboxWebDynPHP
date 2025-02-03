@@ -88,7 +88,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="prix_total" class="form-label"><i class="fas fa-euro-sign"></i> Prix total</label>
-                                <input type="text" class="form-control" id="prix_total" name="prix_total" readonly>
+                                <input type="text" class="form-control" id="prix_total" name="prix_total" required>
                             </div>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary rounded-pill shadow"><i class="fas fa-save"></i> Enregistrer</button>
