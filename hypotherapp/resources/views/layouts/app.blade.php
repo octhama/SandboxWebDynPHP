@@ -119,7 +119,13 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('poneys.index') }}">Poneys</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                        <img src="{{ Auth::user()->avatar ?? 'https://github.com/mdo.png' }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
+                        @php
+                            $defaultAdminAvatar = 'https://github.com/mdo.png';
+                            $defaultEmployeeAvatar = asset('images/employee_two.png'); // Chemin vers votre avatar par defaut
+                            $avatar = Auth::user()->role === 'admin' ? $defaultAdminAvatar : $defaultEmployeeAvatar;
+                        @endphp
+
+                        <img src="{{ Auth::user()->avatar ?? $avatar }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">

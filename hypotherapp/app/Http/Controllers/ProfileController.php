@@ -9,7 +9,9 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        $user = Auth::user();
-        return view('profile.show', compact('user'));
+        //$user = Auth::user();
+        //return view('profile.show', compact('user'));
+        return "Page des rapports en cours de développement.";
+
     }
 }
