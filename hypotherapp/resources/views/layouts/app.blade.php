@@ -117,8 +117,6 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('rendez-vous.index') }}">Rendez-vous</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('poneys.index') }}">Poneys</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('settings.index') }}">Paramètres</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('support.index') }}">Support</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                         <img src="{{ Auth::user()->avatar ?? 'https://github.com/mdo.png' }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
@@ -127,6 +125,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
                         <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
+                        <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">

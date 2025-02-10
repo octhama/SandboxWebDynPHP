@@ -85,18 +85,22 @@ class RendezVousController extends Controller
                 $creneauDebut = $start->copy();
                 $creneauFin = $start->copy()->addMinutes(20);
 
-                // Vérifier si le créneau dépasse la plage horaire
+                // S'assurer que le créneau ne dépasse pas la plage horaire
                 if ($creneauFin->greaterThan($end)) {
                     break;
                 }
 
                 // Vérifier si le créneau est en conflit avec une réservation existante
-                $enConflit = $reservations->some(function ($reservation) use ($creneauDebut, $creneauFin) {
-                    return !(
-                        $creneauFin->lessThanOrEqualTo($reservation['start']) ||
-                        $creneauDebut->greaterThanOrEqualTo($reservation['end'])
-                    );
-                });
+                $enConflit = false;
+                foreach ($reservations as $reservation) {
+                    $resStart = Carbon::parse($reservation['start']);
+                    $resEnd = Carbon::parse($reservation['end']);
+
+                    if (!($creneauFin->lessThanOrEqualTo($resStart) || $creneauDebut->greaterThanOrEqualTo($resEnd))) {
+                        $enConflit = true;
+                        break;
+                    }
+                }
 
                 if (!$enConflit) {
                     $creneauxDisponibles[] = (object) [
@@ -105,11 +109,9 @@ class RendezVousController extends Controller
                     ];
                 }
 
-                $start->addMinutes(20); // Avancer au prochain créneau
+                $start->addMinutes(20); // Passer au créneau suivant
             }
         }
-
-        //dd($creneauxDisponibles);
 
         return $creneauxDisponibles;
     }
@@ -134,10 +136,10 @@ class RendezVousController extends Controller
             ];
         });
 
+        // dd($reservations);  Debug pour voir les données récupérées
+
         // Générer les créneaux disponibles
         $disponibilites = $this->genererCreneauxDisponibles($plagesHoraires, $reservations);
-
-        //dd($disponibilites);
 
         return view('rendez-vous.create', compact('clients', 'poneys', 'disponibilites'));
     }

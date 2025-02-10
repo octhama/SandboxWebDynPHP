@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to right, #f8f9fa, #e3f2fd);
+            background: #f8f9fa;
             font-family: 'Poppins', sans-serif;
             color: #343a40;
             display: flex;

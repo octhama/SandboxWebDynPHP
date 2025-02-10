@@ -36,7 +36,7 @@ class ClientPolicy
      */
     public function update(User $user, Client $client): bool
     {
-        return false;
+        return $user->role === 'admin'; // Seul un administrateur peut modifier un client
     }
 
     /**

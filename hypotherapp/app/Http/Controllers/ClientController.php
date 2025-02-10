@@ -73,7 +73,6 @@ class ClientController extends Controller
         $client = Client::findOrFail($id);
 
         $client->update($validated);
-
         return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès.');
     }
 

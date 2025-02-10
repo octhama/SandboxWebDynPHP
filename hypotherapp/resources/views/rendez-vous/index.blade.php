@@ -98,28 +98,26 @@
                 </div>
             </div>
             <script>
-                // Fonction pour recalculer le prix total
-                function recalculerPrix() {
-                    var nombrePersonnes = document.getElementById('nombre_personnes').value;
-                    var heures = document.getElementById('heures').value;
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Fonction pour recalculer le prix total
+                    function recalculerPrix() {
+                        var nombrePersonnes = parseFloat(document.getElementById('nombre_personnes').value) || 0;
+                        var heures = parseFloat(document.getElementById('heures').value) || 0;
 
-                    // Exemple de tarification
-                    var tarifParPersonne = 50;  // Tarif par personne en €
-                    var tarifParHeure = 50;     // Tarif par heure en €
+                        var tarifParPersonne = 50;  // Tarif par personne en €
+                        var tarifParHeure = 50;     // Tarif par heure en €
 
-                    // Calcul du prix total
-                    var prixTotal = (nombrePersonnes * tarifParPersonne) + (heures * tarifParHeure);
+                        var prixTotal = (nombrePersonnes * tarifParPersonne) + (heures * tarifParHeure);
+                        document.getElementById('prix_total').value = prixTotal.toFixed(2);
+                    }
 
-                    // Affichage du prix total dans le champ
-                    document.getElementById('prix_total').value = prixTotal.toFixed(2);
-                }
+                    // Ajout des écouteurs d'événements
+                    document.getElementById('nombre_personnes').addEventListener('input', recalculerPrix);
+                    document.getElementById('heures').addEventListener('input', recalculerPrix);
 
-                // Événements pour recalculer le prix à chaque modification
-                document.getElementById('nombre_personnes').addEventListener('input', recalculerPrix);
-                document.getElementById('heures').addEventListener('input', recalculerPrix);
-
-                // Initialiser le prix au chargement de la page
-                recalculerPrix();
+                    // Initialiser le prix au chargement de la page
+                    recalculerPrix();
+                });
             </script>
         </div>
     </div>
@@ -143,11 +141,11 @@
         transition: transform 0.3s ease-in-out;
     }
 
-    .collapsed .transition-icon {
+    [data-bs-toggle="collapse"].collapsed .transition-icon {
         transform: rotate(0deg);
     }
 
-    .show .transition-icon {
+    [data-bs-toggle="collapse"].show .transition-icon {
         transform: rotate(180deg);
     }
 
