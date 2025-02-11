@@ -11,7 +11,7 @@
                     <th>#</th>
                     <th>Nom</th>
                     <th>Nombre de personnes</th>
-                    <th>Heures</th>
+                    <th>Minutes</th>
                     <th>Prix total (€)</th>
                     <th>Actions</th>
                 </tr>
@@ -22,7 +22,7 @@
                         <td>{{ $client->id }}</td>
                         <td>{{ $client->nom }}</td>
                         <td>{{ $client->nombre_personnes }}</td>
-                        <td>{{ $client->heures }}</td>
+                        <td>{{ $client->minutes }}</td>
                         <td>{{ number_format($client->prix_total, 2, ',', ' ') }}</td>
                         <td>
                             <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary btn-sm" title="Voir">

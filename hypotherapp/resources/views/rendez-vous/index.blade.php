@@ -74,15 +74,17 @@
                             </div>
                             <div class="mb-4">
                                 <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
-                                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes" min="1" max="10" required>
+                                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes" min="1" max="20" required>
                             </div>
                             <div class="mb-4">
-                                <label for="heures" class="form-label"><i class="fas fa-clock"></i> Nombre d'heures</label>
-                                <input type="number" class="form-control" id="heures" name="heures" min="1" max="8" required>
+                                <label for="duree" class="form-label"><i class="fas fa-clock"></i> Durée en minutes</label>
+                                <input type="number" class="form-control" id="duree" name="duree" min="10" max="20" step="1" required>
+                                <small class="text-danger d-none" id="alerte-duree"><i class="fas fa-exclamation-circle"></i> Minimum 10 minutes.</small>
                             </div>
                             <div class="mb-4">
                                 <label for="prix_total" class="form-label"><i class="fas fa-euro-sign"></i> Prix total</label>
-                                <input type="text" class="form-control" id="prix_total" name="prix_total" required>
+                                <input type="text" class="form-control" id="prix_total" name="prix_total" readonly>
+                                <small class="text-muted">Calculé automatiquement.</small>
                             </div>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary rounded-pill shadow"><i class="fas fa-save"></i> Enregistrer</button>
@@ -91,26 +93,42 @@
                     </div>
                 </div>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    // Fonction pour recalculer le prix total
+                $(document).ready(function() {
                     function recalculerPrix() {
-                        var nombrePersonnes = parseFloat(document.getElementById('nombre_personnes').value) || 0;
-                        var heures = parseFloat(document.getElementById('heures').value) || 0;
+                        var nombrePersonnes = parseInt($('#nombre_personnes').val()) || 0;
+                        var duree = parseInt($('#duree').val()) || 0;
 
-                        var tarifParPersonne = 50;  // Tarif par personne en €
-                        var tarifParHeure = 50;     // Tarif par heure en €
+                        // Vérifier si la durée est inférieure à 10 minutes
+                        if (duree < 10) {
+                            $('#alerte-duree').removeClass('d-none'); // Afficher l'alerte
+                            $('#prix_total').val(""); // Effacer le prix
+                            return;
+                        } else {
+                            $('#alerte-duree').addClass('d-none'); // Cacher l'alerte
+                        }
 
-                        var prixTotal = (nombrePersonnes * tarifParPersonne) + (heures * tarifParHeure);
-                        document.getElementById('prix_total').value = prixTotal.toFixed(2);
+                        if (nombrePersonnes > 0 && duree >= 10) {
+                            $.ajax({
+                                url: "{{ route('calcul.prix') }}",
+                                type: "POST",
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    nombre_personnes: nombrePersonnes,
+                                    duree: duree
+                                },
+                                success: function(response) {
+                                    $('#prix_total').val(response.prix_total + " €");
+                                },
+                                error: function(response) {
+                                    $('#prix_total').val("");
+                                }
+                            });
+                        }
                     }
 
-                    // Ajout des écouteurs d'événements
-                    document.getElementById('nombre_personnes').addEventListener('input', recalculerPrix);
-                    document.getElementById('heures').addEventListener('input', recalculerPrix);
-
-                    // Initialiser le prix au chargement de la page
-                    recalculerPrix();
+                    $('#nombre_personnes, #duree').on('input', recalculerPrix);
                 });
             </script>
         </div>

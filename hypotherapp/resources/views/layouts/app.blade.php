@@ -108,6 +108,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.welcome') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('rendez-vous.index') }}">Rendez-vous</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="clientsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clients</a>
                     <ul class="dropdown-menu" aria-labelledby="clientsDropdown">
@@ -115,7 +116,6 @@
                         <li><a class="dropdown-item" href="{{ route('facturation.index') }}"><i class="fas fa-file-invoice"></i> Historique des facturations</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('rendez-vous.index') }}">Rendez-vous</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('poneys.index') }}">Poneys</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">

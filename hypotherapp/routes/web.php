@@ -10,6 +10,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\PoneyController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 // ========================
 // 🔐 AUTHENTIFICATION
@@ -72,5 +73,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rapports', [RapportController::class, 'index'])->name('rapports.index');
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/support', [SupportController::class, 'index'])->name('support.index');
+
+    // ========================
+    // 🔍 CALCUL DU PRIX
+    // ========================
+    Route::post('/calcul-prix', function (Request $request) {
+        $nombrePersonnes = (int) $request->input('nombre_personnes');
+        $dureeMinutes = (int) $request->input('duree');
+
+        // Vérifier que la durée est d'au moins 10 minutes
+        if ($dureeMinutes < 10) {
+            return response()->json(['error' => 'La durée minimale est de 10 minutes.'], 400);
+        }
+
+        $tarifParMinute = 185 / 20;  // Prix par minute
+        $prixTotal = $nombrePersonnes * $dureeMinutes * $tarifParMinute;
+
+        return response()->json(['prix_total' => number_format($prixTotal, 2, '.', '')]);
+    })->name('calcul.prix');
 
 });

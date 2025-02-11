@@ -9,7 +9,7 @@ class Facturation extends Model {
 
     use HasFactory;
 
-    protected $fillable = ['client_id', 'nombre_heures', 'montant', 'mois'];
+    protected $fillable = ['client_id', 'nombre_heures', 'montant'];
 
     public function client()
     {
@@ -17,7 +17,3 @@ class Facturation extends Model {
     }
 
 }
-
-
-
-

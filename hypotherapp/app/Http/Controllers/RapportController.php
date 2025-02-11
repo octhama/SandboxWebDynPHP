@@ -14,7 +14,7 @@ class RapportController extends Controller
         // Données pour le graphique des clients (heures de réservation)
         $clients = Client::all();
         $clientsLabels = $clients->pluck('nom');
-        $clientsData = $clients->pluck('heures');
+        $clientsData = $clients->pluck('minutes');
 
         // Données pour le graphique des facturations (montant par client)
         $facturations = Facturation::all();

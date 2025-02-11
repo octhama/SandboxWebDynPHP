@@ -10,7 +10,7 @@
             <div class="col-md-6">
                 <div class="card shadow-sm mb-4 chart-card">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Heures Réservées par Client</h5>
+                        <h5 class="card-title text-center">Minutes Réservées par Client</h5>
                         <div class="chart-container">
                             <canvas id="clientsChart"></canvas>
                         </div>

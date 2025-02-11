@@ -13,7 +13,7 @@
                         <strong><i class="fas fa-users"></i> Nombre de personnes :</strong> {{ $client->nombre_personnes }}
                     </li>
                     <li class="mb-2">
-                        <strong><i class="fas fa-clock"></i> Heures :</strong> {{ $client->heures }}
+                        <strong><i class="fas fa-clock"></i> Minutes :</strong> {{ $client->minutes }}
                     </li>
                     <li>
                         <strong><i class="fas fa-euro-sign"></i> Prix total :</strong> {{ $client->prix_total }} €
