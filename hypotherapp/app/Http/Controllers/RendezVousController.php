@@ -11,10 +11,8 @@ use Carbon\Carbon;
 
 class RendezVousController extends Controller
 {
-    // Afficher la liste des rendez-vous
     public function index()
     {
-        // Charger les rendez-vous avec les clients et les poneys associés
         $rendezVous = RendezVous::with(['client', 'poneys'])->get();
         $poneys = Poney::all();
         $clients = Client::all();
@@ -22,40 +20,92 @@ class RendezVousController extends Controller
         return view('rendez-vous.index', compact('rendezVous', 'poneys', 'clients'));
     }
 
-    // Confirmer un rendez-vous
-    public function confirm($id)
+    public function getCreneauxDisponibles()
     {
-        DB::transaction(function () use ($id) {
-            $rendezVous = RendezVous::findOrFail($id);
+        $plages = [
+            ['start' => Carbon::createFromTime(9, 0), 'end' => Carbon::createFromTime(12, 0)],
+            ['start' => Carbon::createFromTime(14, 0), 'end' => Carbon::createFromTime(18, 0)],
+        ];
 
-            // Marquer les poneys comme non disponibles
-            $rendezVous->poneys()->update(['disponible' => false]);
+        $reservations = RendezVous::pluck('horaire_debut', 'horaire_fin')->toArray();
 
-            // Ajouter un champ confirmed si nécessaire
-            $rendezVous->update(['confirmed' => true]);
-        });
+        $creneauxDisponibles = [];
+        foreach ($plages as $plage) {
+            $start = $plage['start']->copy();
+            while ($start->lessThan($plage['end'])) {
+                $creneauDebut = $start->copy();
+                $creneauFin = $start->copy()->addMinutes(20);
 
-        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous confirmé avec succès.');
+                $estReserve = collect($reservations)->contains(function ($fin, $debut) use ($creneauDebut, $creneauFin) {
+                    return ($creneauDebut->eq($debut) && $creneauFin->eq($fin));
+                });
+
+                if (!$estReserve) {
+                    $creneauxDisponibles[] = ['start' => $creneauDebut, 'end' => $creneauFin];
+                }
+
+                $start->addMinutes(20);
+            }
+        }
+        return $creneauxDisponibles;
     }
 
-    // Réinitialiser un rendez-vous
-    public function reset($id)
+    public function create()
     {
-        DB::transaction(function () use ($id) {
+        $clients = Client::all();
+        $poneys = Poney::where('disponible', true)->get();
+        $disponibilites = $this->getDisponibilites();
+
+        // Récupérer les créneaux déjà réservés
+        $reservations = RendezVous::select('horaire_debut', 'horaire_fin')->get()->map(function ($rdv) {
+            return (object) [
+                'horaire_debut' => $rdv->horaire_debut ? Carbon::parse($rdv->horaire_debut) : null,
+                'horaire_fin' => $rdv->horaire_fin ? Carbon::parse($rdv->horaire_fin) : null,
+            ];
+        });
+
+        return view('rendez-vous.create', compact('clients', 'poneys', 'disponibilites', 'reservations'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'nombre_personnes' => 'required|integer|min:1',
+            'creneaux' => 'required|string',
+            'poneys' => 'array',
+            'poneys.*' => 'nullable|exists:poneys,id',
+        ]);
+
+        [$horaireDebut, $horaireFin] = explode('-', $validated['creneaux']);
+        $horaireDebut = Carbon::createFromFormat('H:i', $horaireDebut);
+        $horaireFin = Carbon::createFromFormat('H:i', $horaireFin);
+
+        DB::transaction(function () use ($id, $validated, $horaireDebut, $horaireFin) {
             $rendezVous = RendezVous::findOrFail($id);
 
-            // Libérer les poneys assignés
-            $rendezVous->poneys()->update(['disponible' => true]);
+            // Mise à jour du rendez-vous
+            $rendezVous->update([
+                'client_id' => $validated['client_id'],
+                'horaire_debut' => $horaireDebut,
+                'horaire_fin' => $horaireFin,
+                'nombre_personnes' => $validated['nombre_personnes'],
+            ]);
 
-            // Dissocier les poneys
+            // Réinitialiser les poneys existants avant de mettre à jour
             $rendezVous->poneys()->detach();
 
-            // Supprimer le rendez-vous (optionnel)
-            $rendezVous->delete();
+            if (!empty($validated['poneys'])) {
+                $rendezVous->poneys()->attach($validated['poneys']);
+
+                // Mettre les poneys comme indisponibles
+                Poney::whereIn('id', $validated['poneys'])->update(['disponible' => false]);
+            }
         });
 
-        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous réinitialisé avec succès.');
+        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous mis à jour avec succès.');
     }
+
 
     // Supprimer un rendez-vous
     public function destroy($id)
@@ -73,95 +123,78 @@ class RendezVousController extends Controller
         return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous supprimé avec succès.');
     }
 
-    private function genererCreneauxDisponibles($plages, $reservations)
+    public function getDisponibilites()
     {
-        $creneauxDisponibles = [];
+        $disponibilites = [];
+        $horaires = [
+            ['start' => '10:00', 'end' => '12:00'],
+            ['start' => '14:00', 'end' => '16:30'],
+        ];
 
-        foreach ($plages as $plage) {
-            $start = $plage['start']->copy();
-            $end = $plage['end']->copy();
+        foreach ($horaires as $plage) {
+            $start = Carbon::createFromFormat('H:i', $plage['start']);
+            $end = Carbon::createFromFormat('H:i', $plage['end']);
 
-            while ($start->lessThan($end)) {
-                $creneauDebut = $start->copy();
-                $creneauFin = $start->copy()->addMinutes(20);
-
-                // S'assurer que le créneau ne dépasse pas la plage horaire
-                if ($creneauFin->greaterThan($end)) {
+            while ($start->lt($end)) {
+                $intervalEnd = (clone $start)->addMinutes(20);
+                if ($intervalEnd->gt($end)) {
                     break;
                 }
 
-                // Vérifier si le créneau est en conflit avec une réservation existante
-                $enConflit = false;
-                foreach ($reservations as $reservation) {
-                    $resStart = Carbon::parse($reservation['start']);
-                    $resEnd = Carbon::parse($reservation['end']);
+                $disponibilites[] = (object)[
+                    'start' => clone $start,  // ✅ Assure que ce sont des objets Carbon
+                    'end' => clone $intervalEnd
+                ];
 
-                    if (!($creneauFin->lessThanOrEqualTo($resStart) || $creneauDebut->greaterThanOrEqualTo($resEnd))) {
-                        $enConflit = true;
-                        break;
-                    }
-                }
-
-                if (!$enConflit) {
-                    $creneauxDisponibles[] = (object) [
-                        'start' => $creneauDebut,
-                        'end' => $creneauFin,
-                    ];
-                }
-
-                $start->addMinutes(20); // Passer au créneau suivant
+                $start->addMinutes(20);
             }
         }
 
-        return $creneauxDisponibles;
+        return $disponibilites;
     }
 
-    public function create()
+    public function edit($id)
     {
+        $rendezVous = RendezVous::findOrFail($id);
+
+        if ($rendezVous->horaire_debut) {
+            $rendezVous->horaire_debut = Carbon::parse($rendezVous->horaire_debut);
+        }
+        if ($rendezVous->horaire_fin) {
+            $rendezVous->horaire_fin = Carbon::parse($rendezVous->horaire_fin);
+        }
+
         $clients = Client::all();
-        $poneys = Poney::where('disponible', true)->get();
+        $poneys = Poney::all();
+        $disponibilites = $this->getDisponibilites();
 
-        // Plages horaires ouvertes
-        $plagesHoraires = [
-            ['start' => Carbon::createFromTime(10, 0), 'end' => Carbon::createFromTime(12, 0)],
-            ['start' => Carbon::createFromTime(13, 30), 'end' => Carbon::createFromTime(16, 0)],
-        ];
-
-        // Obtenir les réservations existantes
-        $rendezVous = RendezVous::all();
-        $reservations = $rendezVous->map(function ($rdv) {
-            return [
-                'start' => Carbon::parse($rdv->horaire_debut),
-                'end' => Carbon::parse($rdv->horaire_fin),
+        // ✅ Vérifier que les réservations ne contiennent pas de valeurs null
+        $reservations = RendezVous::select('horaire_debut', 'horaire_fin')->get()->map(function ($rdv) {
+            return (object) [
+                'start' => $rdv->horaire_debut ? Carbon::parse($rdv->horaire_debut) : null,
+                'end' => $rdv->horaire_fin ? Carbon::parse($rdv->horaire_fin) : null,
             ];
         });
 
-        // dd($reservations);  Debug pour voir les données récupérées
-
-        // Générer les créneaux disponibles
-        $disponibilites = $this->genererCreneauxDisponibles($plagesHoraires, $reservations);
-
-        return view('rendez-vous.create', compact('clients', 'poneys', 'disponibilites'));
+        return view('rendez-vous.edit', compact('rendezVous', 'clients', 'poneys', 'disponibilites', 'reservations'));
     }
 
-    // Enregistrer un nouveau rendez-vous
+
     public function store(Request $request)
     {
         $validated = $request->validate([
             'client_id' => 'required|exists:clients,id',
             'nombre_personnes' => 'required|integer|min:1',
-            'creneaux' => 'required|string', // Validation du créneau sélectionné
+            'creneaux' => 'required|string',
             'poneys' => 'array',
             'poneys.*' => 'nullable|exists:poneys,id',
         ]);
 
-        // Découper le créneau en début et fin
         [$horaireDebut, $horaireFin] = explode('-', $validated['creneaux']);
         $horaireDebut = Carbon::createFromFormat('H:i', $horaireDebut);
         $horaireFin = Carbon::createFromFormat('H:i', $horaireFin);
 
         DB::transaction(function () use ($validated, $horaireDebut, $horaireFin) {
-            // Créer le rendez-vous
             $rendezVous = RendezVous::create([
                 'client_id' => $validated['client_id'],
                 'horaire_debut' => $horaireDebut,
@@ -169,13 +202,9 @@ class RendezVousController extends Controller
                 'nombre_personnes' => $validated['nombre_personnes'],
             ]);
 
-            // Associer les poneys uniquement si sélectionnés
-            $selectedPoneys = array_filter($validated['poneys'], fn($poneyId) => $poneyId !== null);
-            if (!empty($selectedPoneys)) {
-                $rendezVous->poneys()->attach($selectedPoneys);
-
-                // Marquer les poneys comme indisponibles
-                Poney::whereIn('id', $selectedPoneys)->update(['disponible' => false]);
+            if (!empty($validated['poneys'])) {
+                $rendezVous->poneys()->attach($validated['poneys']);
+                Poney::whereIn('id', $validated['poneys'])->update(['disponible' => false]);
             }
         });
 

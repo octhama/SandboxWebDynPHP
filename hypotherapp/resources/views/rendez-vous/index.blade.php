@@ -37,23 +37,17 @@
                                 </p>
 
                                 <div class="d-flex gap-2">
-                                    <form action="{{ route('rendez-vous.confirm', $rdv->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-success rounded-circle p-2"><i class="fas fa-check-circle"></i></button>
-                                    </form>
-
-                                    <form action="{{ route('rendez-vous.reset', $rdv->id) }}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn btn-outline-warning rounded-circle p-2"><i class="fas fa-sync-alt"></i></button>
-                                    </form>
-
                                     <form action="{{ route('rendez-vous.destroy', $rdv->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-outline-danger rounded-circle p-2"
-                                                onclick="return confirm('❌ Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">
-                                            <i class="fas fa-trash-alt"></i>
+                                                onclick="return confirm('Vous êtes sur le point de valider ce rendez-vous comme terminé. Continuer ?')">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('rendez-vous.edit', $rdv->id) }}" method="GET">
+                                        <button type="submit" class="btn btn-outline-primary rounded-circle p-2">
+                                            <i class="fas fa-edit"></i>
                                         </button>
                                     </form>
                                 </div>

@@ -22,7 +22,8 @@
             <div class="form-group mb-4">
                 <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
                 <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes"
-                       min="1" max="{{ count($poneys) }}" placeholder="Maximum : {{ count($poneys) }}" required value="{{ old('nombre_personnes') }}">
+                       min="1" max="{{ count($poneys) }}" placeholder="Maximum : {{ count($poneys) }}"
+                       required value="{{ old('nombre_personnes') }}">
             </div>
 
             <!-- Plages horaires disponibles -->
@@ -30,11 +31,25 @@
                 <label for="creneaux" class="form-label"><i class="fas fa-clock"></i> Choisissez une plage horaire</label>
                 <select name="creneaux" id="creneaux" class="form-select" required>
                     <option value="" disabled selected>Choisissez une plage horaire</option>
+                    @php
+                        $reservations = $reservations ?? collect(); // Définit une collection vide si $reservations n'existe pas
+                    @endphp
+
                     @foreach ($disponibilites as $interval)
-                        <option value="{{ $interval->start->format('H:i') }}-{{ $interval->end->format('H:i') }}">
+                        @php
+                            $creneau = $interval->start->format('H:i') . '-' . $interval->end->format('H:i');
+                            $estReserve = $reservations->contains(fn($rdv) =>
+                                optional($rdv->horaire_debut)->format('H:i') === $interval->start->format('H:i') &&
+                                optional($rdv->horaire_fin)->format('H:i') === $interval->end->format('H:i')
+                            );
+                        @endphp
+
+                        <option value="{{ $creneau }}" {{ $estReserve ? 'disabled' : '' }}>
                             {{ $interval->start->format('H:i') }} - {{ $interval->end->format('H:i') }}
+                            @if ($estReserve) (Réservé) @endif
                         </option>
                     @endforeach
+
                 </select>
             </div>
 
@@ -44,41 +59,23 @@
                 <div id="poneys-container" class="row row-cols-2 g-3">
                     @php
                         $selectedPoneys = old('poneys', []);
-                        $allDisabled = true; // Vérifie si tous les poneys sont sélectionnés
+                        $poneysRestants = $poneys->pluck('id')->diff($selectedPoneys);
                     @endphp
-                    @for ($i = 1; $i <= count($poneys); $i++)
-                        @php
-                            $hasAvailable = false;
-                        @endphp
+                    @foreach (range(1, count($poneys)) as $i)
                         <div class="col">
                             <label for="poney-select-{{ $i }}" class="form-label">Poney {{ $i }}</label>
                             <select name="poneys[]" id="poney-select-{{ $i }}" class="form-select">
                                 <option value="" disabled selected>Choisissez un poney</option>
                                 @foreach ($poneys as $poney)
                                     <option value="{{ $poney->id }}"
-                                            @if (in_array($poney->id, $selectedPoneys))
-                                                disabled
-                                    @else
-                                        @php $hasAvailable = true; @endphp
-                                        @endif
+                                        {{ in_array($poney->id, $selectedPoneys) ? 'disabled' : '' }}
                                         {{ isset($selectedPoneys[$i - 1]) && $selectedPoneys[$i - 1] == $poney->id ? 'selected' : '' }}>
                                         {{ $poney->nom }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        @php
-                            if ($hasAvailable) {
-                                $allDisabled = false; // Un poney reste disponible
-                            }
-                        @endphp
-                    @endfor
-
-                    @if ($allDisabled)
-                        <div class="col-12 text-danger mt-3">
-                            <strong><i class="fas fa-exclamation-circle"></i> Tous les poneys disponibles ont été sélectionnés.</strong>
-                        </div>
-                    @endif
+                    @endforeach
                 </div>
             </div>
 
@@ -104,22 +101,9 @@
             background-color: #218838;
             border-color: #1e7e34;
         }
-
-        /* Message d'erreur */
         .text-danger {
             font-weight: bold;
             font-size: 1rem;
-        }
-
-        /* Alignement des heures */
-        .form-group .d-flex input[type="time"] {
-            flex: 1;
-            max-width: 200px; /* Ajustez cette valeur si nécessaire */
-        }
-
-        .form-group .d-flex span {
-            font-weight: bold;
-            font-size: 1.2rem;
         }
     </style>
 @endsection

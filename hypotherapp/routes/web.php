@@ -56,6 +56,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('rendez-vous', RendezVousController::class);
     Route::post('/rendez-vous/{id}/confirm', [RendezVousController::class, 'confirm'])->name('rendez-vous.confirm');
     Route::patch('/rendez-vous/{id}/reset', [RendezVousController::class, 'reset'])->name('rendez-vous.reset');
+    Route::put('/rendez-vous/{id}', [RendezVousController::class, 'update'])->name('rendez-vous.update');
+    Route::get('/rendez-vous/{id}/edit', [RendezVousController::class, 'edit'])->name('rendez-vous.edit');
     Route::delete('/rendez-vous/{id}', [RendezVousController::class, 'destroy'])->name('rendez-vous.destroy');
     Route::post('/rendez-vous/assigner/{id}', [RendezVousController::class, 'assignerPoneys'])->name('rendez-vous.assigner');
 
