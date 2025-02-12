@@ -65,11 +65,6 @@
     <!-- Inclure le composant d'alerte -->
     @include('components.alert')
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
     <h1>Bienvenue sur Hypotherapp</h1>
     <h2 class="mb-4">Navigation principale</h2>
     <div class="row g-4">

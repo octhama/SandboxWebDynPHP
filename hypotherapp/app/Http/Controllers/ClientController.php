@@ -61,19 +61,30 @@ class ClientController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Nettoyer le prix_total en supprimant le symbole € et en convertissant en nombre
+        $request->merge([
+            'prix_total' => (float) str_replace('€', '', $request->prix_total),
+        ]);
+
+        // Validation des données
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'nombre_personnes' => 'required|integer|min:1',
-            'heures' => 'required|integer|min:0',
+            'minutes' => 'required|integer|min:10|max:120', // Durée en minutes
             'prix_total' => 'required|numeric|min:0',
         ]);
 
+        // Mettre à jour le client
         $client = Client::findOrFail($id);
+        $client->update([
+            'nom' => $validated['nom'],
+            'nombre_personnes' => $validated['nombre_personnes'],
+            'minutes' => $validated['minutes'],
+            'prix_total' => $validated['prix_total'],
+        ]);
 
-        $client->update($validated);
         return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès.');
     }
-
     // app/Http/Controllers/ClientController.php
     public function generateInvoice($id)
     {

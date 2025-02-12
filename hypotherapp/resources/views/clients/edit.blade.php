@@ -38,8 +38,8 @@
 
             <div class="form-group mb-4">
                 <label for="prix_total" class="form-label">Prix total (€)</label>
-                <input type="number" class="form-control" id="prix_total" name="prix_total"
-                       value="{{ old('prix_total', $client->prix_total) }}" min="0" step="0.01" readonly>
+                <input type="text" class="form-control" id="prix_total" name="prix_total"
+                       value="{{ old('prix_total', $client->prix_total) }}" readonly>
             </div>
 
             <div class="d-flex justify-content-between">
@@ -51,7 +51,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const tarifParMinute = 185 / 20;
             const nombrePersonnesInput = document.getElementById('nombre_personnes');
             const minutesInput = document.getElementById('minutes');
             const prixTotalInput = document.getElementById('prix_total');
@@ -61,18 +60,47 @@
                 let nombrePersonnes = parseInt(nombrePersonnesInput.value) || 1;
                 let minutes = parseInt(minutesInput.value) || 0;
 
+                // Vérifier si la durée est inférieure à 10 minutes
                 if (minutes < 10) {
                     alertDuree.classList.remove('d-none');
+                    prixTotalInput.value = ""; // Effacer le prix si la durée est invalide
+                    return;
                 } else {
                     alertDuree.classList.add('d-none');
                 }
 
-                let prixTotal = nombrePersonnes * minutes * tarifParMinute;
-                prixTotalInput.value = prixTotal.toFixed(2);
+                // Appeler la route de calcul du prix via AJAX
+                fetch("{{ route('calcul.prix') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        nombre_personnes: nombrePersonnes,
+                        duree: minutes
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alertDuree.classList.remove('d-none');
+                            prixTotalInput.value = ""; // Effacer le prix en cas d'erreur
+                        } else {
+                            prixTotalInput.value = data.prix_total; // Mettre à jour le prix total
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors du calcul du prix :', error);
+                        prixTotalInput.value = ""; // Effacer le prix en cas d'erreur
+                    });
             }
 
+            // Écouter les changements dans les champs
             nombrePersonnesInput.addEventListener('input', recalculerPrix);
             minutesInput.addEventListener('input', recalculerPrix);
+
+            // Calculer le prix initial au chargement de la page
             recalculerPrix();
         });
     </script>
