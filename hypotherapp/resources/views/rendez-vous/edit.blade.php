@@ -21,13 +21,13 @@
                 </select>
             </div>
 
-            <!-- Nombre de personnes -->
+            <!-- Nombre de personnes
             <div class="form-group mb-4">
                 <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
                 <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes"
                        min="1" max="{{ count($poneys) }}" placeholder="Maximum : {{ count($poneys) }}"
                        required value="{{ $rendezVous->nombre_personnes }}">
-            </div>
+            </div> -->
 
             <!-- Plages horaires disponibles -->
             <div class="form-group mb-4">

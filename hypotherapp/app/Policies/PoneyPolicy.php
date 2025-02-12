@@ -1,5 +1,6 @@
 <?php
 
+// app/Policies/PoneyPolicy.php
 namespace App\Policies;
 
 use App\Models\Poney;
@@ -12,7 +13,7 @@ class PoneyPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true; // Les employés peuvent voir la liste des poneys
     }
 
     /**
@@ -20,7 +21,7 @@ class PoneyPolicy
      */
     public function view(User $user, Poney $poney): bool
     {
-        return false;
+        return true; // Les employés peuvent voir les détails d'un poney
     }
 
     /**
@@ -28,7 +29,7 @@ class PoneyPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'admin'; // Seul un administrateur peut créer un poney
     }
 
     /**
@@ -36,7 +37,7 @@ class PoneyPolicy
      */
     public function update(User $user, Poney $poney): bool
     {
-        return false;
+        return $user->role === 'admin'; // Seul un administrateur peut modifier un poney
     }
 
     /**
@@ -45,21 +46,5 @@ class PoneyPolicy
     public function delete(User $user, Poney $poney): bool
     {
         return $user->role === 'admin'; // Seul un administrateur peut supprimer un poney
-    }
-
-    /**
-     * Détermine si l'utilisateur peut restaurer un poney.
-     */
-    public function restore(User $user, Poney $poney): bool
-    {
-        return false;
-    }
-
-    /**
-     * Détermine si l'utilisateur peut supprimer définitivement un poney.
-     */
-    public function forceDelete(User $user, Poney $poney): bool
-    {
-        return false;
     }
 }

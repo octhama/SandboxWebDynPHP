@@ -78,7 +78,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="duree" class="form-label"><i class="fas fa-clock"></i> Durée en minutes</label>
-                                <input type="number" class="form-control" id="duree" name="duree" min="10" max="20" step="1" required>
+                                <input type="number" class="form-control" id="duree" name="duree" min="10" max="120" step="1" required>
                                 <small class="text-danger d-none" id="alerte-duree"><i class="fas fa-exclamation-circle"></i> Minimum 10 minutes.</small>
                             </div>
                             <div class="mb-4">
@@ -116,7 +116,7 @@
                                 data: {
                                     _token: "{{ csrf_token() }}",
                                     nombre_personnes: nombrePersonnes,
-                                    duree: duree
+                                    duree: duree // Utiliser "duree" en minutes
                                 },
                                 success: function(response) {
                                     $('#prix_total').val(response.prix_total + " €");
@@ -129,6 +129,8 @@
                     }
 
                     $('#nombre_personnes, #duree').on('input', recalculerPrix);
+
+                    recalculerPrix();
                 });
             </script>
         </div>
@@ -171,4 +173,3 @@
         box-shadow: 0 0 5px rgba(108, 92, 231, 0.5);
     }
 </style>
-

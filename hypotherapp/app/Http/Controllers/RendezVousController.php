@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Facturation;
 use App\Models\Poney;
 use App\Models\RendezVous;
 use Illuminate\Http\Request;
@@ -18,36 +19,6 @@ class RendezVousController extends Controller
         $clients = Client::all();
 
         return view('rendez-vous.index', compact('rendezVous', 'poneys', 'clients'));
-    }
-
-    public function getCreneauxDisponibles()
-    {
-        $plages = [
-            ['start' => Carbon::createFromTime(9, 0), 'end' => Carbon::createFromTime(12, 0)],
-            ['start' => Carbon::createFromTime(14, 0), 'end' => Carbon::createFromTime(18, 0)],
-        ];
-
-        $reservations = RendezVous::pluck('horaire_debut', 'horaire_fin')->toArray();
-
-        $creneauxDisponibles = [];
-        foreach ($plages as $plage) {
-            $start = $plage['start']->copy();
-            while ($start->lessThan($plage['end'])) {
-                $creneauDebut = $start->copy();
-                $creneauFin = $start->copy()->addMinutes(20);
-
-                $estReserve = collect($reservations)->contains(function ($fin, $debut) use ($creneauDebut, $creneauFin) {
-                    return ($creneauDebut->eq($debut) && $creneauFin->eq($fin));
-                });
-
-                if (!$estReserve) {
-                    $creneauxDisponibles[] = ['start' => $creneauDebut, 'end' => $creneauFin];
-                }
-
-                $start->addMinutes(20);
-            }
-        }
-        return $creneauxDisponibles;
     }
 
     public function create()
@@ -105,7 +76,6 @@ class RendezVousController extends Controller
 
         return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous mis à jour avec succès.');
     }
-
 
     // Supprimer un rendez-vous
     public function destroy($id)
@@ -178,7 +148,6 @@ class RendezVousController extends Controller
 
         return view('rendez-vous.edit', compact('rendezVous', 'clients', 'poneys', 'disponibilites', 'reservations'));
     }
-
 
     public function store(Request $request)
     {

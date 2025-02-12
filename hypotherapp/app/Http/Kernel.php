@@ -7,8 +7,9 @@ use Throwable;
 
 class Kernel extends HttpKernel
 {
+    // app/Http/Kernel.php
     protected $routeMiddleware = [
-        // Autres middlewares Laravel...
+        // Autres middlewares...
         'restrict.employee' => \App\Http\Middleware\RestrictEmployeeAccess::class,
     ];
 }

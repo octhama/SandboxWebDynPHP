@@ -37,10 +37,12 @@ Route::middleware(['auth'])->group(function () {
     // ========================
     // 📁 GESTION DES CLIENTS
     // ========================
+
     Route::resource('clients', ClientController::class)->except(['destroy']);
     Route::delete('/clients/{client}', [ClientController::class, 'destroy'])
         ->name('clients.destroy')
         ->middleware('can:delete,client'); // Utilisation correcte
+    Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
     Route::get('/clients/{id}/invoice', [ClientController::class, 'generateInvoice'])->name('clients.invoice');
 
     // ========================
@@ -86,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
             return response()->json(['error' => 'La durée minimale est de 10 minutes.'], 400);
         }
 
-        $tarifParMinute = 185 / 20;  // Prix par minute
+        $tarifParMinute = 185 / 20;  // Prix par minute (185 € pour 20 minutes)
         $prixTotal = $nombrePersonnes * $dureeMinutes * $tarifParMinute;
 
         return response()->json(['prix_total' => number_format($prixTotal, 2, '.', '')]);

@@ -1,5 +1,6 @@
 <?php
 
+// app/Policies/ClientPolicy.php
 namespace App\Policies;
 
 use App\Models\Client;
@@ -12,7 +13,7 @@ class ClientPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true; // Les employés peuvent voir la liste des clients
     }
 
     /**
@@ -20,7 +21,7 @@ class ClientPolicy
      */
     public function view(User $user, Client $client): bool
     {
-        return false;
+        return true; // Les employés peuvent voir les détails d'un client
     }
 
     /**
@@ -28,7 +29,7 @@ class ClientPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'admin'; // Seul un administrateur peut créer un client
     }
 
     /**
@@ -48,18 +49,10 @@ class ClientPolicy
     }
 
     /**
-     * Détermine si l'utilisateur peut restaurer un client.
+     * Détermine si l'utilisateur peut générer une facture.
      */
-    public function restore(User $user, Client $client): bool
+    public function generateInvoice(User $user, Client $client): bool
     {
-        return false;
-    }
-
-    /**
-     * Détermine si l'utilisateur peut supprimer définitivement un client.
-     */
-    public function forceDelete(User $user, Client $client): bool
-    {
-        return false;
+        return true; // Les employés peuvent générer des factures
     }
 }

@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container">
+        <!-- Afficher les messages d'alerte -->
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <h1 class="mb-5">Liste des Clients</h1>
 
         <div class="table-responsive">
@@ -17,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($clients as $client)
+                @forelse ($clients as $client)
                     <tr>
                         <td>{{ $client->id }}</td>
                         <td>{{ $client->nom }}</td>
@@ -40,7 +46,13 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            <i class="fas fa-info-circle"></i> Aucun client enregistré.
+                        </td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

@@ -54,13 +54,22 @@
     </style>
 </head>
 <body>
-@if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-        <i class="fas fa-exclamation-triangle"></i> {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
 <div class="container">
+    <!-- Afficher les messages d'alerte -->
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <!-- Inclure le composant d'alerte -->
+    @include('components.alert')
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <h1>Bienvenue sur Hypotherapp</h1>
     <h2 class="mb-4">Navigation principale</h2>
     <div class="row g-4">

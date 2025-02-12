@@ -12,7 +12,7 @@ class Client extends Model
     protected $fillable = [
         'nom',
         'nombre_personnes',
-        'minutes',
+        'minutes', // Durée en minutes
         'prix_total',
     ];
 
@@ -23,9 +23,9 @@ class Client extends Model
         // Quand un client est créé, créer une facturation associée
         static::created(function ($client) {
             Facturation::create([
-                'client_id'     => $client->id,
-                'nombre_heures' => round($client->minutes / 60, 2), // Convertir les minutes en heures
-                'montant'       => $client->prix_total,
+                'client_id' => $client->id,
+                'nombre_heures' => $client->minutes, // Garder les minutes, pas d'erreur de conversion
+                'montant' => $client->prix_total,
             ]);
         });
 
@@ -34,9 +34,17 @@ class Client extends Model
             $facturation = Facturation::where('client_id', $client->id)->first();
             if ($facturation) {
                 $facturation->update([
-                    'nombre_heures' => round($client->minutes / 60, 2), // Convertir en heures
-                    'montant'       => $client->prix_total,
+                    'nombre_heures' => $client->minutes, // Toujours en minutes
+                    'montant' => $client->prix_total,
                 ]);
+            }
+        });
+
+        // Quand un client est supprimé, supprimer la facturation associée
+        static::deleted(function ($client) {
+            $facturation = Facturation::where('client_id', $client->id)->first();
+            if ($facturation) {
+                $facturation->delete();
             }
         });
     }

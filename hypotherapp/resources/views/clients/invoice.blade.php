@@ -33,9 +33,14 @@
         }
 
         .invoice-header h1 {
-            color: #2c3e50;
+            color: #007bff;
             font-weight: bold;
             margin-bottom: 5px;
+        }
+
+        .invoice-logo {
+            width: 80px;
+            margin-bottom: 10px;
         }
 
         .invoice-details {
@@ -96,6 +101,7 @@
 <div class="invoice-container">
     <!-- En-tête de la facture -->
     <div class="invoice-header">
+        <img src="{{ asset('logo.png') }}" alt="Logo Hypotherapp" class="invoice-logo">
         <h1>Hypotherapp</h1>
         <h2>Facture</h2>
         <p><strong>Date :</strong> {{ date('d/m/Y') }}</p>
@@ -105,7 +111,7 @@
     <div class="invoice-details">
         <p><strong>Client :</strong> {{ $client->nom }}</p>
         <p><strong>Nombre de personnes :</strong> {{ $client->nombre_personnes }}</p>
-        <p><strong>Heures :</strong> {{ $client->heures }}</p>
+        <p><strong>Durée :</strong> {{ $client->minutes }} minutes</p>
     </div>
 
     <!-- Tableau des détails de facturation -->
@@ -134,10 +140,6 @@
         </tfoot>
     </table>
 </div>
-
-<!-- Bootstrap JS & FontAwesome -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
 </body>
 </html>
