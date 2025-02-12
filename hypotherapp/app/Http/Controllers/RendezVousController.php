@@ -41,40 +41,20 @@ class RendezVousController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'nombre_personnes' => 'required|integer|min:1',
             'creneaux' => 'required|string',
-            'poneys' => 'array',
-            'poneys.*' => 'nullable|exists:poneys,id',
         ]);
 
         [$horaireDebut, $horaireFin] = explode('-', $validated['creneaux']);
         $horaireDebut = Carbon::createFromFormat('H:i', $horaireDebut);
         $horaireFin = Carbon::createFromFormat('H:i', $horaireFin);
 
-        DB::transaction(function () use ($id, $validated, $horaireDebut, $horaireFin) {
-            $rendezVous = RendezVous::findOrFail($id);
+        $rendezVous = RendezVous::findOrFail($id);
+        $rendezVous->update([
+            'horaire_debut' => $horaireDebut,
+            'horaire_fin' => $horaireFin,
+        ]);
 
-            // Mise à jour du rendez-vous
-            $rendezVous->update([
-                'client_id' => $validated['client_id'],
-                'horaire_debut' => $horaireDebut,
-                'horaire_fin' => $horaireFin,
-                'nombre_personnes' => $validated['nombre_personnes'],
-            ]);
-
-            // Réinitialiser les poneys existants avant de mettre à jour
-            $rendezVous->poneys()->detach();
-
-            if (!empty($validated['poneys'])) {
-                $rendezVous->poneys()->attach($validated['poneys']);
-
-                // Mettre les poneys comme indisponibles
-                Poney::whereIn('id', $validated['poneys'])->update(['disponible' => false]);
-            }
-        });
-
-        return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous mis à jour avec succès.');
+        return redirect()->route('rendez-vous.index')->with('success', 'Plage horaire mise à jour avec succès.');
     }
 
     // Supprimer un rendez-vous

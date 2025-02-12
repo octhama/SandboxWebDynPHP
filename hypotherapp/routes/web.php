@@ -76,22 +76,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/support', [SupportController::class, 'index'])->name('support.index');
 
-    // ========================
-    // 🔍 CALCUL DU PRIX
-    // ========================
-    Route::post('/calcul-prix', function (Request $request) {
-        $nombrePersonnes = (int) $request->input('nombre_personnes');
-        $dureeMinutes = (int) $request->input('duree');
-
-        // Vérifier que la durée est d'au moins 10 minutes
-        if ($dureeMinutes < 10) {
-            return response()->json(['error' => 'La durée minimale est de 10 minutes.'], 400);
-        }
-
-        $tarifParMinute = 185 / 20;  // Prix par minute (185 € pour 20 minutes)
-        $prixTotal = $nombrePersonnes * $dureeMinutes * $tarifParMinute;
-
-        return response()->json(['prix_total' => number_format($prixTotal, 2, '.', '')]);
-    })->name('calcul.prix');
-
 });

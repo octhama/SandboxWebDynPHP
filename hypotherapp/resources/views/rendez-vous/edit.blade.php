@@ -8,26 +8,17 @@
             @csrf
             @method('PUT')
 
-            <!-- Sélectionner un client -->
+            <!-- Nom du client (non modifiable) -->
             <div class="form-group mb-4">
-                <label for="client_id" class="form-label"><i class="fas fa-user"></i> Sélectionner un client</label>
-                <select name="client_id" id="client_id" class="form-select" required>
-                    <option value="" disabled>Choisissez un client</option>
-                    @foreach ($clients as $client)
-                        <option value="{{ $client->id }}" {{ $client->id === $rendezVous->client_id ? 'selected' : '' }}>
-                            {{ $client->nom }}
-                        </option>
-                    @endforeach
-                </select>
+                <label class="form-label"><i class="fas fa-user"></i> Client</label>
+                <input type="text" class="form-control" value="{{ $rendezVous->client->nom }}" disabled>
             </div>
 
-            <!-- Nombre de personnes
+            <!-- Nombre de personnes (non modifiable) -->
             <div class="form-group mb-4">
-                <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
-                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes"
-                       min="1" max="{{ count($poneys) }}" placeholder="Maximum : {{ count($poneys) }}"
-                       required value="{{ $rendezVous->nombre_personnes }}">
-            </div> -->
+                <label class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
+                <input type="text" class="form-control" value="{{ $rendezVous->nombre_personnes }}" disabled>
+            </div>
 
             <!-- Plages horaires disponibles -->
             <div class="form-group mb-4">
@@ -61,7 +52,6 @@
                     @endforeach
                 </select>
             </div>
-
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary rounded-pill shadow px-5 py-2">
                     <i class="fas fa-save"></i> Enregistrer

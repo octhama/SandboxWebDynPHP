@@ -3,14 +3,6 @@
 @section('content')
     <div class="container">
         <h1 class="text-center mb-5">Gestion des Poneys</h1>
-
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle"></i> {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-
         <div class="row">
             <!-- Liste des poneys -->
             <div class="col-md-8">

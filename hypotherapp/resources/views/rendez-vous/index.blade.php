@@ -93,48 +93,51 @@
                     </div>
                 </div>
             </div>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    function recalculerPrix() {
-                        var nombrePersonnes = parseInt($('#nombre_personnes').val()) || 0;
-                        var duree = parseInt($('#duree').val()) || 0;
+        </div>
 
-                        // Vérifier si la durée est inférieure à 10 minutes
-                        if (duree < 10) {
-                            $('#alerte-duree').removeClass('d-none'); // Afficher l'alerte
-                            $('#prix_total').val(""); // Effacer le prix
-                            return;
-                        } else {
-                            $('#alerte-duree').addClass('d-none'); // Cacher l'alerte
-                        }
-
-                        if (nombrePersonnes > 0 && duree >= 10) {
-                            $.ajax({
-                                url: "{{ route('calcul.prix') }}",
-                                type: "POST",
-                                data: {
-                                    _token: "{{ csrf_token() }}",
-                                    nombre_personnes: nombrePersonnes,
-                                    duree: duree // Utiliser "duree" en minutes
-                                },
-                                success: function(response) {
-                                    $('#prix_total').val(response.prix_total + " €");
-                                },
-                                error: function(response) {
-                                    $('#prix_total').val("");
-                                }
-                            });
-                        }
-                    }
-
-                    $('#nombre_personnes, #duree').on('input', recalculerPrix);
-
-                    recalculerPrix();
-                });
-            </script>
+        <!-- Bootstrap Toast -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="fas fa-exclamation-triangle"></i> La durée minimale est de 10 minutes !
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let nombrePersonnesInput = document.getElementById('nombre_personnes');
+            let dureeInput = document.getElementById('duree');
+            let prixTotalInput = document.getElementById('prix_total');
+            let alerteDuree = document.getElementById('alerte-duree');
+            let errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
+
+            function recalculerPrix() {
+                let nombrePersonnes = parseInt(nombrePersonnesInput.value) || 0;
+                let duree = parseInt(dureeInput.value) || 0;
+
+                if (duree < 10) {
+                    alerteDuree.classList.remove('d-none');
+                    prixTotalInput.value = "";
+                    errorToast.show();
+                    return;
+                } else {
+                    alerteDuree.classList.add('d-none');
+                }
+
+                let prixParPersonne = 5;  // Exemple : 5€ par personne pour 10 min
+                let prixTotal = (nombrePersonnes * (duree / 10) * prixParPersonne).toFixed(2);
+
+                prixTotalInput.value = prixTotal + " €";
+            }
+
+            nombrePersonnesInput.addEventListener('input', recalculerPrix);
+            dureeInput.addEventListener('input', recalculerPrix);
+        });
+    </script>
 @endsection
 <style>
     body {

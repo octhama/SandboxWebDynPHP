@@ -20,7 +20,7 @@ class Client extends Model
     {
         parent::boot();
 
-        // Quand un client est créé, créer une facturation associée
+        // Quand un client est créé, créer une facturation associée avec les mêmes données initiales
         static::created(function ($client) {
             Facturation::create([
                 'client_id' => $client->id,
