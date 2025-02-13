@@ -1,6 +1,5 @@
 <?php
 
-// app/Http/Middleware/RestrictEmployeeAccess.php
 namespace App\Http\Middleware;
 
 use Closure;
@@ -18,6 +17,3 @@ class RestrictEmployeeAccess
         return $next($request);
     }
 }
-
-
-

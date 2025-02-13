@@ -30,10 +30,10 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="minutes" class="form-label">Durée (minutes)</label>
-                <input type="number" class="form-control" id="minutes" name="minutes"
-                       value="{{ old('minutes', $client->minutes) }}" min="10" max="120" required>
-                <small class="text-danger d-none" id="alert-duree"><i class="fas fa-exclamation-triangle"></i> Minimum 10 minutes.</small>
+                <label for="duree" class="form-label">Durée (minutes)</label>
+                <input type="number" class="form-control" id="duree" name="duree"
+                       value="{{ old('duree', $client->heures * 60) }}" min="10" max="120" required>
+                <small class="text-danger d-none" id="alerte-duree"><i class="fas fa-exclamation-triangle"></i> Minimum 10 minutes.</small>
             </div>
 
             <div class="form-group mb-4">
@@ -48,35 +48,34 @@
             </div>
         </form>
     </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const nombrePersonnesInput = document.getElementById("nombre_personnes");
-            const dureeInput = document.getElementById("minutes"); // Correction de l'ID
-            const prixTotalInput = document.getElementById("prix_total");
-            const alerteDuree = document.getElementById("alert-duree"); // Correction de l'ID
+        document.addEventListener("DOMContentLoaded", function() {
+            let nombrePersonnesInput = document.getElementById('nombre_personnes');
+            let dureeInput = document.getElementById('duree');
+            let prixTotalInput = document.getElementById('prix_total');
+            let alerteDuree = document.getElementById('alerte-duree');
 
             function recalculerPrix() {
                 let nombrePersonnes = parseInt(nombrePersonnesInput.value) || 0;
                 let duree = parseInt(dureeInput.value) || 0;
-                const tarifParMinute = 185 / 20; // 185€ pour 20 minutes
 
                 if (duree < 10) {
-                    alerteDuree.classList.remove("d-none");
+                    alerteDuree.classList.remove('d-none');
                     prixTotalInput.value = "";
                     return;
                 } else {
-                    alerteDuree.classList.add("d-none");
+                    alerteDuree.classList.add('d-none');
                 }
 
-                let prixTotal = nombrePersonnes * duree * tarifParMinute;
-                prixTotalInput.value = prixTotal.toFixed(2) + " €"; // Format propre en €
+                let prixParPersonne = 50;  // Exemple : 50€ par personne pour 10 min
+                let prixTotal = (nombrePersonnes * (duree / 10) * prixParPersonne).toFixed(2);
+
+                prixTotalInput.value = prixTotal + " €";
             }
 
-            // Déclencher le recalcul à chaque modification des champs
-            nombrePersonnesInput.addEventListener("input", recalculerPrix);
-            dureeInput.addEventListener("input", recalculerPrix);
-
-            recalculerPrix(); // Calcul initial au chargement
+            nombrePersonnesInput.addEventListener('input', recalculerPrix);
+            dureeInput.addEventListener('input', recalculerPrix);
         });
     </script>
 @endsection

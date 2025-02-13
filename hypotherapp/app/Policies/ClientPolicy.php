@@ -53,6 +53,6 @@ class ClientPolicy
      */
     public function generateInvoice(User $user, Client $client): bool
     {
-        return true; // Les employés peuvent générer des factures
+        return in_array($user->role, ['admin', 'employee']); // Admin et employés peuvent générer des factures
     }
 }

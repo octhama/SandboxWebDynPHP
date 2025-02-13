@@ -78,7 +78,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="duree" class="form-label"><i class="fas fa-clock"></i> Durée en minutes</label>
-                                <input type="number" class="form-control" id="duree" name="duree" min="10" max="120" step="1" required>
+                                <input type="number" class="form-control" id="duree" name="duree" min="10" max="20" step="1" required>
                                 <small class="text-danger d-none" id="alerte-duree"><i class="fas fa-exclamation-circle"></i> Minimum 10 minutes.</small>
                             </div>
                             <div class="mb-4">
@@ -128,7 +128,7 @@
                     alerteDuree.classList.add('d-none');
                 }
 
-                let prixParPersonne = 5;  // Exemple : 5€ par personne pour 10 min
+                let prixParPersonne = 50;  // Exemple : 50€ par personne pour 10 min
                 let prixTotal = (nombrePersonnes * (duree / 10) * prixParPersonne).toFixed(2);
 
                 prixTotalInput.value = prixTotal + " €";

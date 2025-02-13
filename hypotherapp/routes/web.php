@@ -22,6 +22,13 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 // Déconnexion
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
+// Affichage du formulaire d'inscription
+Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup')->middleware('guest');
+
+// Soumission du formulaire d'inscription
+Route::post('/signup', [AuthController::class, 'register'])->name('signup.process');
+
+
 // ========================
 // 🔒 ZONE PROTÉGÉE (AUTH)
 // ========================
@@ -76,4 +83,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/support', [SupportController::class, 'index'])->name('support.index');
 
-});
+}
+);

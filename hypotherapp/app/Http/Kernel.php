@@ -2,15 +2,19 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\RestrictEmployeeAccess;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Throwable;
 
 class Kernel extends HttpKernel
 {
-    // app/Http/Kernel.php
+    /**
+     * Les middlewares de route de l'application.
+     *
+     * @var array
+     */
     protected $routeMiddleware = [
         // Autres middlewares...
-        'restrict.employee' => \App\Http\Middleware\RestrictEmployeeAccess::class,
+        'restrict.employee' => RestrictEmployeeAccess::class,
     ];
 }
 

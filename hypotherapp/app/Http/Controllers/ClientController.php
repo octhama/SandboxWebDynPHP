@@ -7,6 +7,7 @@ use App\Models\Facturation;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -85,13 +86,10 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès.');
     }
-    // app/Http/Controllers/ClientController.php
     public function generateInvoice($id)
     {
         $client = Client::findOrFail($id);
-
-        // Vérifie si l'utilisateur a le droit de générer une facture
-        $this->authorize('generateInvoice', $client);
+        $this->authorize('generateInvoice', $client); // Vérifie l'autorisation
 
         $pdf = Pdf::loadView('clients.invoice', compact('client'));
         return $pdf->download('facture_' . $client->nom . '.pdf');
@@ -99,8 +97,9 @@ class ClientController extends Controller
 
     public function destroy(Client $client)
     {
-        // Vérifie si l'utilisateur a le droit de supprimer un client
-        $this->authorize('delete', $client);
+        if (Auth::user()->role === 'employee') {
+            return redirect()->route('clients.index')->with('error', '⛔ Vous n\'êtes pas autorisé à supprimer des clients. Veuillez contacter l\'administrateur.');
+        }
 
         $client->delete();
         return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès.');

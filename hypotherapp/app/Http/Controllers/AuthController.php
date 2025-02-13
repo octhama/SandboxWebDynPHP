@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
@@ -33,6 +34,29 @@ class AuthController extends Controller
         return back()->with('error', 'Email ou mot de passe incorrect.');
     }
 
+    public function showSignup()
+    {
+        return view('auth.signup'); // Retourne la vue d'inscription
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+            'role' => 'required|in:admin,employee', // Validation du rôle
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role, // Stocke le rôle choisi
+        ]);
+
+        return redirect()->route('login')->with('success', 'Compte créé avec succès ! Connectez-vous 🎉');
+    }
     // Déconnexion
     public function logout()
     {

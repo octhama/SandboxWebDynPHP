@@ -120,7 +120,7 @@
 <body>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Hypotherapp</a>
+        <a class="navbar-brand" href="#">Hypotheapp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -140,34 +140,36 @@
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                         @php
                             $defaultAdminAvatar = 'https://github.com/mdo.png';
-                            $defaultEmployeeAvatar = asset('images/employee_two.png'); // Chemin vers votre avatar par defaut
-                            $avatar = Auth::user()->role === 'admin' ? $defaultAdminAvatar : $defaultEmployeeAvatar;
+                            $defaultEmployeeAvatar = asset('images/employee_two.png'); // Chemin vers votre avatar par défaut
+                            $avatar = Auth::check() ? (Auth::user()->isAdmin() ? $defaultAdminAvatar : $defaultEmployeeAvatar) : $defaultEmployeeAvatar;
                         @endphp
 
-                        <img src="{{ Auth::user()->avatar ?? $avatar }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
-                        {{ Auth::user()->name }}
+                        <img src="{{ Auth::check() ? (Auth::user()->avatar ?? $avatar) : $avatar }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
+                        {{ Auth::check() ? Auth::user()->name : 'Invité' }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
-                        <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
-                        <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</button>
-                            </form>
-                        </li>
+                        @if (Auth::check())
+                            <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
+                            <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</button>
+                                </form>
+                            </li>
+                        @else
+                            <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fas fa-sign-in-alt me-2"></i> Connexion</a></li>
+                        @endif
                     </ul>
                 </li>
-
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container my-5">
-
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -178,7 +180,7 @@
 </div>
 
 <footer>
-    <p class="mb-2">&copy; 2025 Hypotherapp - Gestion des Poneys. Tous droits réservés.</p>
+    <p class="mb-2">&copy; 2025 Hypotheapp - Gestion des Poneys. Tous droits réservés.</p>
     <p class="mb-0"><a href="#">Politique de confidentialité</a> | <a href="#">Conditions d'utilisation</a></p>
 </footer>
 

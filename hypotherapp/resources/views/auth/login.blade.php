@@ -31,6 +31,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Se connecter</button>
                     </form>
+                        <div class="text-center mt-3">
+                            <small>Pas encore de compte ? <a href="{{ route('signup') }}">S'inscrire</a></small>
+                        </div>
                 </div>
             </div>
         </div>
