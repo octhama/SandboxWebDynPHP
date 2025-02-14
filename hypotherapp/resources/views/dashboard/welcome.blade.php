@@ -142,7 +142,6 @@
                         <a href="{{ route('rapports.index') }}" class="btn btn-info">Accéder</a>
                     @else
                         <button class="btn btn-secondary" disabled>Accès restreint</button>
-                        <small class="d-block text-danger mt-2">Réservé aux administrateurs</small>
                     @endif
                 </div>
             </div>
