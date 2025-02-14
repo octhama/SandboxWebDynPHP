@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -7,9 +8,10 @@
         <div class="row">
             <!-- Section Rendez-vous -->
             <div class="col-md-7">
-                <h3 class="mb-4 text-secondary">{{ ucfirst(\Carbon\Carbon::now()->isoFormat('dddd D MMMM YYYY')) }}</h3>
+                <h3 class="mb-4 text-secondary">{{ ucfirst(Carbon::now()->isoFormat('dddd D MMMM YYYY')) }}</h3>
 
-                <a href="{{ route('rendez-vous.create') }}" class="btn btn-success mb-4 shadow-lg rounded-pill px-4 py-2">
+                <a href="{{ route('rendez-vous.create') }}"
+                   class="btn btn-success mb-4 shadow-lg rounded-pill px-4 py-2">
                     <i class="fas fa-plus-circle"></i> Nouveau Rendez-vous
                 </a>
 
@@ -37,7 +39,8 @@
                             </div>
 
                             <div id="rdv-{{ $rdv->id }}" class="collapse mt-2">
-                                <p><strong><i class="fas fa-users"></i> Nombre de personnes :</strong> {{ $rdv->nombre_personnes }}</p>
+                                <p><strong><i class="fas fa-users"></i> Nombre de personnes
+                                        :</strong> {{ $rdv->nombre_personnes }}</p>
                                 <p><strong><i class="fas fa-horse"></i> Poneys assignés :</strong>
                                     @foreach ($rdv->poneys as $poney)
                                         <span class="badge bg-primary">{{ $poney->nom }}</span>
@@ -62,7 +65,8 @@
                             </div>
                         </div>
                     @empty
-                        <p class="text-muted"><i class="fas fa-info-circle"></i> Aucun rendez-vous prévu pour aujourd'hui.</p>
+                        <p class="text-muted"><i class="fas fa-info-circle"></i> Aucun rendez-vous prévu pour
+                            aujourd'hui.</p>
                     @endforelse
                 </div>
             </div>
@@ -77,20 +81,27 @@
                         <form action="{{ route('clients.store') }}" method="POST">
                             @csrf
                             <div class="mb-4">
-                                <label for="nom_client" class="form-label"><i class="fas fa-user"></i> Nom du client</label>
+                                <label for="nom_client" class="form-label"><i class="fas fa-user"></i> Nom du
+                                    client</label>
                                 <input type="text" class="form-control" id="nom_client" name="nom" required>
                             </div>
                             <div class="mb-4">
-                                <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
-                                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes" min="1" max="20" required>
+                                <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de
+                                    personnes</label>
+                                <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes"
+                                       min="1" max="20" required>
                             </div>
                             <div class="mb-4">
-                                <label for="duree" class="form-label"><i class="fas fa-clock"></i> Durée en minutes</label>
-                                <input type="number" class="form-control" id="duree" name="duree" min="10" max="20" step="1" required>
-                                <small class="text-danger d-none" id="alerte-duree"><i class="fas fa-exclamation-circle"></i> Minimum 10 minutes.</small>
+                                <label for="duree" class="form-label"><i class="fas fa-clock"></i> Durée en
+                                    minutes</label>
+                                <input type="number" class="form-control" id="duree" name="duree" min="10" max="20"
+                                       step="1" required>
+                                <small class="text-danger d-none" id="alerte-duree"><i
+                                        class="fas fa-exclamation-circle"></i> Minimum 10 minutes.</small>
                             </div>
                             <div class="mb-4">
-                                <label for="prix_total" class="form-label"><i class="fas fa-euro-sign"></i> Prix total</label>
+                                <label for="prix_total" class="form-label"><i class="fas fa-euro-sign"></i> Prix
+                                    total</label>
                                 <!-- Champ caché pour stocker la valeur calculée -->
                                 <input type="hidden" id="prix_total_hidden" name="prix_total">
                                 <!-- Champ affiché en lecture seule -->
@@ -98,7 +109,9 @@
                                 <small class="text-muted">Calculé automatiquement.</small>
                             </div>
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary rounded-pill shadow"><i class="fas fa-save"></i> Enregistrer</button>
+                                <button type="submit" class="btn btn-primary rounded-pill shadow"><i
+                                        class="fas fa-save"></i> Enregistrer
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -108,18 +121,20 @@
 
         <!-- Bootstrap Toast -->
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert"
+                 aria-live="assertive" aria-atomic="true">
                 <div class="d-flex">
                     <div class="toast-body">
                         <i class="fas fa-exclamation-triangle"></i> La durée minimale est de 10 minutes !
                     </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                            data-bs-dismiss="toast"></button>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             let nombrePersonnesInput = document.getElementById('nombre_personnes');
             let dureeInput = document.getElementById('duree');
             let prixTotalInput = document.getElementById('prix_total');

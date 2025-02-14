@@ -56,27 +56,36 @@
             <!-- Assigner des poneys -->
             <div class="form-group mb-4">
                 <label for="poneys" class="form-label"><i class="fas fa-horse"></i> Assigner des poneys</label>
-                <div id="poneys-container" class="row row-cols-2 g-3">
-                    @php
-                        $selectedPoneys = old('poneys', []);
-                        $poneysRestants = $poneys->pluck('id')->diff($selectedPoneys);
-                    @endphp
-                    @foreach (range(1, count($poneys)) as $i)
-                        <div class="col">
-                            <label for="poney-select-{{ $i }}" class="form-label">Poney {{ $i }}</label>
-                            <select name="poneys[]" id="poney-select-{{ $i }}" class="form-select">
-                                <option value="" disabled selected>Choisissez un poney</option>
-                                @foreach ($poneys as $poney)
-                                    <option value="{{ $poney->id }}"
-                                        {{ in_array($poney->id, $selectedPoneys) ? 'disabled' : '' }}
-                                        {{ isset($selectedPoneys[$i - 1]) && $selectedPoneys[$i - 1] == $poney->id ? 'selected' : '' }}>
-                                        {{ $poney->nom }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @endforeach
-                </div>
+
+                <!-- Afficher une alerte si aucun poney n'est disponible -->
+                @if ($aucunPoneyDisponible)
+                    <small class="text-danger d-block mb-2">
+                        <i class="fas fa-exclamation-circle"></i> Aucun poney disponible. Veuillez libérer des poneys avant de créer un rendez-vous.
+                    </small>
+                @else
+                    <!-- Afficher les champs de sélection uniquement si des poneys sont disponibles -->
+                    <div id="poneys-container" class="row row-cols-2 g-3">
+                        @php
+                            $selectedPoneys = old('poneys', []);
+                            $poneysRestants = $poneys->pluck('id')->diff($selectedPoneys);
+                        @endphp
+                        @foreach (range(1, count($poneys)) as $i)
+                            <div class="col">
+                                <label for="poney-select-{{ $i }}" class="form-label">Poney {{ $i }}</label>
+                                <select name="poneys[]" id="poney-select-{{ $i }}" class="form-select">
+                                    <option value="" disabled selected>Choisissez un poney</option>
+                                    @foreach ($poneys as $poney)
+                                        <option value="{{ $poney->id }}"
+                                            {{ in_array($poney->id, $selectedPoneys) ? 'disabled' : '' }}
+                                            {{ isset($selectedPoneys[$i - 1]) && $selectedPoneys[$i - 1] == $poney->id ? 'selected' : '' }}>
+                                            {{ $poney->nom }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             <!-- Bouton de validation -->
@@ -150,7 +159,6 @@
         });
     </script>
 
-
     <!-- Styles supplémentaires -->
     <style>
         .form-group label {
@@ -167,6 +175,10 @@
         .text-danger {
             font-weight: bold;
             font-size: 1rem;
+            color: #dc3545; /* Rouge */
+        }
+        .text-danger i {
+            margin-right: 0.5rem;
         }
     </style>
 @endsection

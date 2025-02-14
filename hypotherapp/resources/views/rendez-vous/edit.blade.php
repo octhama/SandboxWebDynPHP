@@ -1,4 +1,7 @@
-@php use Carbon\Carbon; @endphp
+@php
+    use Carbon\Carbon;
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -24,40 +27,40 @@
 
             <!-- Plages horaires disponibles -->
             <div class="form-group mb-4">
-                <label for="creneaux" class="form-label"><i class="fas fa-clock"></i> Plages horaires
-                    disponibles</label>
+                <label for="creneaux" class="form-label"><i class="fas fa-clock"></i> Plages horaires disponibles</label>
                 <select name="creneaux" id="creneaux" class="form-select" required>
                     <option value="" disabled>Choisissez une plage horaire</option>
+
                     @foreach ($disponibilites as $interval)
                         @php
-                            if ($interval->start && $interval->end) {
-                                $creneau = Carbon::parse($interval->start)->format('H:i') . '-' . Carbon::parse($interval->end)->format('H:i');
-                            } else {
-                                continue; // Ignore les créneaux non valides
-                            }
+                            // Vérification que les données de l'intervalle sont valides
+                            if (!$interval->start || !$interval->end) continue;
 
-                            $reservations = $rendezVous->client->rendezVous->where('date', $rendezVous->date);
-                            $estReserve = collect($reservations)->contains(fn($rdv) =>
-                                $rdv->start && $rdv->end &&
-                                Carbon::parse($rdv->start)->format('H:i') === Carbon::parse($interval->start)->format('H:i') &&
-                                Carbon::parse($rdv->end)->format('H:i') === Carbon::parse($interval->end)->format('H:i')
-                            );
+                            // Formatage des créneaux
+                            $creneau = Carbon::parse($interval->start)->format('H:i') . '-' . Carbon::parse($interval->end)->format('H:i');
 
+                            // Vérifier si ce créneau est réservé
+                            $reservations = $reservations ?? collect(); // Définit une collection vide si $reservations n'existe pas
+                            $estReserve = $reservations->contains(function ($rdv) use ($interval) {
+                                return Carbon::parse($rdv->horaire_debut)->format('H:i') === Carbon::parse($interval->start)->format('H:i') &&
+                                       Carbon::parse($rdv->horaire_fin)->format('H:i') === Carbon::parse($interval->end)->format('H:i');
+                            });
+
+                            // Vérifier si le créneau actuel correspond au rendez-vous en cours d'édition
                             $horaireDebut = $rendezVous->horaire_debut ? Carbon::parse($rendezVous->horaire_debut)->format('H:i') : null;
                             $horaireFin = $rendezVous->horaire_fin ? Carbon::parse($rendezVous->horaire_fin)->format('H:i') : null;
+                            $estSelectionne = ($horaireDebut && $horaireFin && ($horaireDebut . '-' . $horaireFin) == $creneau);
                         @endphp
 
                         <option value="{{ $creneau }}"
-                            {{ ($horaireDebut && $horaireFin &&
-                                ($horaireDebut . '-' . $horaireFin) == $creneau) ? 'selected' : '' }}
+                            {{ $estSelectionne ? 'selected' : '' }}
                             {{ $estReserve ? 'disabled' : '' }}>
-                            {{ $creneau }} @if ($estReserve)
-                                (Réservé)
-                            @endif
+                            {{ $creneau }} @if ($estReserve) (Réservé) @endif
                         </option>
                     @endforeach
                 </select>
             </div>
+
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary rounded-pill shadow px-5 py-2">
                     <i class="fas fa-save"></i> Enregistrer

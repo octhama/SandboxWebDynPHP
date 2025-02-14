@@ -25,7 +25,7 @@ class RendezVousController extends Controller
     public function create(): View|Factory|Application
     {
         $clients = Client::all();
-        $poneys = Poney::where('disponible', true)->get();
+        $poneys = (new Poney)->where('disponible', true)->get();
         $disponibilites = $this->getDisponibilites();
 
         // Récupérer les créneaux déjà réservés
@@ -36,7 +36,10 @@ class RendezVousController extends Controller
             ];
         });
 
-        return view('rendez-vous.create', compact('clients', 'poneys', 'disponibilites', 'reservations'));
+        // Vérifier si des poneys sont disponibles
+        $aucunPoneyDisponible = $poneys->isEmpty();
+
+        return view('rendez-vous.create', compact('clients', 'poneys', 'disponibilites', 'reservations', 'aucunPoneyDisponible'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -111,7 +114,12 @@ class RendezVousController extends Controller
         $poneys = Poney::all();
         $disponibilites = $this->getDisponibilites();
 
-        return view('rendez-vous.edit', compact('rendezVous', 'clients', 'poneys', 'disponibilites'));
+        // Récupérer les créneaux réservés pour la journée en cours
+        $reservations = RendezVous::whereDate('horaire_debut', $rendezVous->horaire_debut->toDateString())
+            ->where('id', '!=', $rendezVous->id) // Exclure le rendez-vous en cours d'édition
+            ->get(['horaire_debut', 'horaire_fin']);
+
+        return view('rendez-vous.edit', compact('rendezVous', 'clients', 'poneys', 'disponibilites', 'reservations'));
     }
 
     public function store(Request $request): RedirectResponse
