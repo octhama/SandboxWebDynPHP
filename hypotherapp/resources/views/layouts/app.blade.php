@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <title>@yield('title', 'Hypotheapp - Gestion des Poneys')</title>
+    <title>@yield('title', 'Hypotherapp - Gestion des Poneys')</title>
     <style>
         body {
             background: #f8f9fa;
@@ -70,7 +70,6 @@
         footer {
             background: #ffffff;
             color: #2c3e50;
-            border-top: 1px solid #e5e6e8;
             padding: 1.5rem;
             border-radius: 12px;
             width: 90%;
@@ -120,7 +119,7 @@
 <body>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Hypotheapp</a>
+        <a class="navbar-brand" href="#">Hypotherapp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -180,7 +179,7 @@
 </div>
 
 <footer>
-    <p class="mb-2">&copy; 2025 Hypotheapp - Gestion des Poneys. Tous droits réservés.</p>
+    <p class="mb-2">&copy; 2025 Hypotherapp - Gestion des Poneys. Tous droits réservés.</p>
     <p class="mb-0"><a href="#">Politique de confidentialité</a> | <a href="#">Conditions d'utilisation</a></p>
 </footer>
 
