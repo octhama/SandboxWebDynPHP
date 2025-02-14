@@ -1,10 +1,12 @@
+@php use Carbon\Carbon; @endphp
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
         <h1 class="text-center mb-5">Modifier le Rendez-vous</h1>
 
-        <form action="{{ route('rendez-vous.update', $rendezVous->id) }}" method="POST" class="shadow p-4 rounded bg-light">
+        <form action="{{ route('rendez-vous.update', $rendezVous->id) }}" method="POST"
+              class="shadow p-4 rounded bg-light">
             @csrf
             @method('PUT')
 
@@ -22,32 +24,36 @@
 
             <!-- Plages horaires disponibles -->
             <div class="form-group mb-4">
-                <label for="creneaux" class="form-label"><i class="fas fa-clock"></i> Plages horaires disponibles</label>
+                <label for="creneaux" class="form-label"><i class="fas fa-clock"></i> Plages horaires
+                    disponibles</label>
                 <select name="creneaux" id="creneaux" class="form-select" required>
                     <option value="" disabled>Choisissez une plage horaire</option>
                     @foreach ($disponibilites as $interval)
                         @php
                             if ($interval->start && $interval->end) {
-                                $creneau = \Carbon\Carbon::parse($interval->start)->format('H:i') . '-' . \Carbon\Carbon::parse($interval->end)->format('H:i');
+                                $creneau = Carbon::parse($interval->start)->format('H:i') . '-' . Carbon::parse($interval->end)->format('H:i');
                             } else {
                                 continue; // Ignore les créneaux non valides
                             }
 
+                            $reservations = $rendezVous->client->rendezVous->where('date', $rendezVous->date);
                             $estReserve = collect($reservations)->contains(fn($rdv) =>
                                 $rdv->start && $rdv->end &&
-                                \Carbon\Carbon::parse($rdv->start)->format('H:i') === \Carbon\Carbon::parse($interval->start)->format('H:i') &&
-                                \Carbon\Carbon::parse($rdv->end)->format('H:i') === \Carbon\Carbon::parse($interval->end)->format('H:i')
+                                Carbon::parse($rdv->start)->format('H:i') === Carbon::parse($interval->start)->format('H:i') &&
+                                Carbon::parse($rdv->end)->format('H:i') === Carbon::parse($interval->end)->format('H:i')
                             );
 
-                            $horaireDebut = $rendezVous->horaire_debut ? \Carbon\Carbon::parse($rendezVous->horaire_debut)->format('H:i') : null;
-                            $horaireFin = $rendezVous->horaire_fin ? \Carbon\Carbon::parse($rendezVous->horaire_fin)->format('H:i') : null;
+                            $horaireDebut = $rendezVous->horaire_debut ? Carbon::parse($rendezVous->horaire_debut)->format('H:i') : null;
+                            $horaireFin = $rendezVous->horaire_fin ? Carbon::parse($rendezVous->horaire_fin)->format('H:i') : null;
                         @endphp
 
                         <option value="{{ $creneau }}"
                             {{ ($horaireDebut && $horaireFin &&
                                 ($horaireDebut . '-' . $horaireFin) == $creneau) ? 'selected' : '' }}
                             {{ $estReserve ? 'disabled' : '' }}>
-                            {{ $creneau }} @if ($estReserve) (Réservé) @endif
+                            {{ $creneau }} @if ($estReserve)
+                                (Réservé)
+                            @endif
                         </option>
                     @endforeach
                 </select>

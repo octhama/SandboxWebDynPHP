@@ -88,6 +88,48 @@
         </form>
     </div>
 
+    <!-- Script pour désactiver les poneys déjà assignés -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function updatePoneyOptions() {
+                let selectedPoneys = new Set();
+                let selects = document.querySelectorAll('select[name="poneys[]"]');
+
+                // Collecter les poneys sélectionnés
+                selects.forEach(select => {
+                    if (select.value) {
+                        selectedPoneys.add(select.value);
+                    }
+                });
+
+                // Désactiver les poneys déjà sélectionnés dans les autres listes
+                selects.forEach(select => {
+                    let options = select.querySelectorAll('option');
+
+                    options.forEach(option => {
+                        if (option.value) {
+                            if (selectedPoneys.has(option.value) && option.value !== select.value) {
+                                option.disabled = true;
+                                option.textContent = option.textContent.replace(' (Pris)', '') + ' (Pris)';
+                            } else {
+                                option.disabled = false;
+                                option.textContent = option.textContent.replace(' (Pris)', '');
+                            }
+                        }
+                    });
+                });
+            }
+
+            // Ajouter un événement sur chaque select pour mettre à jour dynamiquement
+            document.querySelectorAll('select[name="poneys[]"]').forEach(select => {
+                select.addEventListener('change', updatePoneyOptions);
+            });
+
+            // Appliquer la mise à jour au chargement de la page
+            updatePoneyOptions();
+        });
+    </script>
+
     <!-- Styles supplémentaires -->
     <style>
         .form-group label {

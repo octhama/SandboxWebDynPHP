@@ -58,6 +58,18 @@
             top: 15px;
             right: 30px;
         }
+        @media (max-width: 768px) {
+            .menu-card i {
+                font-size: 2rem;
+            }
+            .menu-card h5 {
+                font-size: 1rem;
+            }
+            .user-menu {
+                top: 5px;
+                right: 10px;
+            }
+        }
     </style>
 </head>
 <body>

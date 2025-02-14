@@ -22,8 +22,16 @@
                                  data-bs-target="#rdv-{{ $rdv->id }}"
                                  style="cursor: pointer;">
                                 <span class="fw-semibold text-dark">
-                                    <i class="fas fa-user me-2"></i> {{ $rdv->client->nom }}
-                                    <span class="text-muted">(<i class="fas fa-calendar me-2"></i> {{ $rdv->horaire_debut->format('H:i') }} - {{ $rdv->horaire_fin->format('H:i') }})</span>
+                                    <i class="fas fa-user me-2"></i>
+                                    @if (!empty($rdv->client))
+                                        {{ $rdv->client->nom }}
+                                    @else
+                                        <span class="text-danger">Client supprimé</span>
+                                    @endif
+                                    <span class="text-muted">
+                                        (<i class="fas fa-calendar me-2"></i>
+                                        {{ $rdv->horaire_debut->format('H:i') }} - {{ $rdv->horaire_fin->format('H:i') }})
+                                    </span>
                                 </span>
                                 <i class="fas fa-chevron-down transition-icon"></i>
                             </div>

@@ -10,6 +10,10 @@
         @endif
         <h1 class="mb-5">Liste des Clients</h1>
 
+        <a href="{{ route('rendez-vous.create') }}" class="btn btn-success mb-4 shadow-lg rounded-pill px-4 py-2">
+            <i class="fas fa-plus-circle"></i> Nouveau Rendez-vous
+        </a>
+
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
@@ -37,13 +41,19 @@
                             <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-secondary btn-sm" title="Modifier">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('clients.destroy', $client->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm delete-btn" title="Supprimer">
+                            @if (!empty($client->rendezVous) && $client->rendezVous->isNotEmpty())
+                                <button class="btn btn-danger btn-sm" title="Supprimer" disabled>
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
-                            </form>
+                            @else
+                                <form action="{{ route('clients.destroy', $client->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm delete-btn" title="Supprimer">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @empty

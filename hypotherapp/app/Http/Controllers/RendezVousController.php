@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use App\Models\Facturation;
 use App\Models\Poney;
 use App\Models\RendezVous;
 use Illuminate\Contracts\View\Factory;
@@ -19,11 +18,9 @@ class RendezVousController extends Controller
     public function index(): View|Factory|Application
     {
         $rendezVous = RendezVous::with(['client', 'poneys'])->get();
-        $poneys = Poney::all();
-        $clients = Client::all();
-
-        return view('rendez-vous.index', compact('rendezVous', 'poneys', 'clients'));
+        return view('rendez-vous.index', compact('rendezVous'));
     }
+
 
     public function create(): View|Factory|Application
     {
