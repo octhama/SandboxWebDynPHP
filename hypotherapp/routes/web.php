@@ -9,6 +9,7 @@ use App\Http\Controllers\RendezVousController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\PoneyController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -79,7 +80,9 @@ Route::middleware(['auth'])->group(function () {
     // ========================
     // ⚙️ PARAMÈTRES ET AUTRES
     // ========================
-    Route::get('/rapports', [RapportController::class, 'index'])->name('rapports.index');
+    Route::get('/rapports', [RapportController::class, 'index'])
+        ->name('rapports.index')
+        ->middleware(AdminMiddleware::class);
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/support', [SupportController::class, 'index'])->name('support.index');
 

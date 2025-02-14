@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Policies\DashboardAccessPolicy;
+use App\Policies\RapportPolicy;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Client;

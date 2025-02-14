@@ -103,12 +103,18 @@
     <div class="row g-4 mt-3">
         <!-- Menus Supplémentaires -->
         <div class="col-md-4">
-            <div class="card menu-card text-center">
+            <div class="card menu-card text-center @if(auth()->user()->isEmployee()) bg-light text-muted @endif">
                 <div class="card-body">
                     <i class="fas fa-chart-line text-info"></i>
                     <h5 class="card-title">Rapports et Statistiques</h5>
                     <p>Analysez vos données.</p>
-                    <a href="{{ route('rapports.index') }}" class="btn btn-info">Accéder</a>
+
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('rapports.index') }}" class="btn btn-info">Accéder</a>
+                    @else
+                        <button class="btn btn-secondary" disabled>Accès restreint</button>
+                        <small class="d-block text-danger mt-2">Réservé aux administrateurs</small>
+                    @endif
                 </div>
             </div>
         </div>
