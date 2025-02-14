@@ -58,16 +58,19 @@
             top: 15px;
             right: 30px;
         }
+        /* RESPONSIVE */
+
         @media (max-width: 768px) {
-            .menu-card i {
-                font-size: 2rem;
+            .row {
+                flex-direction: column;
             }
-            .menu-card h5 {
-                font-size: 1rem;
+            .menu-card {
+                width: 90%;
+                margin: auto;
             }
             .user-menu {
-                top: 5px;
-                right: 10px;
+                flex-direction: row;
+                justify-content: space-between;
             }
         }
     </style>
