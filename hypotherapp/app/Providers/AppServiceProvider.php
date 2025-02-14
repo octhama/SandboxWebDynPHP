@@ -20,8 +20,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Client::class, ClientPolicy::class);
         Gate::policy(Poney::class, PoneyPolicy::class);
 
-        $this->registerPolicies();
-        Gate::define('view-reports', [DashboardAccessPolicy::class, 'viewReports']);    }
+        // $this->registerPolicies();
+        // Gate::define('view-reports', [DashboardAccessPolicy::class, 'viewReports']);
+    }
 
     /**
      * Enregistrement des services de l'application.

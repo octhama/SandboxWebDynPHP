@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Poney;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PoneyController extends Controller
 {
     // Afficher la liste des poneys
-    public function index()
+    public function index(): View|Factory|Application
     {
         $poneys = Poney::all();
         return view('poneys.index', compact('poneys'));
     }
 
     // Ajouter un nouveau poney
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'nom' => 'required|string|max:255',
@@ -29,12 +33,12 @@ class PoneyController extends Controller
 
         return redirect()->route('poneys.index')->with('success', 'Poney ajouté avec succès.');
     }
-    public function edit(Poney $poney)
+    public function edit(Poney $poney): View|Factory|Application
     {
         return view('poneys.edit', compact('poney'));
     }
 
-    public function update(Request $request, Poney $poney)
+    public function update(Request $request, Poney $poney): RedirectResponse
     {
         $request->validate([
             'nom' => 'required|string|max:255',
@@ -51,7 +55,7 @@ class PoneyController extends Controller
     }
 
     // Supprimer un poney
-    public function destroy(Poney $poney)
+    public function destroy(Poney $poney): RedirectResponse
     {
         $poney->delete();
         return redirect()->route('poneys.index')->with('success', 'Poney supprimé avec succès.');

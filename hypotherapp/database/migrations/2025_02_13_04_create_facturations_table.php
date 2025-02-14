@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('facturations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained()->onDelete('cascade');
-            $table->integer('nombre_heures')->default(0);
+            $table->integer('nombre_minutes')->default(0);
             $table->decimal('montant', 8, 2)->default(0.0);
             $table->timestamps();
         });

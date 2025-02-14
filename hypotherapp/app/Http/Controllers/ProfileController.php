@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function show()
+    public function show(): string
     {
         //$user = Auth::user();
         //return view('profile.show', compact('user'));

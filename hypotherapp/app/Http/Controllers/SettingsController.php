@@ -9,7 +9,7 @@ class SettingsController extends Controller
         return view('settings.index');
     }*/
 
-    public function index()
+    public function index(): string
     {
         return "Page des rapports en cours de développement.";
     }

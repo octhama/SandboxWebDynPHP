@@ -1,8 +1,9 @@
+@php use Carbon\Carbon; @endphp
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <h3 class="mb-4">{{ ucfirst(\Carbon\Carbon::now()->isoFormat('dddd D MMMM YYYY')) }}</h3>
+        <h3 class="mb-4">{{ ucfirst(Carbon::now()->isoFormat('dddd D MMMM YYYY')) }}</h3>
 
         <h2 class="text-center mb-4">Facturation</h2>
 
@@ -11,13 +12,13 @@
             <div class="col-md-4">
                 <h4 class="mb-3">Historique</h4>
                 <ol class="list-group shadow-sm">
-                    @forelse ($facturations->groupBy(fn($facture) => \Carbon\Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
+                    @forelse ($facturations->groupBy(fn($facture) => Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <a class="text-decoration-none text-dark fw-semibold d-flex align-items-center toggle-link"
                                    data-bs-toggle="collapse" href="#facture-{{ $loop->index }}" role="button"
                                    aria-expanded="false" aria-controls="facture-{{ $loop->index }}">
-                                    {{ ucfirst(\Carbon\Carbon::createFromFormat('Y-m', $mois)->translatedFormat('F Y')) }}
+                                    {{ ucfirst(Carbon::createFromFormat('Y-m', $mois)->translatedFormat('F Y')) }}
                                 </a>
                                 <small class="text-muted">Total : {{ count($factures) }} factures</small>
                             </div>
@@ -42,16 +43,17 @@
                 </div>
 
                 <div>
-                    @forelse ($facturations->groupBy(fn($facture) => \Carbon\Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
-                        <div class="collapse fade mt-2 bg-white p-3 rounded shadow-sm animated-collapse" id="facture-{{ $loop->index }}" data-bs-parent=".col-md-8">
-                            <h5 class="fw-bold text-primary">{{ ucfirst(\Carbon\Carbon::createFromFormat('Y-m', $mois)->translatedFormat('F Y')) }}
+                    @forelse ($facturations->groupBy(fn($facture) => Carbon::parse($facture->created_at)->format('Y-m')) as $mois => $factures)
+                        <div class="collapse fade mt-2 bg-white p-3 rounded shadow-sm animated-collapse"
+                             id="facture-{{ $loop->index }}" data-bs-parent=".col-md-8">
+                            <h5 class="fw-bold text-primary">{{ ucfirst(Carbon::createFromFormat('Y-m', $mois)->translatedFormat('F Y')) }}
                             </h5>
                             @if ($factures->isNotEmpty())
                                 <table class="table table-hover">
                                     <thead class="bg-primary text-white">
                                     <tr>
                                         <th>Client</th>
-                                        <th>Heures</th>
+                                        <th>Minutes</th>
                                         <th>Montant (€)</th>
                                     </tr>
                                     </thead>
@@ -59,8 +61,9 @@
                                     @foreach ($factures as $facture)
                                         <tr class="align-middle">
                                             <td>{{ $facture->client ? $facture->client->nom : 'Client inconnu' }}</td>
-                                            <td>{{ $facture->nombre_heures }}</td>
-                                            <td class="fw-bold">{{ number_format($facture->montant, 2, ',', ' ') }} €</td>
+                                            <td>{{ $facture->nombre_minutes }}</td>
+                                            <td class="fw-bold">{{ number_format($facture->montant, 2, ',', ' ') }}€
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -69,11 +72,13 @@
                                     <i class="fas fa-paper-plane"></i> Envoyer les factures
                                 </button>
                             @else
-                                <p class="text-center text-muted"><i class="fas fa-info-circle"></i> Aucune facture pour ce mois</p>
+                                <p class="text-center text-muted"><i class="fas fa-info-circle"></i> Aucune facture pour
+                                    ce mois</p>
                             @endif
                         </div>
                     @empty
-                        <p class="text-muted"><i class="fas fa-info-circle"></i> Cliquez sur une facture dans l'historique pour afficher les détails.</p>
+                        <p class="text-muted"><i class="fas fa-info-circle"></i> Cliquez sur une facture dans
+                            l'historique pour afficher les détails.</p>
                     @endforelse
                 </div>
             </div>

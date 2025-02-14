@@ -6,13 +6,17 @@ use App\Models\Client;
 use App\Models\Facturation;
 use App\Models\Poney;
 use App\Models\RendezVous;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class RendezVousController extends Controller
 {
-    public function index()
+    public function index(): View|Factory|Application
     {
         $rendezVous = RendezVous::with(['client', 'poneys'])->get();
         $poneys = Poney::all();
@@ -21,14 +25,14 @@ class RendezVousController extends Controller
         return view('rendez-vous.index', compact('rendezVous', 'poneys', 'clients'));
     }
 
-    public function create()
+    public function create(): View|Factory|Application
     {
         $clients = Client::all();
         $poneys = Poney::where('disponible', true)->get();
         $disponibilites = $this->getDisponibilites();
 
         // Récupérer les créneaux déjà réservés
-        $reservations = RendezVous::select('horaire_debut', 'horaire_fin')->get()->map(function ($rdv) {
+        $reservations = (new RendezVous)->select('horaire_debut', 'horaire_fin')->get()->map(function ($rdv) {
             return (object) [
                 'horaire_debut' => $rdv->horaire_debut ? Carbon::parse($rdv->horaire_debut) : null,
                 'horaire_fin' => $rdv->horaire_fin ? Carbon::parse($rdv->horaire_fin) : null,
@@ -38,7 +42,7 @@ class RendezVousController extends Controller
         return view('rendez-vous.create', compact('clients', 'poneys', 'disponibilites', 'reservations'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
         $validated = $request->validate([
             'creneaux' => 'required|string',
@@ -48,7 +52,7 @@ class RendezVousController extends Controller
         $horaireDebut = Carbon::createFromFormat('H:i', $horaireDebut);
         $horaireFin = Carbon::createFromFormat('H:i', $horaireFin);
 
-        $rendezVous = RendezVous::findOrFail($id);
+        $rendezVous = (new RendezVous)->findOrFail($id);
         $rendezVous->update([
             'horaire_debut' => $horaireDebut,
             'horaire_fin' => $horaireFin,
@@ -58,10 +62,10 @@ class RendezVousController extends Controller
     }
 
     // Supprimer un rendez-vous
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         DB::transaction(function () use ($id) {
-            $rendezVous = RendezVous::findOrFail($id);
+            $rendezVous = (new RendezVous)->findOrFail($id);
 
             // Réinitialiser la disponibilité des poneys avant de supprimer le rendez-vous
             $rendezVous->poneys()->update(['disponible' => true]);
@@ -73,7 +77,7 @@ class RendezVousController extends Controller
         return redirect()->route('rendez-vous.index')->with('success', 'Rendez-vous supprimé avec succès.');
     }
 
-    public function getDisponibilites()
+    public function getDisponibilites(): array
     {
         $disponibilites = [];
         $horaires = [
@@ -103,9 +107,9 @@ class RendezVousController extends Controller
         return $disponibilites;
     }
 
-    public function edit($id)
+    public function edit($id): View|Factory|Application
     {
-        $rendezVous = RendezVous::findOrFail($id);
+        $rendezVous = (new RendezVous)->findOrFail($id);
 
         if ($rendezVous->horaire_debut) {
             $rendezVous->horaire_debut = Carbon::parse($rendezVous->horaire_debut);
@@ -119,7 +123,7 @@ class RendezVousController extends Controller
         $disponibilites = $this->getDisponibilites();
 
         // ✅ Vérifier que les réservations ne contiennent pas de valeurs null
-        $reservations = RendezVous::select('horaire_debut', 'horaire_fin')->get()->map(function ($rdv) {
+        $reservations = (new RendezVous)->select('horaire_debut', 'horaire_fin')->get()->map(function ($rdv) {
             return (object) [
                 'start' => $rdv->horaire_debut ? Carbon::parse($rdv->horaire_debut) : null,
                 'end' => $rdv->horaire_fin ? Carbon::parse($rdv->horaire_fin) : null,
@@ -129,7 +133,7 @@ class RendezVousController extends Controller
         return view('rendez-vous.edit', compact('rendezVous', 'clients', 'poneys', 'disponibilites', 'reservations'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'client_id' => 'required|exists:clients,id',
@@ -144,7 +148,7 @@ class RendezVousController extends Controller
         $horaireFin = Carbon::createFromFormat('H:i', $horaireFin);
 
         DB::transaction(function () use ($validated, $horaireDebut, $horaireFin) {
-            $rendezVous = RendezVous::create([
+            $rendezVous = (new RendezVous)->create([
                 'client_id' => $validated['client_id'],
                 'horaire_debut' => $horaireDebut,
                 'horaire_fin' => $horaireFin,
@@ -153,7 +157,7 @@ class RendezVousController extends Controller
 
             if (!empty($validated['poneys'])) {
                 $rendezVous->poneys()->attach($validated['poneys']);
-                Poney::whereIn('id', $validated['poneys'])->update(['disponible' => false]);
+                (new Poney)->whereIn('id', $validated['poneys'])->update(['disponible' => false]);
             }
         });
 

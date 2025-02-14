@@ -25,7 +25,7 @@
                                         {{ $poney->disponible ? 'Disponible' : 'Indisponible' }}
                                     </span>
                             </td>
-                            <td> {{ $poney->heures_travail_validee }} / 8 heures</td>
+                            <td> {{ $poney->heures_travail_validee }} / 5 heures</td>
                             <td>
                                 <a href="{{ route('poneys.edit', $poney->id) }}" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> Modifier
@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="heures_travail_validee"><i class="fas fa-clock"></i> Heures travaillées</label>
-                                <input type="number" class="form-control" name="heures_travail_validee" placeholder="Ex : 6" min="1" max="24" required>
+                                <input type="number" class="form-control" name="heures_travail_validee" placeholder="Ex : 5" min="1" max="5" required>
                             </div>
                             <button type="submit" class="btn btn-success w-100">
                                 <i class="fas fa-save"></i> Ajouter

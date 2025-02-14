@@ -30,16 +30,16 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="duree" class="form-label">Durée (minutes)</label>
-                <input type="number" class="form-control" id="duree" name="duree"
-                       value="{{ old('duree', $client->heures * 60) }}" min="10" max="120" required>
+                <label for="minutes" class="form-label">Durée (minutes)</label>
+                <input type="number" class="form-control" id="minutes" name="minutes"
+                       value="{{ old('minutes', $client->minutes) }}" min="10" max="120" required>
                 <small class="text-danger d-none" id="alerte-duree"><i class="fas fa-exclamation-triangle"></i> Minimum 10 minutes.</small>
             </div>
 
             <div class="form-group mb-4">
                 <label for="prix_total" class="form-label">Prix total (€)</label>
                 <input type="text" class="form-control" id="prix_total" name="prix_total"
-                       value="{{ old('prix_total', $client->prix_total) }}" readonly>
+                       value="{{ old('prix_total', number_format($client->prix_total, 2)) }}" readonly>
             </div>
 
             <div class="d-flex justify-content-between">
@@ -52,7 +52,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let nombrePersonnesInput = document.getElementById('nombre_personnes');
-            let dureeInput = document.getElementById('duree');
+            let dureeInput = document.getElementById('minutes');
             let prixTotalInput = document.getElementById('prix_total');
             let alerteDuree = document.getElementById('alerte-duree');
 

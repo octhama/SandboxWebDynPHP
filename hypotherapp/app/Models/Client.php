@@ -16,13 +16,13 @@ class Client extends Model
         'prix_total',
     ];
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
         // Quand un client est créé, créer une facturation associée avec les mêmes données initiales
         static::created(function ($client) {
-            Facturation::create([
+            (new Facturation)->create([
                 'client_id' => $client->id,
                 'nombre_heures' => $client->minutes, // Garder les minutes, pas d'erreur de conversion
                 'montant' => $client->prix_total,
@@ -31,7 +31,7 @@ class Client extends Model
 
         // Quand un client est mis à jour, mettre à jour la facturation associée
         static::updated(function ($client) {
-            $facturation = Facturation::where('client_id', $client->id)->first();
+            $facturation = (new Facturation)->where('client_id', $client->id)->first();
             if ($facturation) {
                 $facturation->update([
                     'nombre_heures' => $client->minutes, // Toujours en minutes
@@ -42,7 +42,7 @@ class Client extends Model
 
         // Quand un client est supprimé, supprimer la facturation associée
         static::deleted(function ($client) {
-            $facturation = Facturation::where('client_id', $client->id)->first();
+            $facturation = (new Facturation)->where('client_id', $client->id)->first();
             if ($facturation) {
                 $facturation->delete();
             }

@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Facturation;
 use App\Models\Poney;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
 class RapportController extends Controller
 {
-    public function index()
+    public function index(): View|Factory|Application
     {
         // Données pour le graphique des clients (heures de réservation)
         $clients = Client::all();

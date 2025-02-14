@@ -5,22 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Facturation;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
     use AuthorizesRequests;
-    public function index()
+    public function index(): View|Factory|Application
     {
-        $clients = Client::paginate(5); // Récupère les clients avec pagination
+        $clients = (new Client)->paginate(5); // Récupère les clients avec pagination
         return view('clients.index', compact('clients')); // Retourne une vue avec les clients
     }
 
-    public function show($id)
+    public function show($id): View|Factory|Application
     {
-        $client = Client::findOrFail($id); // Récupère le client ou renvoie une erreur 404
+        $client = (new Client)->findOrFail($id); // Récupère le client ou renvoie une erreur 404
         return view('clients.show', compact('client'));
     }
 
@@ -30,7 +36,7 @@ class ClientController extends Controller
         return view('clients.edit', compact('client'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // dd($request->all()); Afficher les données soumises
 
@@ -60,7 +66,7 @@ class ClientController extends Controller
         return redirect()->route('clients.index')->with('success', 'Client créé avec succès.');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
         // Nettoyer le prix_total en supprimant le symbole € et en convertissant en nombre
         $request->merge([
@@ -76,7 +82,7 @@ class ClientController extends Controller
         ]);
 
         // Mettre à jour le client
-        $client = Client::findOrFail($id);
+        $client = (new Client)->findOrFail($id);
         $client->update([
             'nom' => $validated['nom'],
             'nombre_personnes' => $validated['nombre_personnes'],
@@ -86,7 +92,11 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès.');
     }
-    public function generateInvoice($id)
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function generateInvoice($id): Response
     {
         $client = Client::findOrFail($id);
         $this->authorize('generateInvoice', $client); // Vérifie l'autorisation
@@ -95,7 +105,7 @@ class ClientController extends Controller
         return $pdf->download('facture_' . $client->nom . '.pdf');
     }
 
-    public function destroy(Client $client)
+    public function destroy(Client $client): RedirectResponse
     {
         if (Auth::user()->role === 'employee') {
             return redirect()->route('clients.index')->with('error', '⛔ Vous n\'êtes pas autorisé à supprimer des clients. Veuillez contacter l\'administrateur.');
