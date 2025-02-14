@@ -91,7 +91,10 @@
                             </div>
                             <div class="mb-4">
                                 <label for="prix_total" class="form-label"><i class="fas fa-euro-sign"></i> Prix total</label>
-                                <input type="text" class="form-control" id="prix_total" name="prix_total" readonly>
+                                <!-- Champ caché pour stocker la valeur calculée -->
+                                <input type="hidden" id="prix_total_hidden" name="prix_total">
+                                <!-- Champ affiché en lecture seule -->
+                                <input type="text" class="form-control" id="prix_total" readonly>
                                 <small class="text-muted">Calculé automatiquement.</small>
                             </div>
                             <div class="d-grid">
@@ -120,6 +123,7 @@
             let nombrePersonnesInput = document.getElementById('nombre_personnes');
             let dureeInput = document.getElementById('duree');
             let prixTotalInput = document.getElementById('prix_total');
+            let prixTotalHidden = document.getElementById('prix_total_hidden');
             let alerteDuree = document.getElementById('alerte-duree');
             let errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
 
@@ -130,6 +134,7 @@
                 if (duree < 10) {
                     alerteDuree.classList.remove('d-none');
                     prixTotalInput.value = "";
+                    prixTotalHidden.value = "";
                     errorToast.show();
                     return;
                 } else {
@@ -140,6 +145,7 @@
                 let prixTotal = (nombrePersonnes * (duree / 10) * prixParPersonne).toFixed(2);
 
                 prixTotalInput.value = prixTotal + " €";
+                prixTotalHidden.value = prixTotal; // Stocker la valeur dans le champ caché
             }
 
             nombrePersonnesInput.addEventListener('input', recalculerPrix);

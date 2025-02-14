@@ -106,28 +106,12 @@ class RendezVousController extends Controller
 
     public function edit($id): View|Factory|Application
     {
-        $rendezVous = (new RendezVous)->findOrFail($id);
-
-        if ($rendezVous->horaire_debut) {
-            $rendezVous->horaire_debut = Carbon::parse($rendezVous->horaire_debut);
-        }
-        if ($rendezVous->horaire_fin) {
-            $rendezVous->horaire_fin = Carbon::parse($rendezVous->horaire_fin);
-        }
-
+        $rendezVous = RendezVous::with(['client.rendezVous'])->findOrFail($id);
         $clients = Client::all();
         $poneys = Poney::all();
         $disponibilites = $this->getDisponibilites();
 
-        // ✅ Vérifier que les réservations ne contiennent pas de valeurs null
-        $reservations = (new RendezVous)->select('horaire_debut', 'horaire_fin')->get()->map(function ($rdv) {
-            return (object) [
-                'start' => $rdv->horaire_debut ? Carbon::parse($rdv->horaire_debut) : null,
-                'end' => $rdv->horaire_fin ? Carbon::parse($rdv->horaire_fin) : null,
-            ];
-        });
-
-        return view('rendez-vous.edit', compact('rendezVous', 'clients', 'poneys', 'disponibilites', 'reservations'));
+        return view('rendez-vous.edit', compact('rendezVous', 'clients', 'poneys', 'disponibilites'));
     }
 
     public function store(Request $request): RedirectResponse
