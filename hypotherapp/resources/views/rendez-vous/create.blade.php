@@ -13,7 +13,9 @@
                 <select name="client_id" id="client_id" class="form-select" required>
                     <option value="" disabled selected>Choisissez un client</option>
                     @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">{{ $client->nom }}</option>
+                        <option value="{{ $client->id }}" data-nombre-personnes="{{ $client->nombre_personnes }}">
+                            {{ $client->nom }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -23,7 +25,7 @@
                 <label for="nombre_personnes" class="form-label"><i class="fas fa-users"></i> Nombre de personnes</label>
                 <input type="number" class="form-control" id="nombre_personnes" name="nombre_personnes"
                        min="1" max="{{ count($poneys) }}" placeholder="Maximum : {{ count($poneys) }}"
-                       required value="{{ old('nombre_personnes') }}">
+                       required value="{{ old('nombre_personnes') }}" readonly>
             </div>
 
             <!-- Plages horaires disponibles -->
@@ -49,7 +51,6 @@
                             @if ($estReserve) (Réservé) @endif
                         </option>
                     @endforeach
-
                 </select>
             </div>
 
@@ -63,27 +64,9 @@
                         <i class="fas fa-exclamation-circle"></i> Aucun poney disponible. Veuillez libérer des poneys avant de créer un rendez-vous.
                     </small>
                 @else
-                    <!-- Afficher les champs de sélection uniquement si des poneys sont disponibles -->
+                    <!-- Afficher les champs de sélection dynamiquement -->
                     <div id="poneys-container" class="row row-cols-2 g-3">
-                        @php
-                            $selectedPoneys = old('poneys', []);
-                            $poneysRestants = $poneys->pluck('id')->diff($selectedPoneys);
-                        @endphp
-                        @foreach (range(1, count($poneys)) as $i)
-                            <div class="col">
-                                <label for="poney-select-{{ $i }}" class="form-label">Poney {{ $i }}</label>
-                                <select name="poneys[]" id="poney-select-{{ $i }}" class="form-select">
-                                    <option value="" disabled selected>Choisissez un poney</option>
-                                    @foreach ($poneys as $poney)
-                                        <option value="{{ $poney->id }}"
-                                            {{ in_array($poney->id, $selectedPoneys) ? 'disabled' : '' }}
-                                            {{ isset($selectedPoneys[$i - 1]) && $selectedPoneys[$i - 1] == $poney->id ? 'selected' : '' }}>
-                                            {{ $poney->nom }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endforeach
+                        <!-- Les sélections de poneys seront injectées ici dynamiquement -->
                     </div>
                 @endif
             </div>
@@ -97,9 +80,46 @@
         </form>
     </div>
 
-    <!-- Script pour désactiver les poneys déjà assignés -->
+    <!-- Script pour gérer la dynamique des poneys -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const clientSelect = document.getElementById('client_id');
+            const nombrePersonnesInput = document.getElementById('nombre_personnes');
+            const poneysContainer = document.getElementById('poneys-container');
+            const poneysData = @json($poneys);
+
+            // Mettre à jour le nombre de personnes et les sélections de poneys
+            clientSelect.addEventListener('change', function () {
+                const selectedClient = this.options[this.selectedIndex];
+                const nombrePersonnes = selectedClient.dataset.nombrePersonnes;
+
+                // Mettre à jour le champ "Nombre de personnes"
+                nombrePersonnesInput.value = nombrePersonnes;
+
+                // Générer les sélections de poneys dynamiquement
+                poneysContainer.innerHTML = ''; // Vider le conteneur
+                for (let i = 1; i <= nombrePersonnes; i++) {
+                    const selectHtml = `
+                        <div class="col">
+                            <label for="poney-select-${i}" class="form-label">Poney ${i}</label>
+                            <select name="poneys[]" id="poney-select-${i}" class="form-select">
+                                <option value="" disabled selected>Choisissez un poney</option>
+                                ${poneysData.map(poney => `
+                                    <option value="${poney.id}">
+                                        ${poney.nom}
+                                    </option>
+                                `).join('')}
+                            </select>
+                        </div>
+                    `;
+                    poneysContainer.insertAdjacentHTML('beforeend', selectHtml);
+                }
+
+                // Appliquer la logique de désactivation des poneys déjà sélectionnés
+                updatePoneyOptions();
+            });
+
+            // Fonction pour désactiver les poneys déjà sélectionnés
             function updatePoneyOptions() {
                 let selectedPoneys = new Set();
                 let selects = document.querySelectorAll('select[name="poneys[]"]');
@@ -130,30 +150,9 @@
             }
 
             // Ajouter un événement sur chaque select pour mettre à jour dynamiquement
-            document.querySelectorAll('select[name="poneys[]"]').forEach(select => {
-                select.addEventListener('change', updatePoneyOptions);
-            });
-
-            // Appliquer la mise à jour au chargement de la page
-            updatePoneyOptions();
-        });
-    </script>
-
-    <!-- Script pour remplir le nombre de personnes automatiquement -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const clientSelect = document.getElementById('client_id');
-            const nombrePersonnesInput = document.getElementById('nombre_personnes');
-            const clientsData = @json($clients->pluck('nombre_personnes', 'id'));
-
-            clientSelect.addEventListener('change', function () {
-                let clientId = this.value;
-                if (clientId && clientsData[clientId]) {
-                    nombrePersonnesInput.value = clientsData[clientId];
-                    nombrePersonnesInput.setAttribute('readonly', true); // Empêcher la modification
-                } else {
-                    nombrePersonnesInput.value = "";
-                    nombrePersonnesInput.removeAttribute('readonly');
+            poneysContainer.addEventListener('change', function (e) {
+                if (e.target.tagName === 'SELECT') {
+                    updatePoneyOptions();
                 }
             });
         });
