@@ -18,7 +18,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             position: relative;
         }
@@ -27,6 +27,7 @@
             max-width: 1200px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
+            padding: 20px;
         }
 
         .menu-card {
@@ -36,15 +37,16 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             overflow: hidden;
             position: relative;
+            margin-bottom: 20px;
         }
 
         .menu-card:hover {
-            transform: scale(1.08);
+            transform: scale(1.05);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .menu-card i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
@@ -56,21 +58,52 @@
         .user-menu {
             position: absolute;
             top: 15px;
-            right: 30px;
+            right: 15px;
         }
-        /* RESPONSIVE */
 
+        .user-menu .dropdown-toggle {
+            padding: 5px 10px;
+        }
+
+        .user-menu .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
+            .container {
+                margin-top: 60px; /* Marge en haut pour éviter le chevauchement */
+            }
             .row {
                 flex-direction: column;
             }
             .menu-card {
-                width: 90%;
-                margin: auto;
+                width: 100%;
+                margin: 10px 0;
+            }
+            .menu-card i {
+                font-size: 2rem;
+            }
+            .menu-card h5 {
+                font-size: 1.2rem;
+            }
+            .menu-card .btn {
+                font-size: 0.9rem;
+                padding: 8px 16px;
             }
             .user-menu {
-                flex-direction: row;
-                justify-content: space-between;
+                top: 10px;
+                right: 10px;
+            }
+            .user-menu .dropdown-toggle {
+                font-size: 0.9rem;
+            }
+            .container h1 {
+                font-size: 1.5rem;
+            }
+            .container h2 {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -86,19 +119,19 @@
 
     <!-- Inclure le composant d'alerte -->
     @include('components.alert')
-<div class="user-menu">
-    <li class="nav-item dropdown list-unstyled">
-        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-            @php
-                $defaultAdminAvatar = 'https://github.com/mdo.png';
-                $defaultEmployeeAvatar = asset('images/employee_two.png');
-                $avatar = Auth::check() ? (Auth::user()->isAdmin() ? $defaultAdminAvatar : $defaultEmployeeAvatar) : $defaultEmployeeAvatar;
-            @endphp
-            <img src="{{ Auth::check() ? (Auth::user()->avatar ?? $avatar) : $avatar }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
-            {{ Auth::check() ? Auth::user()->name : 'Invité' }}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-            @if (Auth::check())
+    <div class="user-menu">
+        <li class="nav-item dropdown list-unstyled">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                @php
+                    $defaultAdminAvatar = 'https://github.com/mdo.png';
+                    $defaultEmployeeAvatar = asset('images/employee_two.png');
+                    $avatar = Auth::check() ? (Auth::user()->isAdmin() ? $defaultAdminAvatar : $defaultEmployeeAvatar) : $defaultEmployeeAvatar;
+                @endphp
+                <img src="{{ Auth::check() ? (Auth::user()->avatar ?? $avatar) : $avatar }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
+                {{ Auth::check() ? Auth::user()->name : 'Invité' }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                @if (Auth::check())
                 <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
                 <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
                 <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
@@ -109,13 +142,12 @@
                         <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</button>
                     </form>
                 </li>
-            @else
-                <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fas fa-sign-in-alt me-2"></i> Connexion</a></li>
-            @endif
-        </ul>
-    </li>
-</div>
-<div class="container">
+                @else
+                    <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fas fa-sign-in-alt me-2"></i> Connexion</a></li>
+                @endif
+            </ul>
+        </li>
+    </div>
     <h1>Bienvenue sur Hypotherapp</h1>
     <h2 class="mb-4">Navigation principale</h2>
     <div class="row g-4">
@@ -152,9 +184,8 @@
                     <i class="fas fa-chart-line text-info"></i>
                     <h5 class="card-title">Rapports et Statistiques</h5>
                     <p>Analysez vos données.</p>
-
                     @if(auth()->user()->isAdmin())
-                        <a href="{{ route('rapports.index') }}" class="btn btn-info">Accéder</a>
+                    <a href="{{ route('rapports.index') }}" class="btn btn-info">Accéder</a>
                     @else
                         <button class="btn btn-secondary" disabled>Accès restreint</button>
                     @endif
