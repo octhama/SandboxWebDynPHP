@@ -20,6 +20,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative;
         }
 
         .container {
@@ -51,6 +52,12 @@
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .user-menu {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+        }
     </style>
 </head>
 <body>
@@ -64,17 +71,44 @@
 
     <!-- Inclure le composant d'alerte -->
     @include('components.alert')
-
+<div class="user-menu">
+    <li class="nav-item dropdown list-unstyled">
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+            @php
+                $defaultAdminAvatar = 'https://github.com/mdo.png';
+                $defaultEmployeeAvatar = asset('images/employee_two.png');
+                $avatar = Auth::check() ? (Auth::user()->isAdmin() ? $defaultAdminAvatar : $defaultEmployeeAvatar) : $defaultEmployeeAvatar;
+            @endphp
+            <img src="{{ Auth::check() ? (Auth::user()->avatar ?? $avatar) : $avatar }}" class="rounded-circle me-2" width="25" height="25" alt="Avatar">
+            {{ Auth::check() ? Auth::user()->name : 'Invité' }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            @if (Auth::check())
+                <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
+                <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
+                <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</button>
+                    </form>
+                </li>
+            @else
+                <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fas fa-sign-in-alt me-2"></i> Connexion</a></li>
+            @endif
+        </ul>
+    </li>
+</div>
+<div class="container">
     <h1>Bienvenue sur Hypotherapp</h1>
     <h2 class="mb-4">Navigation principale</h2>
     <div class="row g-4">
-        <!-- Menus Principaux -->
         <div class="col-md-4">
             <div class="card menu-card text-center">
                 <div class="card-body">
                     <i class="fas fa-users text-primary"></i>
                     <h5 class="card-title">Gestion des Clients</h5>
-                    <p>Consultez, modifiez ou ajoutez des clients.</p>
                     <a href="{{ route('clients.index') }}" class="btn btn-primary">Accéder</a>
                 </div>
             </div>
@@ -84,7 +118,6 @@
                 <div class="card-body">
                     <i class="fas fa-calendar-alt text-success"></i>
                     <h5 class="card-title">Gestion des Rendez-vous</h5>
-                    <p>Planifiez et gérez vos rendez-vous.</p>
                     <a href="{{ route('rendez-vous.index') }}" class="btn btn-success">Accéder</a>
                 </div>
             </div>
@@ -94,14 +127,10 @@
                 <div class="card-body">
                     <i class="fas fa-horse text-warning"></i>
                     <h5 class="card-title">Gestion des Poneys</h5>
-                    <p>Ajoutez et suivez vos poneys.</p>
                     <a href="{{ route('poneys.index') }}" class="btn btn-warning">Accéder</a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row g-4 mt-3">
-        <!-- Menus Supplémentaires -->
         <div class="col-md-4">
             <div class="card menu-card text-center @if(auth()->user()->isEmployee()) bg-light text-muted @endif">
                 <div class="card-body">
