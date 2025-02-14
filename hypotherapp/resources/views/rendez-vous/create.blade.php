@@ -130,6 +130,27 @@
         });
     </script>
 
+    <!-- Script pour remplir le nombre de personnes automatiquement -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const clientSelect = document.getElementById('client_id');
+            const nombrePersonnesInput = document.getElementById('nombre_personnes');
+            const clientsData = @json($clients->pluck('nombre_personnes', 'id'));
+
+            clientSelect.addEventListener('change', function () {
+                let clientId = this.value;
+                if (clientId && clientsData[clientId]) {
+                    nombrePersonnesInput.value = clientsData[clientId];
+                    nombrePersonnesInput.setAttribute('readonly', true); // Empêcher la modification
+                } else {
+                    nombrePersonnesInput.value = "";
+                    nombrePersonnesInput.removeAttribute('readonly');
+                }
+            });
+        });
+    </script>
+
+
     <!-- Styles supplémentaires -->
     <style>
         .form-group label {
