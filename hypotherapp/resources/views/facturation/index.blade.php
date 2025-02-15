@@ -72,7 +72,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <button class="btn btn-primary w-100 shadow-sm">
+                                <button class="btn btn-primary mb-4 shadow-lg rounded-pill px-4 py-2 d-block mx-auto">
                                     <i class="fas fa-paper-plane"></i> Envoyer les factures
                                 </button>
                             @else
