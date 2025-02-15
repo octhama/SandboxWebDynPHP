@@ -103,7 +103,7 @@
                                 <small class="text-muted">Calculé automatiquement.</small>
                             </div>
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary rounded-pill shadow"><i
+                                <button type="submit" class="btn btn-primary px-4 py-2 d-block mx-auto shadow rounded-pill"><i
                                         class="fas fa-save"></i> Enregistrer
                                 </button>
                             </div>
