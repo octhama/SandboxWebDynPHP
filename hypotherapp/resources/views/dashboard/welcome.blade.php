@@ -11,10 +11,22 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --font-family: 'Poppins', sans-serif;
+        }
+
         body {
-            background: #f8f9fa;
-            font-family: 'Poppins', sans-serif;
-            color: #343a40;
+            background: var(--light-color);
+            font-family: var(--font-family);
+            color: var(--dark-color);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -48,6 +60,7 @@
         .menu-card i {
             font-size: 2.5rem;
             margin-bottom: 10px;
+            color: var(--primary-color);
         }
 
         @keyframes fadeIn {
@@ -73,7 +86,7 @@
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .container {
-                margin-top: 60px; /* Marge en haut pour éviter le chevauchement */
+                margin-top: 60px;
             }
             .row {
                 flex-direction: column;
@@ -132,16 +145,16 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
                 @if (Auth::check())
-                <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
-                <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
-                <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</button>
-                    </form>
-                </li>
+                    <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
+                    <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
+                    <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</button>
+                        </form>
+                    </li>
                 @else
                     <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fas fa-sign-in-alt me-2"></i> Connexion</a></li>
                 @endif
@@ -188,7 +201,7 @@
                     <h5 class="card-title">Rapports et Statistiques</h5>
                     <p>Analysez vos données.</p>
                     @if(auth()->user()->isAdmin())
-                    <a href="{{ route('rapports.index') }}" class="btn btn-info">Accéder</a>
+                        <a href="{{ route('rapports.index') }}" class="btn btn-info">Accéder</a>
                     @else
                         <button class="btn btn-secondary" disabled>Accès restreint</button>
                     @endif

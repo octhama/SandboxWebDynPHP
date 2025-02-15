@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-4">Rapports & Statistiques</h1>
+        <h1 class="my-4 text-center">Rapports & Statistiques</h1>
 
         <!-- Conteneur avec 3 cartes de taille identique -->
         <div class="row">
             <!-- Carte 1 : Heures Réservées par Client -->
-            <div class="col-md-6">
-                <div class="card shadow-sm mb-4 chart-card">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm chart-card hover-effect">
                     <div class="card-body">
                         <h5 class="card-title text-center">Minutes Réservées par Client</h5>
                         <div class="chart-container">
@@ -19,8 +19,8 @@
             </div>
 
             <!-- Carte 2 : Tendance des Factures -->
-            <div class="col-md-6">
-                <div class="card shadow-sm mb-4 chart-card">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm chart-card hover-effect">
                     <div class="card-body">
                         <h5 class="card-title text-center">Tendance des Factures</h5>
                         <div class="chart-container">
@@ -31,8 +31,8 @@
             </div>
 
             <!-- Carte 3 : Heures de Travail Validées par Poney -->
-            <div class="col-md-6">
-                <div class="card shadow-sm mb-4 chart-card">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm chart-card hover-effect">
                     <div class="card-body">
                         <h5 class="card-title text-center">Heures de Travail Validées par Poney</h5>
                         <div class="chart-container">
@@ -51,12 +51,22 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .chart-container {
             width: 100%;
             height: 300px; /* Taille identique pour tous les charts */
             position: relative;
+        }
+
+        .hover-effect {
+            cursor: pointer;
         }
     </style>
 
@@ -68,7 +78,12 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false
+                    }
                 }
             };
 
