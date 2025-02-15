@@ -125,8 +125,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.welcome') }}">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('rendez-vous.index') }}">Rendez-vous</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('poneys.index') }}">Poneys</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="clientsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clients</a>
                     <ul class="dropdown-menu" aria-labelledby="clientsDropdown">
@@ -134,7 +134,6 @@
                         <li><a class="dropdown-item" href="{{ route('facturation.index') }}"><i class="fas fa-file-invoice"></i> Historique des facturations</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('poneys.index') }}">Poneys</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                         @php
@@ -148,6 +147,8 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         @if (Auth::check())
+                            <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.welcome') }}"><i class="fa fa-tachometer-alt me-2"></i> Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fas fa-user-circle me-2"></i> Profil</a></li>
                             <li><a class="dropdown-item" href="{{ route('settings.index') }}"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
                             <li><a class="dropdown-item" href="{{ route('support.index') }}"><i class="fas fa-life-ring me-2"></i> Support</a></li>
