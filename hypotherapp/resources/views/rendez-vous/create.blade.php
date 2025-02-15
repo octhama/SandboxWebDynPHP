@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="text-center mb-5">Créer un Nouveau Rendez-vous</h1>
 
-        <form action="{{ route('rendez-vous.store') }}" method="POST" class="shadow p-4 rounded bg-light">
+        <form action="{{ route('rendez-vous.store') }}" method="POST" class="shadow p-4 rounded bg-light" id="rendez-vous-form">
             @csrf
 
             <!-- Sélectionner un client -->
@@ -80,12 +80,13 @@
         </form>
     </div>
 
-    <!-- Script pour gérer la dynamique des poneys -->
+    <!-- Script pour gérer la dynamique des poneys et la validation -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const clientSelect = document.getElementById('client_id');
             const nombrePersonnesInput = document.getElementById('nombre_personnes');
             const poneysContainer = document.getElementById('poneys-container');
+            const form = document.getElementById('rendez-vous-form');
             const poneysData = @json($poneys);
 
             // Mettre à jour le nombre de personnes et les sélections de poneys
@@ -102,7 +103,7 @@
                     const selectHtml = `
                         <div class="col">
                             <label for="poney-select-${i}" class="form-label">Poney ${i}</label>
-                            <select name="poneys[]" id="poney-select-${i}" class="form-select">
+                            <select name="poneys[]" id="poney-select-${i}" class="form-select" required>
                                 <option value="" disabled selected>Choisissez un poney</option>
                                 ${poneysData.map(poney => `
                                     <option value="${poney.id}">
@@ -153,6 +154,19 @@
             poneysContainer.addEventListener('change', function (e) {
                 if (e.target.tagName === 'SELECT') {
                     updatePoneyOptions();
+                }
+            });
+
+            // Validation du formulaire avant soumission
+            form.addEventListener('submit', function (e) {
+                const nombrePersonnes = parseInt(nombrePersonnesInput.value, 10);
+                const selectedPoneys = document.querySelectorAll('select[name="poneys[]"]');
+                const selectedPoneysCount = Array.from(selectedPoneys).filter(select => select.value !== '').length;
+
+                // Vérifier si le nombre de poneys sélectionnés correspond au nombre de personnes
+                if (selectedPoneysCount !== nombrePersonnes) {
+                    e.preventDefault(); // Empêcher la soumission du formulaire
+                    alert('Le nombre de poneys sélectionnés ne correspond pas au nombre de personnes. Veuillez sélectionner un poney pour chaque personne.');
                 }
             });
         });

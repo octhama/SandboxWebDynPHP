@@ -156,6 +156,7 @@
                 <div class="card-body">
                     <i class="fas fa-users text-primary"></i>
                     <h5 class="card-title">Gestion des Clients</h5>
+                    <p>Gestion des clients et des rendez-vous.</p>
                     <a href="{{ route('clients.index') }}" class="btn btn-primary">Accéder</a>
                 </div>
             </div>
@@ -165,6 +166,7 @@
                 <div class="card-body">
                     <i class="fas fa-calendar-alt text-success"></i>
                     <h5 class="card-title">Gestion des Rendez-vous</h5>
+                    <p>Planifiez les rendez-vous.</p>
                     <a href="{{ route('rendez-vous.index') }}" class="btn btn-success">Accéder</a>
                 </div>
             </div>
@@ -174,6 +176,7 @@
                 <div class="card-body">
                     <i class="fas fa-horse text-warning"></i>
                     <h5 class="card-title">Gestion des Poneys</h5>
+                    <p>Enregistrez les poneys.</p>
                     <a href="{{ route('poneys.index') }}" class="btn btn-warning">Accéder</a>
                 </div>
             </div>
