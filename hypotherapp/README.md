@@ -132,31 +132,6 @@ Pour exécuter les tests unitaires et fonctionnels :
 php artisan test
 ```
 
-## 💪 Contribuer
-
-Les contributions sont les bienvenues ! 🚀
-
-1. **Forkez** le dépôt.
-2. **Créez une branche** pour votre fonctionnalité :
-
-   ```bash
-   git checkout -b feature/nouvelle-fonctionnalite
-   ```
-
-3. **Committez vos changements** :
-
-   ```bash
-   git commit -m 'Ajouter une nouvelle fonctionnalité'
-   ```
-
-4. **Pushez la branche** :
-
-   ```bash
-   git push origin feature/nouvelle-fonctionnalite
-   ```
-
-5. **Ouvrez une Pull Request**.
-
 ## 📝 Licence
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
