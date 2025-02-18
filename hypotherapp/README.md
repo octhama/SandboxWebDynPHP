@@ -153,6 +153,6 @@ L'application sera accessible à l'adresse : **[http://127.0.0.1:8000](http://lo
 ## ❤️ Remerciements
 
 Merci à l'équipe de Laravel pour leur excellent framework, ainsi qu'à la communauté open-source pour les outils utilisés dans ce projet.
-Merci à **maitrepylos** - Php Sensei - [GitHub](https://github.com/maitrepylos) pour ses précieux conseils et son soutien.
+Merci à **maitrepylos** - Php Sensei 🫡 - [GitHub](https://github.com/maitrepylos) pour ses précieux conseils et son soutien.
 
 
