@@ -94,7 +94,7 @@ composer require barryvdh/laravel-dompdf
 php artisan serve
 ```
 
-L'application sera accessible à l'adresse : **[http://localhost:8000](http://localhost:8000)**
+L'application sera accessible à l'adresse : **[http://127.0.0.1:8000](http://localhost:8000)**
 
 ## 📂 Structure du projet
 
