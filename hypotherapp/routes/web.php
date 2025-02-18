@@ -11,7 +11,6 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\PoneyController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 // ========================
 // 🔐 AUTHENTIFICATION
