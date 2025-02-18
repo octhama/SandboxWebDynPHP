@@ -4,8 +4,9 @@ Hypotherapp est une application web développée avec Laravel pour gérer les **
 
 ## 🚀 Fonctionnalités principales
 
+- **🔒 Authentification** : Inscription, connexion et gestion des utilisateurs avec des rôles (admin, employee).
 - **🤝 Gestion des clients** : Ajouter, modifier et supprimer des clients.
-- **🐴 Gestion des poneys** : Assigner des poneys à des rendez-vous.
+- **🐴 Gestion des poneys** : Assigner des poneys à des rendez-vous, ajouter de nouveaux poneys, modifier et supprimer des poneys.
 - **🗓️ Rendez-vous** : Planifier des rendez-vous avec des créneaux horaires disponibles.
 - **💰 Facturation (PDF)** : Générer des factures PDF détaillées grâce à **Laravel DomPDF**.
 - **🎨 Interface utilisateur intuitive** : Conçue pour une navigation fluide et agréable.
