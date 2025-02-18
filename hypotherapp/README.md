@@ -127,6 +127,24 @@ L'application sera accessible à l'adresse : **[http://localhost:8000](http://lo
 3. Cliquez sur **Générer la facture PDF**.
 4. Le fichier **PDF** sera téléchargé automatiquement.
 
+### 🐴 3️⃣ Gérer les poneys
+
+1. Accédez à la section **Poneys**.
+2. Ajoutez un nouveau poney avec le formulaire.
+3. Cliquer sur **Ajouter le poney**.
+4. Le poney sera ajouté avec succès dans la liste des poneys.
+
+### 👤 4️⃣ Créer un utilisateur
+
+1. Accédez à l'application via ce lien : **[http://127.0.0.1:8000**.
+2. Si vous n'avez pas de compte, cliquez sur **S'inscrire**.
+3. Remplissez le formulaire d'inscription.
+4. Choisissez un rôle : **admin** ou **employee**.
+5. Cliquez sur **S'inscrire**.
+6. Vous serez redirigé vers la page de connexion.
+7. Connectez-vous avec vos identifiants.
+8. Cliquez sur **Se connecter**.
+
 ## ✨ Auteur
 
 **Octhama** - Développeur principal - [GitHub](https://github.com/octhama)
