@@ -19,7 +19,7 @@ Hypotherapp est une application web développée avec Laravel pour gérer les **
 - **Génération de factures PDF** : `barryvdh/laravel-dompdf`
 - **Autres outils** : Composer, npm, Carbon (gestion des dates)
 
-## 👅 Installation
+## 📦 Installation
 
 Suivez ces étapes pour installer et configurer le projet localement.
 
