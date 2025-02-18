@@ -18,24 +18,42 @@ use Illuminate\Support\Facades\Auth;
 class ClientController extends Controller
 {
     use AuthorizesRequests;
+
+    /**
+     * Afficher la liste des clients
+     * @return View|Factory|Application
+     */
     public function index(): View|Factory|Application
     {
         $clients = (new Client)->paginate(5); // Récupère les clients avec pagination
         return view('clients.index', compact('clients')); // Retourne une vue avec les clients
     }
 
+    /**
+     * Afficher le formulaire de création d'un client
+     * @return View|Factory|Application
+     */
     public function show($id): View|Factory|Application
     {
         $client = (new Client)->findOrFail($id); // Récupère le client ou renvoie une erreur 404
         return view('clients.show', compact('client'));
     }
 
+    /**
+     * Afficher le formulaire de création d'un client
+     * @return View|Factory|Application
+     */
     public function edit($id)
     {
         $client = Client::findOrFail($id); // Récupère le client ou retourne une erreur 404
         return view('clients.edit', compact('client'));
     }
 
+    /**
+     * Afficher le formulaire de création d'un client
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request): RedirectResponse
     {
         // dd($request->all()); Afficher les données soumises
@@ -66,6 +84,13 @@ class ClientController extends Controller
         return redirect()->route('clients.index')->with('success', 'Client créé avec succès.');
     }
 
+    /**
+     * Mettre à jour un client
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
+
     public function update(Request $request, $id): RedirectResponse
     {
         // Nettoyer le prix_total en supprimant le symbole € et en convertissant en nombre
@@ -94,6 +119,9 @@ class ClientController extends Controller
     }
 
     /**
+     * Générer une facture pour un client
+     * @param $id
+     * @return Response
      * @throws AuthorizationException
      */
     public function generateInvoice($id): Response
@@ -105,6 +133,11 @@ class ClientController extends Controller
         return $pdf->download('facture_' . $client->nom . '.pdf');
     }
 
+    /**
+     * Supprimer un client
+     * @param Client $client
+     * @return RedirectResponse
+     */
     public function destroy(Client $client): RedirectResponse
     {
         if (Auth::user()->role === 'employee') {

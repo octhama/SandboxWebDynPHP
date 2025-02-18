@@ -14,13 +14,21 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Afficher le formulaire de connexion
+    /***
+     * Afficher le formulaire de connexion
+     * @return View|Factory|Application
+     */
     public function showLogin(): View|Factory|Application
     {
         return view('auth.login');
     }
 
-    // Traiter la connexion
+    /***
+     * Authentification
+     * @param Request $request
+     * @return RedirectResponse
+     * @return RedirectResponse
+     */
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -38,10 +46,21 @@ class AuthController extends Controller
         return back()->with('error', 'Email ou mot de passe incorrect.');
     }
 
+    /***
+     * Afficher le formulaire d'inscription
+     * @return View|Factory|Application
+     */
+
     public function showSignup(): View|Factory|Application
     {
         return view('auth.signup'); // Retourne la vue d'inscription
     }
+
+    /***
+     * Inscription
+     * @param Request $request
+     * @return RedirectResponse
+     */
 
     public function register(Request $request): RedirectResponse
     {
@@ -61,7 +80,11 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Compte créé avec succès ! Connectez-vous 🎉');
     }
-    // Déconnexion
+
+    /***
+     * Déconnexion
+     * @return RedirectResponse
+     */
     public function logout(): RedirectResponse
     {
         Auth::logout();

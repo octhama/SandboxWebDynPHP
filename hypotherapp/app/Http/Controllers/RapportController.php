@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class RapportController extends Controller
 {
+    /**
+     * Afficher les rapports
+     * @return View|Factory|Application
+     */
     public function index(): View|Factory|Application
     {
         // Données pour le graphique des clients (heures de réservation)
