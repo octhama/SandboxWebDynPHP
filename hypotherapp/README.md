@@ -6,6 +6,15 @@ Hypotherapp est une application web développée avec Laravel pour gérer les **
 
 L'application est conçue pour un centre équestre qui propose des balades à poney pour les enfants. Les clients peuvent réserver des créneaux horaires pour une durée de 10 à 20 minutes et choisir le nombre de poneys pour leur balade. Les employés peuvent gérer les rendez-vous, les clients et les poneys, ainsi que générer des factures pour les clients.
 
+## 🎯 Objectifs
+
+- **Gestion des rendez-vous** : Planifier des rendez-vous avec des créneaux horaires disponibles.
+- **Gestion des clients** : Ajouter, modifier et supprimer des clients.
+- **Gestion des poneys** : Assigner des poneys à des rendez-vous, ajouter de nouveaux poneys, modifier et supprimer des poneys.
+- **Facturation** : Générer des factures PDF détaillées pour les clients.
+- **Authentification** : Inscription, connexion et gestion des utilisateurs avec des rôles (admin, employee).
+- **Interface utilisateur** : Conception d'une interface intuitive et conviviale pour une navigation fluide.
+
 ## 🚀 Fonctionnalités principales
 
 - **🔒 Authentification** : Inscription, connexion et gestion des utilisateurs avec des rôles (admin, employee).
