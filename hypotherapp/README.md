@@ -114,13 +114,16 @@ L'application sera accessible à l'adresse : **[http://localhost:8000](http://lo
 
 1. Connectez-vous à l'application.
 2. Accédez à la section **Rendez-vous**.
-3. Sélectionnez un client, une plage horaire et assignez des poneys.
-4. Cliquez sur **Créer le rendez-vous**.
+3. Ajoutez un client, le nombre de poneys et le nombre de minutes (min 10 min, max 20 min).
+4. Accédez à la section **Clients - Liste des clients** pour voir la liste des clients avec la possibilité de les modifier ou les supprimer et voir les factures et les générer.
+5. Accédez à la section **Nouveau Rendez-vous** pour ajouter un nouveau rendez-vous avec un client, le nombre de poneys et le créneau horaire désiré pour utiliser les minutes.
+6. Cliquez sur **Créer le rendez-vous**.
+7. Le rendez-vous sera ajouté avec succès dans la liste des rendez-vous.
 
 ### 💰 2️⃣ Générer une facture PDF
 
-1. Accédez à la section **Facturation**.
-2. Sélectionnez un client et un mois.
+1. Accédez à la section **Clients - Liste des clients**.
+2. Cliquer sur le bouton **Voir** pour voir les détails du client et générer la facture.
 3. Cliquez sur **Générer la facture PDF**.
 4. Le fichier **PDF** sera téléchargé automatiquement.
 
