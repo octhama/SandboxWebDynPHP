@@ -154,7 +154,7 @@ L'application sera accessible à l'adresse : **[http://127.0.0.1:8000](http://lo
 
 ### 👤 4️⃣ Créer un utilisateur
 
-1. Accédez à l'application via ce lien : **[http://127.0.0.1:8000**.
+1. Accédez à l'application via ce lien : **http://127.0.0.1:8000**.
 2. Si vous n'avez pas de compte, cliquez sur **S'inscrire**.
 3. Remplissez le formulaire d'inscription.
 4. Choisissez un rôle : **admin** ou **employee**.
