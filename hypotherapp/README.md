@@ -13,7 +13,8 @@ Hypotherapp est une application web développée avec Laravel pour gérer les **
 ## 🛠️ Technologies utilisées
 
 - **Backend** : Laravel 10.x
-- **Frontend** : Bootstrap 5, Font Awesome
+- **Frontend** : Bootstrap 5, Font Awesome, Tailwind CSS
+- **Template Engine** : Blade
 - **Base de données** : SQLite
 - **Génération de factures PDF** : `barryvdh/laravel-dompdf`
 - **Autres outils** : Composer, npm, Carbon (gestion des dates)
