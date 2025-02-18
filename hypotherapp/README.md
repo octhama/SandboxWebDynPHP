@@ -166,4 +166,6 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 ## ❤️ Remerciements
 
 Merci à l'équipe de Laravel pour leur excellent framework, ainsi qu'à la communauté open-source pour les outils utilisés dans ce projet.
+Merci à [GitHub](https://github.com/maitrepylos) pour ses précieux conseils et son soutien.
+```
 
