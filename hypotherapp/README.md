@@ -127,18 +127,6 @@ L'application sera accessible à l'adresse : **[http://localhost:8000](http://lo
 3. Cliquez sur **Générer la facture PDF**.
 4. Le fichier **PDF** sera téléchargé automatiquement.
 
-## 🧪 Tests
-
-Pour exécuter les tests unitaires et fonctionnels :
-
-```bash
-php artisan test
-```
-
-## 📝 Licence
-
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
 ## ✨ Auteur
 
 **Octhama** - Développeur principal - [GitHub](https://github.com/octhama)
