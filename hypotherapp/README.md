@@ -65,7 +65,7 @@ Vérifiez la configuration de la base de données dans le fichier `.env` :
 ```env
 DB_CONNECTION=sqlite
 DB_DATABASE=../database/database.sqlite # Chemin vers la base de données SQLite
-DB_DATABASE="database/database.sqlite" # Chemin vers la base de données SQLite pour effectuer les migrations et les seeders
+# DB_DATABASE="database/database.sqlite"  Chemin vers la base de données SQLite pour effectuer les migrations et les seeders
 ```
 
 #### 5️⃣ Générer une clé d'application
