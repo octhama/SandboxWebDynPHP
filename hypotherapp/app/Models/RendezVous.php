@@ -13,9 +13,6 @@ class RendezVous extends Model
 {
     use HasFactory;
 
-    /**
-     * @var HigherOrderCollectionProxy|mixed
-     */
     protected $table = 'rendez_vous';
 
     protected $fillable = [
@@ -30,12 +27,13 @@ class RendezVous extends Model
         'horaire_debut' => 'datetime',
         'horaire_fin' => 'datetime',
     ];
-    // Relation avec le modèle Client
+
+    // Relation avec le client pour un rendez-vous. Un rendez-vous appartient à un client (1-N)
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
-    // Relation avec les poneys
+    // Relation avec les poneys pour un rendez-vous. Un rendez-vous a plusieurs poneys (N-N)
     public function poneys(): BelongsToMany
     {
         return $this->belongsToMany(Poney::class, 'rendez_vous_poneys', 'rendez_vous_id', 'poney_id');

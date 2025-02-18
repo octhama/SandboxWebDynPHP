@@ -12,6 +12,10 @@ class Facturation extends Model {
 
     protected $fillable = ['client_id', 'nombre_minutes', 'montant'];
 
+    /**
+     * Relation avec le client. Une facturation appartient à un client (1-N)
+     * @return BelongsTo
+     */
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'client_id');

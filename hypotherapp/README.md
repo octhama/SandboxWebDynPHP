@@ -113,17 +113,90 @@ php artisan serve
 
 L'application sera accessible à l'adresse : **[http://127.0.0.1:8000](http://localhost:8000)**
 
+## Utilisation de l'ORM (Eloquent) dans Hypotherapp
+
+Hypotherapp utilise **Eloquent**, l'ORM de Laravel, pour la gestion des données.
+
+### Exemple : Modèle `Client`
+
+Un client est lié à une facturation par une relation **un-à-un** :
+```php
+class Client extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['nom', 'nombre_personnes', 'minutes', 'prix_total'];
+
+    public function facturation(): HasOne
+    {
+        return $this->hasOne(Facturation::class);
+    }
+}
+```
+
+### Exemple : Facturation automatique
+
+Lorsqu'un client est créé, une facturation lui est automatiquement associée :
+```php
+protected static function boot(): void
+{
+    parent::boot();
+    static::created(function ($client) {
+        (new Facturation)->create([
+            'client_id' => $client->id,
+            'nombre_minutes' => $client->minutes,
+            'montant' => $client->prix_total,
+        ]);
+    });
+}
+```
+
+### Relations Eloquent utilisées dans le projet
+
+- **Client - Facturation** : `HasOne`
+- **Client - Rendez-vous** : `HasMany`
+- **Rendez-vous - Poney** : `BelongsToMany`
+
+### Exemple : Relation `RendezVous - Poney`
+```php
+public function poneys(): BelongsToMany
+{
+    return $this->belongsToMany(Poney::class, 'rendez_vous_poneys', 'rendez_vous_id', 'poney_id');
+}
+```
+
 ## 📂 Structure du projet
 
 ```
 📦 hypotherapp
-├── app/         # Modèles, contrôleurs et middlewares
-├── database/    # Migrations, seeders et database SQLite
-├── resources/   # Vues Blade, assets (CSS, JS)
-├── routes/      # Routes de l'application
-├── public/      # Fichiers accessibles publiquement
-├── config/      # Fichiers de configuration
-└── .env         # Fichier de configuration de l'environnement
+├── app
+│   ├── Http
+│   │   ├── Controllers       # Contrôleurs (Clients, Poneys, Rendez-vous...)
+│   │   └── Middleware        # Middleware (authentification, rôles)
+│   ├── Models                # Modèles (Client, Facturation, Poney, RendezVous...)
+│   ├── Policies              # Politiques d'accès (Clients, Poneys, Rendez-vous...)
+│   └── Providers             # Fournisseurs de services (Auth, Route...)
+├── config                    # Configuration de l'application
+├── database
+│   ├── factories             # Factories pour les tests
+│   ├── migrations            # Migrations de la base de données
+│   └── seeders               # Seeders pour peupler la base de données
+├── public                    # Fichiers accessibles publiquement (images, CSS, JS...)
+├── resources
+│   ├── css                   # Fichiers CSS
+│   ├── js                    # Fichiers JavaScript
+│   └── views                 # Vues de l'application
+│       ├── auth              # Vues d'authentification
+│       ├── clients           # Vues des clients
+│       ├── components        # Composants réutilisables
+│       ├── dashboard         # Tableau de bord
+│       ├── facturation       # Vues de facturation
+│       ├── poneys            # Vues des poneys
+│       └── rendez-vous       # Vues des rendez-vous
+├── routes                    # Définition des routes
+├── storage                   # Stockage (logs, cache, fichiers uploadés...)
+├── tests                    # Tests (Unitaires et Feature)
+└── vendor                    # Dépendances Composer (packages tiers)
 ```
 
 ## 📌 Utilisation
